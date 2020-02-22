@@ -16,9 +16,9 @@ const db = require('./config/keys').mongoURI;
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose
-	.connect(db)
-	.then(() => console.log('MongoDB Connected...'))
-	.catch(err => console.log(err));
+    .connect(db)
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log('Error: ', err));
 
 // Use Routes
 app.use('/api/items', items);
