@@ -4,21 +4,42 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"client-install": "npm install --prefix client",
-		"production": "node server.js",
-		"server": "nodemon server.js",
-		"client": "npm run dev --prefix client",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+		"server": "nodemon server/server.js",
+		"client": "cd client && next",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"production": "node server.js"
 	},
 	"author": "Neology92",
 	"license": "MIT",
 	"dependencies": {
+		"@material-ui/core": "^4.9.3",
+		"@material-ui/icons": "^4.9.1",
+		"babel-plugin-styled-components": "^1.10.7",
 		"body-parser": "^1.19.0",
 		"concurrently": "^5.1.0",
 		"express": "^4.17.1",
-		"mongoose": "^5.9.1"
+		"mongoose": "^5.9.1",
+		"next": "^9.2.2",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"styled-components": "^5.0.1",
+		"uuid": "^3.4.0"
 	},
 	"devDependencies": {
-		"eslint": "^6.8.0"
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-node": "^11.0.0",
+		"eslint-plugin-react": "^7.18.3",
+		"husky": "^4.2.3",
+		"lint-staged": "^10.0.7",
+		"prettier": "^1.19.1",
+		"stylelint": "^13.2.0",
+		"stylelint-config-recommended": "^3.0.0",
+		"stylelint-config-styled-components": "^0.1.1",
+		"stylelint-processor-styled-components": "^1.10.0",
+		"stylelint-webpack-plugin": "^1.2.3"
 	}
 }

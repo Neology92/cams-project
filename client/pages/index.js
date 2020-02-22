@@ -20,6 +20,7 @@ const Home = ({ switchColorsMode }) => (
                     </Button>
                 </StyledPaper>
             </Grid>
+
             <Grid item xs={6}>
                 <StyledPaper>a</StyledPaper>
             </Grid>

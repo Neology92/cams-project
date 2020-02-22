@@ -2,14 +2,13 @@
 
 # dependencies
 /node_modules
-/client/node_modules
 
 # testing
-/coverage
+/server/coverage
 
 # production
-/build
-/dist
+/server/build
+/server/dist
 /client/.next
 
 # misc
@@ -18,6 +17,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/server/.DS_Store
+/server/.env
+/server/npm-debug.log*
+/server/yarn-debug.log*
+/server/yarn-error.log*
+
 /client/.env
 /client/.env.build
 /client/npm-debug.log*
