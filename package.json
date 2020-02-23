@@ -10,7 +10,7 @@
         "production": "cd server && node server.js"
     },
     "author": "Neology92",
-    "license": "MIT",
+    "license": "",
     "dependencies": {
         "@material-ui/core": "^4.9.3",
         "@material-ui/icons": "^4.9.1",
