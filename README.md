@@ -24,7 +24,7 @@ Start in development mode (runs client on port 3000 and server - with nodemon - 
 npm run dev
 ```
 
-Start just server or client
+Or start just server or client
 ```bash
 npm run server
 ---
