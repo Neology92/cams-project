@@ -9,8 +9,8 @@ const Home = ({ switchColorsMode }) => (
             <Grid item xs={12}>
                 <StyledPaper>
                     <Button
-                        variant="contained"
                         color="primary"
+                        type="text"
                         onClick={() => {
                             switchColorsMode();
                         }}
@@ -18,8 +18,8 @@ const Home = ({ switchColorsMode }) => (
                         Primary Button
                     </Button>
                     <Button
-                        variant="contained"
                         color="secondary"
+                        type="text"
                         onClick={() => {
                             switchColorsMode();
                         }}
@@ -32,7 +32,7 @@ const Home = ({ switchColorsMode }) => (
             <Grid item xs={12}>
                 <Space>
                     <Button
-                        variant="contained"
+                        type="default"
                         color="primary"
                         onClick={() => {
                             switchColorsMode();
@@ -41,7 +41,6 @@ const Home = ({ switchColorsMode }) => (
                         Primary Button
                     </Button>
                     <Button
-                        variant="contained"
                         color="secondary"
                         onClick={() => {
                             switchColorsMode();
