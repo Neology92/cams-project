@@ -31,11 +31,25 @@ const StyledInput = styled(InputBase)`
         transition: ${({ theme }) =>
             theme.transitions.create(['border-color'])};
 
+<<<<<<< HEAD
         &:focus {
             border-color: ${({ theme }) => theme.palette.primary.main};
         }
     }
 `;
+=======
+        '&:focus': {
+            borderColor: theme.palette.primary.main,
+        },
+    },
+}))(InputBase);
+
+const StyledMuiInputLabel = withStyles(theme => ({
+    root: {
+        color: `${theme.palette.secondary.contrastText} !important`,
+    },
+}))(InputLabel);
+>>>>>>> fixed label color
 
 Input.propTypes = {
     value: PropTypes.string.isRequired,
