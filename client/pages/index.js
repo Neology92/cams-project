@@ -2,7 +2,11 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
+<<<<<<< HEAD
 import { ShoppingList, Button, Select } from '../components';
+=======
+import { ShoppingList, Button, Radio } from '../components';
+>>>>>>> Styling radio
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -40,6 +44,7 @@ const Home = ({ switchColorsMode }) => {
                     </Space>
                 </Grid>
 
+<<<<<<< HEAD
                 <Grid item xs={12}>
                     <StyledPaper>
                         <Button
@@ -85,6 +90,19 @@ const Home = ({ switchColorsMode }) => {
                         <ShoppingList />
                     </StyledPaper>
                 </Grid>
+=======
+            <Grid item xs={12}>
+                <StyledPaper>
+                    <Radio label="Primary Button label" />
+                    <Radio label="Radio label" labelPlacement="start" />
+                </StyledPaper>
+            </Grid>
+
+            <Grid item xs={12}>
+                <StyledPaper>
+                    <ShoppingList />
+                </StyledPaper>
+>>>>>>> Styling radio
             </Grid>
         </Container>
     );
@@ -100,7 +118,7 @@ const StyledPaper = styled(Paper)`
 `;
 
 const Space = styled.div`
-    height: 50px;
+    min-height: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
