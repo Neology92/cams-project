@@ -6,12 +6,13 @@ import { lightMuiTheme, darkMuiTheme } from '../assets/styles/muiTheme';
 import { Navbar } from '../components';
 
 import GlobalStyle from '../assets/styles/GlobalStyle';
+import '../assets/styles/fontNunitoSans.css';
 
 export default class MyApp extends App {
     constructor(props) {
         super(props);
 
-        this.state = { muiTheme: darkMuiTheme };
+        this.state = { muiTheme: lightMuiTheme };
         this.switchColorsMode = this.switchColorsMode.bind(this);
     }
 

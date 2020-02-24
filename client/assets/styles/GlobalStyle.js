@@ -7,9 +7,10 @@ const GlobalStyle = createGlobalStyle`
     }
     
     body {
-        background: ${({ theme }) => theme.palette.background.main};
+        background: ${({ theme }) => theme.palette.background.default};
         padding: 0;
         margin: 0;
+        font-family: "Nunito Sans", sans-serif;
     }
 
 `;

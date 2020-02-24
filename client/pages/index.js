@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Grid, Container, Paper } from '@material-ui/core';
-import { ShoppingList } from '../components';
+import { Grid, Container, Paper } from '@material-ui/core';
+import { ShoppingList, Button } from '../components';
 import Input from '../components/ui-elements/Input';
 
 const Home = ({ switchColorsMode }) => (
@@ -9,9 +9,7 @@ const Home = ({ switchColorsMode }) => (
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <StyledPaper>
-                    <Title>Hello world!</Title>
-                    <h3>hej jestem Twoim inputem</h3>
-                    <Input>1234</Input>
+                    <Input color="primary" />
                     <Button
                         variant="contained"
                         color="primary"
@@ -19,17 +17,43 @@ const Home = ({ switchColorsMode }) => (
                             switchColorsMode();
                         }}
                     >
-                        Click me!
+                        Primary Button
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Secondary Button
                     </Button>
                 </StyledPaper>
             </Grid>
 
-            <Grid item xs={6}>
-                <StyledPaper>a</StyledPaper>
+            <Grid item xs={12}>
+                <Space>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Primary Button
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Secondary Button
+                    </Button>
+                </Space>
             </Grid>
-            <Grid item xs={6}>
-                <StyledPaper>b</StyledPaper>
-            </Grid>
+
             <Grid item xs={12}>
                 <StyledPaper>
                     <ShoppingList />
@@ -39,10 +63,6 @@ const Home = ({ switchColorsMode }) => (
     </Container>
 );
 
-const Title = styled.h1`
-    color: ${({ theme }) => theme.palette.secondary.contrastText};
-`;
-
 const StyledPaper = styled(Paper)`
     display: flex;
     flex-direction: row;
@@ -50,7 +70,13 @@ const StyledPaper = styled(Paper)`
     align-items: center;
     padding: 20px;
     text-align: center;
-    color: ${({ theme }) => theme.palette.text.secondary};
+`;
+
+const Space = styled.div`
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 `;
 
 Home.propTypes = {
