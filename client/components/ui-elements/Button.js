@@ -1,15 +1,9 @@
 import MuiButton from '@material-ui/core/Button';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Button = ({ color, type, children, ...props }) => {
-    if (type === 'select') {
-        return (
-            <StyledMuiButton variant="contained" color={color} {...props}>
-                {children}
-            </StyledMuiButton>
-        );
-    }
     if (type === 'text') {
         return (
             <StyledMuiButton color={color} {...props} type="text">

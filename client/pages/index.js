@@ -1,11 +1,39 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
-import { ShoppingList, Button } from '../components';
+import { ShoppingList, Button, Select } from '../components';
+
+const selectItems = [
+    { value: '1', label: 'First' },
+    { value: '2', label: 'Second' },
+    { value: '3', label: 'Very long thrid label' },
+    { value: '4', label: 'Next one' },
+];
 
 const Home = ({ switchColorsMode }) => (
     <Container maxWidth="lg">
         <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <Space>
+                    <Button
+                        type="default"
+                        color="primary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Primary Button
+                    </Button>
+                    <Button
+                        color="secondary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Secondary Button
+                    </Button>
+                </Space>
+            </Grid>
             <Grid item xs={12}>
                 <StyledPaper>
                     <Button
@@ -31,23 +59,8 @@ const Home = ({ switchColorsMode }) => (
 
             <Grid item xs={12}>
                 <Space>
-                    <Button
-                        type="default"
-                        color="primary"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Primary Button
-                    </Button>
-                    <Button
-                        color="secondary"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Secondary Button
-                    </Button>
+                    <Select items={selectItems}>Primary</Select>
+                    <Select items={selectItems}>Secondary</Select>
                 </Space>
             </Grid>
 
