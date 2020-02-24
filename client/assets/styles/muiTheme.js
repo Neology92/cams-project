@@ -42,6 +42,9 @@ const lightMuiTheme = createMuiTheme({
             contrastText: '#000',
         },
     },
+    typography: {
+        fontFamily: 'Nunito Sans, sans-serif',
+    },
 });
 
 const darkMuiTheme = createMuiTheme({
