@@ -8,7 +8,6 @@ const Home = ({ switchColorsMode }) => (
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <StyledPaper>
-                    <Title>Hello world!</Title>
                     <Button
                         variant="contained"
                         color="primary"
@@ -16,7 +15,16 @@ const Home = ({ switchColorsMode }) => (
                             switchColorsMode();
                         }}
                     >
-                        Click me!
+                        Primary Button
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Secondary Button
                     </Button>
                 </StyledPaper>
             </Grid>
@@ -35,10 +43,6 @@ const Home = ({ switchColorsMode }) => (
         </Grid>
     </Container>
 );
-
-const Title = styled.h1`
-    color: ${({ theme }) => theme.palette.secondary.contrastText};
-`;
 
 const StyledPaper = styled(Paper)`
     display: flex;
