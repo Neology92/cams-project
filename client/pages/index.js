@@ -14,9 +14,13 @@ const Home = ({ switchColorsMode }) => (
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <StyledPaper>
+<<<<<<< HEAD
                     <Title>Hello world!</Title>
                     <h3>hej jestem Twoim inputem</h3>
                     <Input>1234</Input>
+=======
+                    <Input label="Label" color="primary" />
+>>>>>>> fixed label spacing
                     <Button
                         variant="contained"
                         color="primary"
