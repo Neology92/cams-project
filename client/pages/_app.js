@@ -6,6 +6,7 @@ import { lightMuiTheme, darkMuiTheme } from '../assets/styles/muiTheme';
 import { Navbar } from '../components';
 
 import GlobalStyle from '../assets/styles/GlobalStyle';
+import '../assets/styles/fontNunitoSans.css';
 
 export default class MyApp extends App {
     constructor(props) {
