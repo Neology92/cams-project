@@ -29,12 +29,29 @@ const Home = ({ switchColorsMode }) => (
                 </StyledPaper>
             </Grid>
 
-            <Grid item xs={6}>
-                <StyledPaper>a</StyledPaper>
+            <Grid item xs={12}>
+                <Space>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Primary Button
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => {
+                            switchColorsMode();
+                        }}
+                    >
+                        Secondary Button
+                    </Button>
+                </Space>
             </Grid>
-            <Grid item xs={6}>
-                <StyledPaper>b</StyledPaper>
-            </Grid>
+
             <Grid item xs={12}>
                 <StyledPaper>
                     <ShoppingList />
@@ -51,7 +68,13 @@ const StyledPaper = styled(Paper)`
     align-items: center;
     padding: 20px;
     text-align: center;
-    color: ${({ theme }) => theme.palette.text.secondary};
+`;
+
+const Space = styled.div`
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 `;
 
 Home.propTypes = {
