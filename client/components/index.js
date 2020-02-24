@@ -1,4 +1,6 @@
 import Navbar from './Navbar';
 import ShoppingList from './ShoppingList';
 
-export { Navbar, ShoppingList };
+import Button from './ui-elements/Button';
+
+export { Navbar, ShoppingList, Button };
