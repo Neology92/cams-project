@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
@@ -10,69 +11,84 @@ const selectItems = [
     { value: '4', label: 'Next one' },
 ];
 
-const Home = ({ switchColorsMode }) => (
-    <Container maxWidth="lg">
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <Space>
-                    <Button
-                        type="default"
-                        color="primary"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Primary Button
-                    </Button>
-                    <Button
-                        color="secondary"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Secondary Button
-                    </Button>
-                </Space>
-            </Grid>
+const Home = ({ switchColorsMode }) => {
+    const [value1, setValue1] = useState('1');
+    const [value2, setValue2] = useState('1');
 
-            <Grid item xs={12}>
-                <StyledPaper>
-                    <Button
-                        color="primary"
-                        type="text"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Primary Button
-                    </Button>
-                    <Button
-                        color="secondary"
-                        type="text"
-                        onClick={() => {
-                            switchColorsMode();
-                        }}
-                    >
-                        Secondary Button
-                    </Button>
-                </StyledPaper>
-            </Grid>
+    return (
+        <Container maxWidth="lg">
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Space>
+                        <Button
+                            type="default"
+                            color="primary"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Primary Button
+                        </Button>
+                        <Button
+                            color="secondary"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Secondary Button
+                        </Button>
+                    </Space>
+                </Grid>
 
-            <Grid item xs={12}>
-                <Space>
-                    <Select items={selectItems}>Primary</Select>
-                    <Select items={selectItems}>Secondary</Select>
-                </Space>
-            </Grid>
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Button
+                            color="primary"
+                            type="text"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Primary Button
+                        </Button>
+                        <Button
+                            color="secondary"
+                            type="text"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Secondary Button
+                        </Button>
+                    </StyledPaper>
+                </Grid>
 
-            <Grid item xs={12}>
-                <StyledPaper>
-                    <ShoppingList />
-                </StyledPaper>
+                <Grid item xs={12}>
+                    <Space>
+                        <Select
+                            items={selectItems}
+                            value={value1}
+                            setValue={setValue1}
+                            label="Primary"
+                        />
+                        <Select
+                            items={selectItems}
+                            label="Secondary"
+                            value={value2}
+                            setValue={setValue2}
+                        />
+                    </Space>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <ShoppingList />
+                    </StyledPaper>
+                </Grid>
             </Grid>
-        </Grid>
-    </Container>
-);
+        </Container>
+    );
+};
 
 const StyledPaper = styled(Paper)`
     display: flex;
