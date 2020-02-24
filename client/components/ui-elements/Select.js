@@ -8,6 +8,9 @@ import {
     InputBase,
 } from '@material-ui/core';
 
+// Props:
+//  - children: Button Label
+//  - items: array of menu items {value: 'string', label:'string'}
 const Select = ({ children, items, ...props }) => {
     return (
         <div>
