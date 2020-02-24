@@ -1,7 +1,7 @@
-import { List, ListItem, IconButton, Button } from '@material-ui/core';
+import { List, ListItem, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
-// import styled from 'styled-components';
 import uuid from 'uuid';
+import Button from './ui-elements/Button';
 
 class ShoppingList extends React.Component {
     constructor(props) {

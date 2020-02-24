@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Grid, Container, Paper } from '@material-ui/core';
-import { ShoppingList } from '../components';
+import { Grid, Container, Paper } from '@material-ui/core';
+import { ShoppingList, Button } from '../components';
 
 const Home = ({ switchColorsMode }) => (
     <Container maxWidth="lg">
