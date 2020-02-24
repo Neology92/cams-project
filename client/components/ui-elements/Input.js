@@ -4,10 +4,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 
-const Input = ({ color, children, ...props }) => (
+const Input = ({ label, color, children, ...props }) => (
     <FormControl margin="none">
         <StyledMuiInputLabel shrink htmlFor="my-input">
-            Label
+            {label}
         </StyledMuiInputLabel>
         <StyledMuiInput
             placeholder="Placeholder"
@@ -24,7 +24,7 @@ const Input = ({ color, children, ...props }) => (
 const StyledMuiInput = withStyles(theme => ({
     root: {
         'label + &': {
-            marginTop: theme.spacing(3),
+            marginTop: theme.spacing(2),
         },
     },
     input: {
@@ -48,8 +48,6 @@ const StyledMuiInput = withStyles(theme => ({
 const StyledMuiInputLabel = withStyles(theme => ({
     root: {
         color: theme.palette.secondary.contrastText,
-        position: 'absolute',
-        top: 10,
         '&:focus': {
             borderColor: theme.palette.secondary.contrastText,
         },
@@ -61,12 +59,14 @@ Input.propTypes = {
     children: PropTypes.node.isRequired,
     size: PropTypes.string,
     variant: PropTypes.string,
+    label: PropTypes.string,
 };
 
 Input.defaultProps = {
     size: 'small',
     color: 'default',
     variant: 'outlined',
+    label: 'label',
 };
 
 export default Input;

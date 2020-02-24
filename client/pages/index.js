@@ -9,7 +9,7 @@ const Home = ({ switchColorsMode }) => (
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <StyledPaper>
-                    <Input color="primary" />
+                    <Input label="Label" color="primary" />
                     <Button
                         variant="contained"
                         color="primary"
