@@ -54,7 +54,7 @@ const StyledInput = styled(InputBase)`
     & *:focus {
         color: ${({ theme }) => theme.palette.text.primary};
         border-bottom: 1.5px solid
-            ${({ theme }) => theme.palette.secondary.dark} !important;
+            ${({ theme }) => theme.palette.secondary.contrastText} !important;
         margin-bottom: -1.5px !important;
     }
 
