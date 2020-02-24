@@ -47,10 +47,7 @@ const StyledMuiInput = withStyles(theme => ({
 
 const StyledMuiInputLabel = withStyles(theme => ({
     root: {
-        color: theme.palette.secondary.contrastText,
-        '&:focus': {
-            borderColor: theme.palette.secondary.contrastText,
-        },
+        color: `${theme.palette.secondary.contrastText} !important`,
     },
 }))(InputLabel);
 
