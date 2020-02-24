@@ -11,7 +11,7 @@ export default class MyApp extends App {
     constructor(props) {
         super(props);
 
-        this.state = { muiTheme: darkMuiTheme };
+        this.state = { muiTheme: lightMuiTheme };
         this.switchColorsMode = this.switchColorsMode.bind(this);
     }
 
