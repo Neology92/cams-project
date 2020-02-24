@@ -11,14 +11,26 @@ import {
 // Props:
 //  - children: Button Label
 //  - items: array of menu items {value: 'string', label:'string'}
-const Select = ({ children, items, ...props }) => {
+const Select = ({ value, setValue, label, items, ...props }) => {
+    const handleChange = e => {
+        setValue(e.target.value);
+    };
+
     return (
         <div>
             <StyledLabel>
-                <em>{children}</em>
+                <em>{label}</em>
             </StyledLabel>
             <FormControl variant="filled">
-                <MuiSelect input={<StyledInput {...props} />}>
+                <MuiSelect
+                    input={
+                        <StyledInput
+                            {...props}
+                            value={value}
+                            onChange={e => handleChange(e)}
+                        />
+                    }
+                >
                     {items.map(item => (
                         <MenuItem key={item.value} value={item.value}>
                             {item.label}
@@ -69,15 +81,21 @@ const StyledInput = styled(InputBase)`
 `;
 
 Select.propTypes = {
-    children: PropTypes.node.isRequired,
     items: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
         })
-    ).isRequired,
+    ),
+    label: PropTypes.string,
+    value: PropTypes.string,
+    setValue: PropTypes.func.isRequired,
 };
 
-Select.defaultProps = {};
+Select.defaultProps = {
+    label: '',
+    items: [],
+    value: '',
+};
 
 export default Select;
