@@ -16,6 +16,18 @@ const Home = ({ switchColorsMode }) => {
     const [value2, setValue2] = useState('1');
     const [value3, setValue3] = useState('1');
     const [value4, setValue4] = useState('1');
+    const [values5, setValues5] = useState({
+        '1': true,
+        '2': false,
+        '3': true,
+        '4': true,
+    });
+    const [values6, setValues6] = useState({
+        '1': true,
+        '2': false,
+        '3': false,
+        '4': false,
+    });
 
     return (
         <Container maxWidth="lg">
@@ -101,13 +113,15 @@ const Home = ({ switchColorsMode }) => {
                 <Grid item xs={12}>
                     <Space>
                         <CheckboxGroup
-                            value="a"
-                            label="Primary checkbox"
+                            items={selectItems}
+                            values={values5}
+                            setValues={setValues5}
                             color="primary"
                         />
                         <CheckboxGroup
-                            value="b"
-                            label="Secondary checkbox"
+                            items={selectItems}
+                            values={values6}
+                            setValues={setValues6}
                             color="secondary"
                         />
                     </Space>
