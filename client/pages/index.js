@@ -14,6 +14,8 @@ const selectItems = [
 const Home = ({ switchColorsMode }) => {
     const [value1, setValue1] = useState('1');
     const [value2, setValue2] = useState('1');
+    const [value3, setValue3] = useState('1');
+    const [value4, setValue4] = useState('1');
 
     return (
         <Container maxWidth="lg">
@@ -72,8 +74,8 @@ const Home = ({ switchColorsMode }) => {
                             label="Primary"
                         />
                         <Select
-                            items={selectItems}
                             label="Secondary"
+                            items={selectItems}
                             value={value2}
                             setValue={setValue2}
                         />
@@ -82,8 +84,17 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <Radio label="Radio label" />
-                        <Radio />
+                        <Radio
+                            items={selectItems}
+                            value={value3}
+                            setValue={setValue3}
+                            label="Radio label"
+                        />
+                        <Radio
+                            items={selectItems}
+                            value={value4}
+                            setValue={setValue4}
+                        />
                     </StyledPaper>
                 </Grid>
             </Grid>

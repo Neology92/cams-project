@@ -8,35 +8,29 @@ import {
     FormControlLabel,
 } from '@material-ui/core';
 
-const Radio = ({ label, ...props }) => {
+const Radio = ({ value, setValue, label, items, ...props }) => {
+    const handleChange = e => {
+        setValue(e.target.value);
+    };
+
     return (
         <FormControl>
             {label ? <StyledLabel>{label}</StyledLabel> : null}
-            <RadioGroup aria-label={label} name={label}>
-                <RadioLabel
-                    value="a"
-                    control={<MuiRadio color="primary" />}
-                    label="First choice"
-                    {...props}
-                />
-                <RadioLabel
-                    value="b"
-                    control={<MuiRadio color="primary" />}
-                    label="You can also Choose here"
-                    {...props}
-                />
-                <RadioLabel
-                    value="c"
-                    control={<MuiRadio color="primary" />}
-                    label="Can You click it?"
-                    {...props}
-                />
-                <RadioLabel
-                    value="d"
-                    control={<MuiRadio color="primary" />}
-                    label="Wiw"
-                    {...props}
-                />
+            <RadioGroup
+                aria-label={label}
+                name={label}
+                value={value}
+                onChange={e => handleChange(e)}
+            >
+                {items.map(item => (
+                    <RadioLabel
+                        key={item.value}
+                        value={item.value}
+                        label={item.label}
+                        control={<MuiRadio color="primary" />}
+                        {...props}
+                    />
+                ))}
             </RadioGroup>
         </FormControl>
     );
@@ -70,11 +64,21 @@ const RadioLabel = styled(FormControlLabel)`
 `;
 
 Radio.propTypes = {
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        })
+    ),
     label: PropTypes.string,
+    value: PropTypes.string,
+    setValue: PropTypes.func.isRequired,
 };
 
 Radio.defaultProps = {
     label: '',
+    items: [],
+    value: '',
 };
 
 export default Radio;
