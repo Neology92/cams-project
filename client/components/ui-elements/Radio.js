@@ -12,29 +12,29 @@ import {
 const Radio = ({ label, ...props }) => {
     return (
         <FormControl>
-            <FormLabel>{label}</FormLabel>
+            {label ? <StyledLabel>{label}</StyledLabel> : null}
             <RadioGroup aria-label={label} name={label}>
-                <StyledLabel
+                <RadioLabel
                     value="a"
-                    control={<StyledRadio color="primary" />}
+                    control={<MuiRadio color="primary" />}
                     label="First choice"
                     {...props}
                 />
-                <StyledLabel
+                <RadioLabel
                     value="b"
-                    control={<StyledRadio color="primary" />}
+                    control={<MuiRadio color="primary" />}
                     label="You can also Choose here"
                     {...props}
                 />
-                <StyledLabel
+                <RadioLabel
                     value="c"
-                    control={<StyledRadio color="primary" />}
+                    control={<MuiRadio color="primary" />}
                     label="Can You click it?"
                     {...props}
                 />
-                <StyledLabel
+                <RadioLabel
                     value="d"
-                    control={<StyledRadio color="primary" />}
+                    control={<MuiRadio color="primary" />}
                     label="Wiw"
                     {...props}
                 />
@@ -43,19 +43,39 @@ const Radio = ({ label, ...props }) => {
     );
 };
 
-const StyledLabel = styled(FormControlLabel)`
-    text-transform: capitalize;
-    * {
-        font-size: 14px !important;
+const StyledLabel = styled(FormLabel)`
+    && {
+        margin: 8px 0;
+        text-align: left;
+        color: ${({ theme }) => theme.palette.text.primary};
+        padding: 0;
+        font-size: 14px;
+
+        * {
+            text-transform: capitalize;
+            font-style: unset;
+            font-weight: 400;
+        }
     }
 `;
 
-const StyledRadio = styled(MuiRadio)`
-    width: 10px;
+const RadioLabel = styled(FormControlLabel)`
+    && {
+        text-transform: capitalize;
+        margin: 0;
+
+        span {
+            font-size: 14px;
+        }
+    }
 `;
 
 Radio.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
+};
+
+Radio.defaultProps = {
+    label: '',
 };
 
 export default Radio;
