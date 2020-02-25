@@ -82,8 +82,8 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <Radio label="Primary Button label" />
-                        <Radio label="Radio label" labelPlacement="start" />
+                        <Radio label="Radio label" />
+                        <Radio />
                     </StyledPaper>
                 </Grid>
             </Grid>
