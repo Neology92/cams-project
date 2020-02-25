@@ -31,8 +31,9 @@ const CheckboxGroup = ({ values, setValues, items, label, ...props }) => {
 };
 const StyledLabel = styled(FormControlLabel)`
     && {
-        span {
+        .MuiFormControlLabel-label {
             font-size: 14px;
+            color: ${({ theme }) => theme.palette.text.primary};
         }
     }
 `;
