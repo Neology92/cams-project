@@ -31,16 +31,18 @@ export default class MyApp extends App {
     render() {
         const { Component, pageProps } = this.props;
         return (
-            <MuiThemeProvider theme={this.state.muiTheme}>
+            <>
                 <ThemeProvider theme={this.state.muiTheme}>
-                    <GlobalStyle />
-                    <Navbar />
-                    <Component
-                        {...pageProps}
-                        switchColorsMode={this.switchColorsMode}
-                    />
+                    <MuiThemeProvider theme={this.state.muiTheme}>
+                        <GlobalStyle />
+                        <Navbar />
+                        <Component
+                            {...pageProps}
+                            switchColorsMode={this.switchColorsMode}
+                        />
+                    </MuiThemeProvider>
                 </ThemeProvider>
-            </MuiThemeProvider>
+            </>
         );
     }
 }
