@@ -32,11 +32,15 @@ const StyledInput = styled(InputBase)`
             theme.transitions.create(['border-color'])};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refactored whole input to use styled components
         &:focus {
             border-color: ${({ theme }) => theme.palette.primary.main};
         }
     }
 `;
+<<<<<<< HEAD
 =======
         '&:focus': {
             borderColor: theme.palette.primary.main,
@@ -50,6 +54,8 @@ const StyledMuiInputLabel = withStyles(theme => ({
     },
 }))(InputLabel);
 >>>>>>> fixed label color
+=======
+>>>>>>> refactored whole input to use styled components
 
 Input.propTypes = {
     value: PropTypes.string.isRequired,
