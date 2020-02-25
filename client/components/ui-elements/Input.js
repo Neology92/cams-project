@@ -13,9 +13,9 @@ const Input = ({ value, label, placeholder }) => (
 
 const StyledLabel = styled(InputLabel)`
     && {
-        margin: -15px 0px;
         color: ${({ theme }) => theme.palette.text.primary} !important;
         font-size: 16px !important;
+        margin: -15px 0px;
     }
 `;
 const StyledInput = styled(InputBase)`
@@ -31,31 +31,11 @@ const StyledInput = styled(InputBase)`
         transition: ${({ theme }) =>
             theme.transitions.create(['border-color'])};
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refactored whole input to use styled components
         &:focus {
             border-color: ${({ theme }) => theme.palette.primary.main};
         }
     }
 `;
-<<<<<<< HEAD
-=======
-        '&:focus': {
-            borderColor: theme.palette.primary.main,
-        },
-    },
-}))(InputBase);
-
-const StyledMuiInputLabel = withStyles(theme => ({
-    root: {
-        color: `${theme.palette.secondary.contrastText} !important`,
-    },
-}))(InputLabel);
->>>>>>> fixed label color
-=======
->>>>>>> refactored whole input to use styled components
 
 Input.propTypes = {
     value: PropTypes.string.isRequired,
