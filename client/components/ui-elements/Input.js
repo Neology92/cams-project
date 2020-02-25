@@ -1,69 +1,51 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
-import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 
-const Input = ({ label, color, children, ...props }) => (
-    <FormControl margin="none">
-        <StyledMuiInputLabel shrink htmlFor="my-input">
-            {label}
-        </StyledMuiInputLabel>
-        <StyledMuiInput
-            placeholder="Placeholder"
-            size="small"
-            id="my-input"
-            color={color}
-            {...props}
-        >
-            {children}
-        </StyledMuiInput>
+const Input = ({ value, label, placeholder }) => (
+    <FormControl>
+        <StyledLabel shrink>{label}</StyledLabel>
+        <StyledInput value={value} placeholder={placeholder} />
     </FormControl>
 );
 
-const StyledMuiInput = withStyles(theme => ({
-    root: {
-        'label + &': {
-            marginTop: theme.spacing(2),
-        },
-    },
-    input: {
-        borderRadius: 4,
-        position: 'relative',
-        backgroundColor: theme.palette.secondary.main,
-        border: '1px solid',
-        borderColor: theme.palette.secondary.main,
-        fontSize: 12,
-        paddingLeft: 5,
-        width: 200,
-        transition: theme.transitions.create(['border-color']),
-        // Use the system font instead of the default Roboto font.
+const StyledLabel = styled(InputLabel)`
+    && {
+        margin: -15px 0px;
+        color: ${({ theme }) => theme.palette.text.primary} !important;
+        font-size: 16px !important;
+    }
+`;
+const StyledInput = styled(InputBase)`
+    .MuiInputBase-input {
+        position: relative;
+        border: 1px solid ${({ theme }) => theme.palette.secondary.main};
+        background-color: ${({ theme }) => theme.palette.secondary.main};
+        border-radius: 4px;
+        min-height: 13px;
+        min-width: 200px;
+        font-size: 12px;
+        padding-left: 4px;
+        transition: ${({ theme }) =>
+            theme.transitions.create(['border-color'])};
 
-        '&:focus': {
-            borderColor: theme.palette.primary.main,
-        },
-    },
-}))(InputBase);
-
-const StyledMuiInputLabel = withStyles(theme => ({
-    root: {
-        color: `${theme.palette.secondary.contrastText} !important`,
-    },
-}))(InputLabel);
+        &:focus {
+            border-color: ${({ theme }) => theme.palette.primary.main};
+        }
+    }
+`;
 
 Input.propTypes = {
-    color: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    size: PropTypes.string,
-    variant: PropTypes.string,
+    value: PropTypes.string.isRequired,
     label: PropTypes.string,
+    placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
-    size: 'small',
-    color: 'default',
-    variant: 'outlined',
-    label: 'label',
+    label: '',
+    placeholder: '',
 };
 
 export default Input;

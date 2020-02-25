@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
-import { ShoppingList, Button } from '../components';
-import Input from '../components/ui-elements/Input';
+import { ShoppingList, Button, Input } from '../components';
 
 const Home = ({ switchColorsMode }) => (
     <Container maxWidth="lg">
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <StyledPaper>
-                    <Input label="Label" color="primary" />
+                    <Input label="Label" placeholder="Placeholder" />
                     <Button
                         variant="contained"
                         color="primary"
