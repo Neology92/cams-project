@@ -1,39 +1,31 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 import styled from 'styled-components';
 
-const CheckboxGroup = ({ value, label, ...props }) => {
-    const [checked, setChecked] = useState(true);
-
-    const handleChange = event => {
-        setChecked(event.target.checked);
+const CheckboxGroup = ({ values, setValues, items, label, ...props }) => {
+    const handleChange = (event, name) => {
+        setValues({
+            ...values,
+            [name]: event.target.checked,
+        });
     };
 
     return (
         <FormGroup column>
-            <StyledLabel
-                control={
-                    <Checkbox
-                        checked={checked}
-                        onChange={e => handleChange(e)}
-                        inputProps={{ 'aria-label': value }}
-                        {...props}
-                    />
-                }
-                label={label}
-            />
-            <StyledLabel
-                control={
-                    <Checkbox
-                        checked={checked}
-                        onChange={e => handleChange(e)}
-                        inputProps={{ 'aria-label': value }}
-                        {...props}
-                    />
-                }
-                label={label}
-            />
+            {items.map(item => (
+                <StyledLabel
+                    key={item.value}
+                    control={
+                        <Checkbox
+                            checked={values[item.value]}
+                            onChange={e => handleChange(e, item.value)}
+                            inputProps={{ 'aria-label': item.label }}
+                            {...props}
+                        />
+                    }
+                    label={item.label}
+                />
+            ))}
         </FormGroup>
     );
 };
@@ -53,14 +45,14 @@ CheckboxGroup.propTypes = {
         })
     ),
     label: PropTypes.string,
-    value: PropTypes.string,
-    setValue: PropTypes.func.isRequired,
+    values: PropTypes.string,
+    setValues: PropTypes.func.isRequired,
 };
 
 CheckboxGroup.defaultProps = {
     label: '',
     items: [],
-    value: '',
+    values: '',
 };
 
 export default CheckboxGroup;
