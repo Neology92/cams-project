@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Button = ({ color, type, children, ...props }) => {
     if (type === 'text') {
         return (
-            <StyledMuiButton color={color} {...props} type="text">
+            <StyledMuiButton color={color} {...props} format={type}>
                 {children}
             </StyledMuiButton>
         );
@@ -24,8 +24,8 @@ const StyledMuiButton = styled(MuiButton)`
     font-weight: 400;
     text-transform: capitalize !important;
 
-    ${({ color, type, theme }) =>
-        color === 'secondary' && type === 'text'
+    ${({ color, format, theme }) =>
+        color === 'secondary' && format === 'text'
             ? `color: ${theme.palette.text.secondary} !important;`
             : ''}
 `;
