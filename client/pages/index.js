@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
-import { ShoppingList, Button, Select, Input } from '../components';
+import { Button, Select, Radio, CheckboxGroup, Input } from '../components';
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -14,6 +14,20 @@ const selectItems = [
 const Home = ({ switchColorsMode }) => {
     const [value1, setValue1] = useState('1');
     const [value2, setValue2] = useState('1');
+    const [value3, setValue3] = useState('1');
+    const [value4, setValue4] = useState('1');
+    const [values5, setValues5] = useState({
+        '1': true,
+        '2': false,
+        '3': true,
+        '4': true,
+    });
+    const [values6, setValues6] = useState({
+        '1': true,
+        '2': false,
+        '3': false,
+        '4': false,
+    });
 
     return (
         <Container maxWidth="lg">
@@ -74,8 +88,8 @@ const Home = ({ switchColorsMode }) => {
                             label="Primary"
                         />
                         <Select
-                            items={selectItems}
                             label="Secondary"
+                            items={selectItems}
                             value={value2}
                             setValue={setValue2}
                         />
@@ -84,8 +98,35 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <ShoppingList />
+                        <Radio
+                            items={selectItems}
+                            value={value3}
+                            setValue={setValue3}
+                            label="Radio label"
+                        />
+                        <Radio
+                            items={selectItems}
+                            value={value4}
+                            setValue={setValue4}
+                        />
                     </StyledPaper>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <CheckboxGroup
+                            items={selectItems}
+                            values={values5}
+                            setValues={setValues5}
+                            color="primary"
+                        />
+                        <CheckboxGroup
+                            items={selectItems}
+                            values={values6}
+                            setValues={setValues6}
+                            color="secondary"
+                        />
+                    </Space>
                 </Grid>
             </Grid>
         </Container>
@@ -102,7 +143,7 @@ const StyledPaper = styled(Paper)`
 `;
 
 const Space = styled.div`
-    height: 50px;
+    min-height: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
