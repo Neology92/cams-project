@@ -38,12 +38,13 @@ const StyledLabel = styled(InputLabel)`
 `;
 const StyledInput = styled(InputBase)`
     .MuiInputBase-input {
+        box-sizing: border-box;
         position: relative;
         border: 1px solid ${({ theme }) => theme.palette.secondary.main};
         background-color: ${({ theme }) => theme.palette.secondary.main};
         border-radius: 4px;
         height: 30px;
-        width: 250px;
+        width: 256px;
         font-size: 14px;
         padding: 0 0 0 4px;
         transition: ${({ theme }) =>
