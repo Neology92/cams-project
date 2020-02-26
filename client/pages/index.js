@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
-import { Button, Select, Radio, CheckboxGroup } from '../components';
+import { Button, Select, Radio, CheckboxGroup, Input } from '../components';
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -28,6 +28,7 @@ const Home = ({ switchColorsMode }) => {
         '3': false,
         '4': false,
     });
+    const [value7, setValue7] = useState('');
 
     return (
         <Container maxWidth="lg">
@@ -65,6 +66,7 @@ const Home = ({ switchColorsMode }) => {
                         >
                             Primary Button
                         </Button>
+
                         <Button
                             color="secondary"
                             type="text"
@@ -125,6 +127,18 @@ const Home = ({ switchColorsMode }) => {
                             color="secondary"
                         />
                     </Space>
+                </Grid>
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Space>
+                            <Input
+                                value={value7}
+                                setValue={setValue7}
+                                label="Label"
+                                placeholder="Placeholder"
+                            />
+                        </Space>
+                    </StyledPaper>
                 </Grid>
             </Grid>
         </Container>
