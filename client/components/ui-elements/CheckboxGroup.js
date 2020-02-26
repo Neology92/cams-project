@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 import styled from 'styled-components';
 
-const CheckboxGroup = ({ values, setValues, items, label, ...props }) => {
+const CheckboxGroup = ({ values, setValues, items, label, row, ...props }) => {
     const handleChange = (event, name) => {
         setValues({
             ...values,
@@ -11,7 +11,7 @@ const CheckboxGroup = ({ values, setValues, items, label, ...props }) => {
     };
 
     return (
-        <FormGroup column>
+        <FormGroup row={row}>
             {items.map(item => (
                 <StyledLabel
                     key={item.value}
@@ -46,14 +46,16 @@ CheckboxGroup.propTypes = {
         })
     ),
     label: PropTypes.string,
-    values: PropTypes.string,
+    row: PropTypes.bool,
+    values: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
     setValues: PropTypes.func.isRequired,
 };
 
 CheckboxGroup.defaultProps = {
     label: '',
+    row: false,
     items: [],
-    values: '',
+    values: {},
 };
 
 export default CheckboxGroup;
