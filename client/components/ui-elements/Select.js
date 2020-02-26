@@ -54,29 +54,32 @@ const StyledLabel = styled(InputLabel)`
 `;
 
 const StyledInput = styled(InputBase)`
-    background: ${({ theme }) => theme.palette.secondary.main};
-    min-width: 130px !important;
-    border-radius: 10px;
-    position: relative;
-    padding: 5px 10px;
+    && {
+        background: ${({ theme }) => theme.palette.secondary.main};
+        min-width: 130px;
+        border-radius: 4px;
+        position: relative;
+        padding: 5px 10px;
 
-    color: ${({ theme }) => theme.palette.text.secondary} !important;
-    font-size: 14px;
+        color: ${({ theme }) => theme.palette.text.secondary};
+        font-size: 14px !important;
 
-    * {
-        background: transparent !important;
-    }
-    & *:focus {
-        color: ${({ theme }) => theme.palette.text.primary};
-        border-bottom: 1.5px solid
-            ${({ theme }) => theme.palette.secondary.contrastText} !important;
-        margin-bottom: -1.5px !important;
-    }
+        * {
+            font-size: 14px !important;
+            background: transparent !important;
+        }
+        *:focus {
+            color: ${({ theme }) => theme.palette.text.primary};
+        }
+        &:focus-within {
+            box-shadow: 0 0 0 1px ${({ theme }) => theme.palette.primary.main} !important;
+        }
 
-    transition: background 0.2s ease-in-out;
+        transition: background 0.2s ease-in-out;
 
-    &:hover {
-        background: ${({ theme }) => theme.palette.secondary.dark} !important;
+        &:hover {
+            background: ${({ theme }) => theme.palette.secondary.dark};
+        }
     }
 `;
 
