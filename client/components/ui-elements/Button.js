@@ -23,6 +23,7 @@ const StyledMuiButton = styled(MuiButton)`
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize !important;
+    box-shadow: none !important;
 
     ${({ color, format, theme }) =>
         color === 'secondary' && format === 'text'

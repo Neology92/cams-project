@@ -5,7 +5,9 @@ const lightMuiTheme = createMuiTheme({
         type: 'light',
         common: { black: 'rgba(24, 24, 24, 1)', white: '#fff' },
         primary: {
+            dark: '#00088b',
             main: '#062ebd',
+
             contrastText: '#fff',
         },
         secondary: {
@@ -52,8 +54,8 @@ const darkMuiTheme = createMuiTheme({
         type: 'dark',
         common: { black: 'rgba(24, 24, 24, 1)', white: '#fff' },
         primary: {
-            main: '#fdcb6e',
-            contrastText: '#fff',
+            main: '#FDCB6E',
+            contrastText: '#000',
         },
         secondary: {
             main: '#242424',
