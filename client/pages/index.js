@@ -29,6 +29,7 @@ const Home = ({ switchColorsMode }) => {
         '4': false,
     });
     const [value7, setValue7] = useState('');
+    const [value8, setValue8] = useState('');
 
     return (
         <Container maxWidth="lg">
@@ -136,6 +137,15 @@ const Home = ({ switchColorsMode }) => {
                                 setValue={setValue7}
                                 label="Label"
                                 placeholder="Placeholder"
+                            />
+                        </Space>
+                        <Space>
+                            <Input
+                                value={value8}
+                                setValue={setValue8}
+                                label="Search Label"
+                                placeholder="Search"
+                                type="search"
                             />
                         </Space>
                     </StyledPaper>
