@@ -2,7 +2,14 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
-import { Button, Select, Radio, CheckboxGroup, Input } from '../components';
+import {
+    Button,
+    Select,
+    Radio,
+    CheckboxGroup,
+    Input,
+    Toggle,
+} from '../components';
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -22,18 +29,48 @@ const Home = ({ switchColorsMode }) => {
         '3': true,
         '4': true,
     });
-    const [values6, setValues6] = useState({
-        '1': true,
-        '2': false,
-        '3': false,
-        '4': false,
-    });
+    const [value6, setValue6] = useState('');
     const [value7, setValue7] = useState('');
-    const [value8, setValue8] = useState('');
+    const [value8, setValue8] = useState(false);
+    const [value9, setValue9] = useState(true);
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Toggle value={value8} setValue={setValue8} />
+                        <Toggle value={value9} setValue={setValue9} />
+                    </StyledPaper>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <CheckboxGroup
+                            items={selectItems}
+                            values={values5}
+                            setValues={setValues5}
+                            color="primary"
+                        />
+                    </Space>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Radio
+                            items={selectItems}
+                            value={value3}
+                            setValue={setValue3}
+                            label="Radio label"
+                        />
+                        <Radio
+                            items={selectItems}
+                            value={value4}
+                            setValue={setValue4}
+                        />
+                    </StyledPaper>
+                </Grid>
+
                 <Grid item xs={12}>
                     <Space>
                         <Button
@@ -99,50 +136,18 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <Radio
-                            items={selectItems}
-                            value={value3}
-                            setValue={setValue3}
-                            label="Radio label"
-                        />
-                        <Radio
-                            items={selectItems}
-                            value={value4}
-                            setValue={setValue4}
-                        />
-                    </StyledPaper>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space>
-                        <CheckboxGroup
-                            items={selectItems}
-                            values={values5}
-                            setValues={setValues5}
-                            color="primary"
-                        />
-                        <CheckboxGroup
-                            items={selectItems}
-                            values={values6}
-                            setValues={setValues6}
-                            color="secondary"
-                        />
-                    </Space>
-                </Grid>
-                <Grid item xs={12}>
-                    <StyledPaper>
                         <Space>
                             <Input
-                                value={value7}
-                                setValue={setValue7}
+                                value={value6}
+                                setValue={setValue6}
                                 label="Label"
                                 placeholder="Placeholder"
                             />
                         </Space>
                         <Space>
                             <Input
-                                value={value8}
-                                setValue={setValue8}
+                                value={value7}
+                                setValue={setValue7}
                                 label="Search Label"
                                 placeholder="Search"
                                 type="search"
