@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 
-const Input = ({ label, placeholder, ...props }) => {
-    const [value, setValue] = useState('');
+const Input = ({ label, value, setValue, placeholder, ...props }) => {
+    const handleChange = e => {
+        setValue(e.target.value);
+    };
 
     return (
         <div>
@@ -15,7 +16,7 @@ const Input = ({ label, placeholder, ...props }) => {
                 <StyledInput
                     value={value}
                     placeholder={placeholder}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => handleChange(e)}
                     {...props}
                 />
             </FormControl>
@@ -53,6 +54,7 @@ const StyledInput = styled(InputBase)`
 
 Input.propTypes = {
     value: PropTypes.string.isRequired,
+    setValue: PropTypes.string.isRequired,
     label: PropTypes.string,
     placeholder: PropTypes.string,
 };

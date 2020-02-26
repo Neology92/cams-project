@@ -28,6 +28,7 @@ const Home = ({ switchColorsMode }) => {
         '3': false,
         '4': false,
     });
+    const [value7, setValue7] = useState('');
 
     return (
         <Container maxWidth="lg">
@@ -130,7 +131,12 @@ const Home = ({ switchColorsMode }) => {
                 <Grid item xs={12}>
                     <StyledPaper>
                         <Space>
-                            <Input label="Label" placeholder="Placeholder" />
+                            <Input
+                                value={value7}
+                                setValue={setValue7}
+                                label="Label"
+                                placeholder="Placeholder"
+                            />
                         </Space>
                     </StyledPaper>
                 </Grid>
