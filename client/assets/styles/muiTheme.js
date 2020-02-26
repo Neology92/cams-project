@@ -52,7 +52,7 @@ const darkMuiTheme = createMuiTheme({
         type: 'dark',
         common: { black: 'rgba(24, 24, 24, 1)', white: '#fff' },
         primary: {
-            main: '#062ebd',
+            main: '#fdcb6e',
             contrastText: '#fff',
         },
         secondary: {
