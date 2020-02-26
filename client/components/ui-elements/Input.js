@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import InputBase from '@material-ui/core/InputBase';
-import InputLabel from '@material-ui/core/InputLabel';
+import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 
 const Input = ({ label, placeholder, ...props }) => {
     const [value, setValue] = useState('');
@@ -12,12 +11,14 @@ const Input = ({ label, placeholder, ...props }) => {
             <div>
                 <StyledLabel>{label}</StyledLabel>
             </div>
-            <StyledInput
-                value={value}
-                placeholder={placeholder}
-                onChange={e => setValue(e.target.value)}
-                {...props}
-            />
+            <FormControl>
+                <StyledInput
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={e => setValue(e.target.value)}
+                    {...props}
+                />
+            </FormControl>
         </div>
     );
 };
