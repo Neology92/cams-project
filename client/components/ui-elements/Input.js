@@ -1,20 +1,34 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 
-const Input = ({ value, label, placeholder }) => (
-    <div>
-        <StyledLabel shrink>{label}</StyledLabel>
-        <StyledInput value={value} placeholder={placeholder} />
-    </div>
-);
+const Input = ({ label, placeholder, ...props }) => {
+    const [value, setValue] = useState('');
+
+    return (
+        <div>
+            <div>
+                <StyledLabel>{label}</StyledLabel>
+            </div>
+            <StyledInput
+                value={value}
+                placeholder={placeholder}
+                onChange={e => setValue(e.target.value)}
+                {...props}
+            />
+        </div>
+    );
+};
 
 const StyledLabel = styled(InputLabel)`
     && {
-        color: ${({ theme }) => theme.palette.text.primary} !important;
-        font-size: 16px !important;
+        position: relative;
         float: left;
+        color: ${({ theme }) => theme.palette.text.primary};
+        font-size: 14px;
+        margin-bottom: 7px;
     }
 `;
 const StyledInput = styled(InputBase)`
@@ -23,10 +37,10 @@ const StyledInput = styled(InputBase)`
         border: 1px solid ${({ theme }) => theme.palette.secondary.main};
         background-color: ${({ theme }) => theme.palette.secondary.main};
         border-radius: 4px;
-        min-height: 13px;
-        min-width: 200px;
+        height: 30px;
+        width: 250px;
         font-size: 14px;
-        padding-left: 4px;
+        padding: 0 0 0 4px;
         transition: ${({ theme }) =>
             theme.transitions.create(['border-color'])};
 

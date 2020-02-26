@@ -65,7 +65,6 @@ const Home = ({ switchColorsMode }) => {
                         >
                             Primary Button
                         </Button>
-                        <Input label="Label" placeholder="Placeholder" />
 
                         <Button
                             color="secondary"
@@ -127,6 +126,13 @@ const Home = ({ switchColorsMode }) => {
                             color="secondary"
                         />
                     </Space>
+                </Grid>
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Space>
+                            <Input label="Label" placeholder="Placeholder" />
+                        </Space>
+                    </StyledPaper>
                 </Grid>
             </Grid>
         </Container>
