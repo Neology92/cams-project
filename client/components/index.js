@@ -8,6 +8,7 @@ import CheckboxGroup from './ui-elements/CheckboxGroup';
 import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
 import Icon from './Icon';
+import Tag from './ui-elements/Tag';
 
 export {
     Navbar,
@@ -19,4 +20,8 @@ export {
     Toggle,
     SegmentedButtons,
     Icon,
+    Tag,
 };
+
+
+

@@ -11,6 +11,7 @@ import {
     Toggle,
     SegmentedButtons,
     Icon,
+    Tag,
 } from '../components';
 import {
     Ban,
@@ -48,6 +49,12 @@ const Home = ({ switchColorsMode }) => {
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
     const [value11, setValue11] = useState('');
+    const [value12, setValue12] = useState([
+        { key: 0, label: 'first chip' },
+        { key: 1, label: '2nd chip' },
+        { key: 2, label: 'third long chip' },
+        { key: 3, label: 'fourth very very very long chip' },
+    ]);
 
     return (
         <Container maxWidth="lg">
@@ -222,6 +229,11 @@ const Home = ({ switchColorsMode }) => {
                             />
                         </Space>
                     </StyledPaper>
+                    <Grid item xs={12}>
+                        <Space>
+                            <Tag chipData={value12} setChipData={setValue12} />
+                        </Space>
+                    </Grid>
                 </Grid>
 
                 <Grid item xs={12}>
