@@ -10,6 +10,7 @@ import {
     Input,
     Toggle,
     SegmentedButtons,
+
 } from '../components';
 
 const selectItems = [
@@ -35,6 +36,7 @@ const Home = ({ switchColorsMode }) => {
     const [value8, setValue8] = useState(false);
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
+
 
     return (
         <Container maxWidth="lg">
