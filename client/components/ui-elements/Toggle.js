@@ -39,7 +39,10 @@ const IOSSwitch = styled(Switch)`
             }
 
             &-track {
-                background-color: ${({ theme }) => theme.palette.primary.main};
+                background-color: ${({ value, theme }) =>
+                    value
+                        ? theme.palette.primary.main
+                        : theme.palette.secondary.main};
                 opacity: 1 !important;
             }
         }
