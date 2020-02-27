@@ -50,13 +50,23 @@ const Home = ({ switchColorsMode }) => {
                             multiline
                             rows={2}
                             maxRows={4}
-                            placeholder="write sth"
+                            placeholder="Placeholder"
+                            label="Text Area"
+                            value={value11}
+                            setValue={setValue11}
+                        />
+                        <Input
+                            multiline
+                            rows={2}
+                            maxRows={4}
+                            placeholder="Placeholder"
+                            label="Wide Text Area"
+                            width="40vw"
                             value={value11}
                             setValue={setValue11}
                         />
                     </StyledPaper>
                 </Grid>
-
                 <Grid item xs={12}>
                     <Space>
                         <Toggle value={value8} setValue={setValue8} />
