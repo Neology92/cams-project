@@ -10,6 +10,7 @@ import SegmentedButtons from './ui-elements/SegmentedButtons';
 import Tooltip from './ui-elements/Tooltip';
 import Icon from './Icon';
 import Dropdown from './Examples/Dropdown';
+import Tag from './ui-elements/Tag';
 
 export {
     Navbar,
@@ -23,4 +24,8 @@ export {
     Icon,
     Tooltip,
     Dropdown,
+    Tag,
 };
+
+
+
