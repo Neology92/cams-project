@@ -10,8 +10,7 @@ import {
     Input,
     Toggle,
     SegmentedButtons,
-}
-
+} from '../components';
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -37,7 +36,6 @@ const Home = ({ switchColorsMode }) => {
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
 
-
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
@@ -60,9 +58,6 @@ const Home = ({ switchColorsMode }) => {
                             label="Segmented Buttons"
                             items={selectItems}
                         />
-                    <StyledPaper>
-                        <Toggle value={value8} setValue={setValue8} />
-                        <Toggle value={value9} setValue={setValue9} />
                     </StyledPaper>
                 </Grid>
 
