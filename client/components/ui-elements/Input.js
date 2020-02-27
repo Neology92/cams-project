@@ -4,7 +4,15 @@ import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
-const Input = ({ label, value, setValue, placeholder, type, ...props }) => {
+const Input = ({
+    label,
+    value,
+    setValue,
+    placeholder,
+    type,
+    width,
+    ...props
+}) => {
     const handleChange = e => {
         setValue(e.target.value);
     };
@@ -20,6 +28,7 @@ const Input = ({ label, value, setValue, placeholder, type, ...props }) => {
                     placeholder={placeholder}
                     type={type}
                     onChange={e => handleChange(e)}
+                    width={width}
                     {...props}
                 />
             </FormControl>
@@ -43,15 +52,17 @@ const StyledInput = styled(InputBase)`
         border: 1px solid ${({ theme }) => theme.palette.secondary.main};
         background-color: ${({ theme }) => theme.palette.secondary.main};
         border-radius: 4px;
-        height: 30px;
-        width: 256px;
+        width: ${({ width }) => width};
+        min-height: 30px;
         font-size: 14px;
-        padding: 0 0 0 4px;
+        padding: 4px;
         transition: ${({ theme }) =>
             theme.transitions.create(['border-color'])};
 
         &:focus {
             border-color: ${({ theme }) => theme.palette.primary.main};
+            background: ${({ theme }) =>
+                theme.palette.background.default} !important;
         }
     }
 
@@ -69,12 +80,18 @@ Input.propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
+    width: PropTypes.string,
+    rows: PropTypes.number,
+    rowsMax: PropTypes.number,
 };
 
 Input.defaultProps = {
     label: '',
     placeholder: '',
     type: 'default',
+    width: '256px',
+    rows: '2',
+    rowsMax: '4',
 };
 
 export default Input;
