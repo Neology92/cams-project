@@ -1,26 +1,23 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import PropTypes from 'prop-types';
 
-const items = [
-    { value: '1', label: 'First Button' },
-    { value: '2', label: 'Second button' },
-    { value: '3', label: 'Thrid button' },
-    { value: '4', label: 'Next one' },
-];
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
-const SegmentedButtons = () => {
-    const [state, setState] = useState('1');
-
-    const handleChange = (e, newState) => {
-        if (newState) {
-            setState(newState);
+const SegmentedButtons = ({ value, setValue, label, items, ...props }) => {
+    const handleChange = (e, newValue) => {
+        if (newValue) {
+            setValue(newValue);
         }
     };
 
     return (
-        <StyledGroup value={state} exclusive onChange={handleChange}>
+        <StyledGroup
+            value={value}
+            exclusive
+            onChange={handleChange}
+            {...props}
+            label={label}
+        >
             {items.map(item => (
                 <ToggleButton
                     key={item.value}
@@ -60,5 +57,21 @@ const StyledGroup = styled(ToggleButtonGroup)`
         }
     }
 `;
+
+SegmentedButtons.propTypes = {
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        })
+    ),
+    label: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    setValue: PropTypes.func.isRequired,
+};
+SegmentedButtons.defaultProps = {
+    label: '',
+    items: [],
+};
 
 export default SegmentedButtons;

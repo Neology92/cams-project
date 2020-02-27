@@ -34,6 +34,7 @@ const Home = ({ switchColorsMode }) => {
     const [value7, setValue7] = useState('');
     const [value8, setValue8] = useState(false);
     const [value9, setValue9] = useState(true);
+    const [value10, setValue10] = useState('2');
 
     return (
         <Container maxWidth="lg">
@@ -51,7 +52,12 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <SegmentedButtons />
+                        <SegmentedButtons
+                            value={value10}
+                            setValue={setValue10}
+                            label="Segmented Buttons"
+                            items={selectItems}
+                        />
                     </StyledPaper>
                 </Grid>
 
