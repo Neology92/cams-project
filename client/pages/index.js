@@ -10,7 +10,6 @@ import {
     Input,
     Toggle,
     SegmentedButtons,
-
 } from '../components';
 
 const selectItems = [
@@ -36,13 +35,26 @@ const Home = ({ switchColorsMode }) => {
     const [value8, setValue8] = useState(false);
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
-
+    const [value11, setValue11] = useState('');
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Space />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <Input
+                            multiline
+                            rows={2}
+                            maxRows={4}
+                            placeholder="write sth"
+                            value={value11}
+                            setValue={setValue11}
+                        />
+                    </StyledPaper>
                 </Grid>
 
                 <Grid item xs={12}>
