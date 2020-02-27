@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 
 // Prop "type" takes string and defines type of input.
-// Empty for normal input and search for search input
+// 'default' for normal input and 'search' for search input
 const Input = ({ label, value, setValue, placeholder, type, ...props }) => {
     const handleChange = e => {
         setValue(e.target.value);
@@ -38,7 +38,7 @@ const StyledLabel = styled(InputLabel)`
 `;
 const StyledInput = styled(InputBase)`
     .MuiInputBase-input {
-        box-sizing: border-box;
+        /* box-sizing: border-box; */
         position: relative;
         border: 1px solid ${({ theme }) => theme.palette.secondary.main};
         background-color: ${({ theme }) => theme.palette.secondary.main};
@@ -74,7 +74,7 @@ Input.propTypes = {
 Input.defaultProps = {
     label: '',
     placeholder: '',
-    type: '',
+    type: 'default',
 };
 
 export default Input;
