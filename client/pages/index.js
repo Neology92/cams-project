@@ -9,6 +9,7 @@ import {
     CheckboxGroup,
     Input,
     Toggle,
+    SegmentedButtons,
 } from '../components';
 
 const selectItems = [
@@ -38,9 +39,19 @@ const Home = ({ switchColorsMode }) => {
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <StyledPaper>
+                    <Space />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
                         <Toggle value={value8} setValue={setValue8} />
                         <Toggle value={value9} setValue={setValue9} />
+                    </Space>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <StyledPaper>
+                        <SegmentedButtons />
                     </StyledPaper>
                 </Grid>
 
@@ -154,6 +165,10 @@ const Home = ({ switchColorsMode }) => {
                             />
                         </Space>
                     </StyledPaper>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space />
                 </Grid>
             </Grid>
         </Container>
