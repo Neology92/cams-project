@@ -19,7 +19,13 @@ const Tag = ({ chipData, setChipData }) => {
                         key={data.key}
                         label={data.label}
                         onDelete={handleDelete(data)}
-                        deleteIcon={<Icon component={<Close />} />}
+                        deleteIcon={
+                            <Icon
+                                component={Close}
+                                size="8px"
+                                color="secondary"
+                            />
+                        }
                     />
                 );
             })}
@@ -31,11 +37,9 @@ const StyledChip = styled(Chip)`
     && {
         height: 20px;
         font-size: 12px;
-    }
-
-    &.MuiChip-deleteIcon {
-        height: 20px;
-        width: 20px;
+        margin: 3px 5px 3px 5px;
+        background-color: ${({ theme }) => theme.palette.secondary.main};
+        color: ${({ theme }) => theme.palette.text.secondary};
     }
 `;
 
