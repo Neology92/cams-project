@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Nunito Sans", sans-serif;
     }
 
+
 `;
 
 export default GlobalStyle;

@@ -46,6 +46,7 @@ const lightMuiTheme = createMuiTheme({
     },
     typography: {
         fontFamily: 'Nunito Sans, sans-serif',
+        fontSize: 14,
     },
 });
 
@@ -90,6 +91,10 @@ const darkMuiTheme = createMuiTheme({
             dark: '#FD9E6E',
             contrastText: '#000',
         },
+    },
+    typography: {
+        fontFamily: 'Nunito Sans, sans-serif',
+        fontSize: 14,
     },
 });
 
