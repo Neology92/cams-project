@@ -34,12 +34,22 @@ const Tag = ({ chipData, setChipData }) => {
 };
 
 const StyledChip = styled(Chip)`
+    svg > g > path:nth-child(2) {
+        stroke: ${({ theme }) => theme.palette.text.secondary};
+        fill: ${({ theme }) => theme.palette.text.secondary};
+    }
+
     && {
         height: 20px;
         font-size: 12px;
         margin: 3px 5px 3px 5px;
         background-color: ${({ theme }) => theme.palette.secondary.main};
         color: ${({ theme }) => theme.palette.text.secondary};
+    }
+
+    .MuiChip-deleteIcon {
+        padding-left: 2px;
+        padding-right: 1px;
     }
 `;
 
