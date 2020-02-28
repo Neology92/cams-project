@@ -7,6 +7,7 @@ import Radio from './ui-elements/Radio';
 import CheckboxGroup from './ui-elements/CheckboxGroup';
 import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
+import Tooltip from './ui-elements/Tooltip';
 import Icon from './Icon';
 
 export {
@@ -19,4 +20,5 @@ export {
     Toggle,
     SegmentedButtons,
     Icon,
+    Tooltip,
 };
