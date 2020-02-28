@@ -11,6 +11,17 @@ import {
     Toggle,
     SegmentedButtons,
 } from '../components';
+import {
+    Ban,
+    CheckCopy,
+    AngleDown,
+    Woman,
+    Clock,
+    Check,
+    Fire,
+    Lgbt,
+    DarkMode,
+} from '../assets/icons';
 
 const selectItems = [
     { value: '1', label: 'First' },
@@ -45,6 +56,20 @@ const Home = ({ switchColorsMode }) => {
                 </Grid>
 
                 <Grid item xs={12}>
+                    <Space>
+                        <Ban />
+                        <CheckCopy />
+                        <AngleDown />
+                        <Woman />
+                        <Clock />
+                        <Check />
+                        <Fire />
+                        <Lgbt />
+                        <DarkMode />
+                    </Space>
+                </Grid>
+
+                <Grid item xs={12}>
                     <StyledPaper>
                         <Input
                             multiline
@@ -67,6 +92,7 @@ const Home = ({ switchColorsMode }) => {
                         />
                     </StyledPaper>
                 </Grid>
+
                 <Grid item xs={12}>
                     <Space>
                         <Toggle value={value8} setValue={setValue8} />
