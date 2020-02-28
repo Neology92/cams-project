@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icons/lock</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icons/lock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="lock">
+            <rect id="Rectangle" x="0" y="0" width="20" height="20"></rect>
+            <g transform="translate(4.000000, 2.000000)" fill="#181818" id="Shape">
+                <path d="M9.75,5.6 L9.75,4 C9.75,1.790861 8.07106781,0 6,0 C3.92893219,0 2.25,1.790861 2.25,4 L2.25,5.6 C1.00735931,5.6 0,6.6745166 0,8 L0,13.6 C0,14.9254834 1.00735931,16 2.25,16 L9.75,16 C10.9926407,16 12,14.9254834 12,13.6 L12,8 C12,6.6745166 10.9926407,5.6 9.75,5.6 Z M3.75,4 C3.75,2.6745166 4.75735931,1.6 6,1.6 C7.24264069,1.6 8.25,2.6745166 8.25,4 L8.25,5.6 L3.75,5.6 L3.75,4 Z M10.5,13.6 C10.5,14.0418278 10.1642136,14.4 9.75,14.4 L2.25,14.4 C1.83578644,14.4 1.5,14.0418278 1.5,13.6 L1.5,8 C1.5,7.5581722 1.83578644,7.2 2.25,7.2 L9.75,7.2 C10.1642136,7.2 10.5,7.5581722 10.5,8 L10.5,13.6 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>
