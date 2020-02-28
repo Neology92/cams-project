@@ -7,7 +7,6 @@ import Radio from './ui-elements/Radio';
 import CheckboxGroup from './ui-elements/CheckboxGroup';
 import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
-import Icon from './Icon';
 
 export {
     Navbar,
@@ -18,5 +17,4 @@ export {
     Input,
     Toggle,
     SegmentedButtons,
-    Icon,
 };
