@@ -12,6 +12,7 @@ import {
     SegmentedButtons,
     Icon,
     Tooltip,
+    Dropdown,
 } from '../components';
 import {
     Ban,
@@ -58,6 +59,12 @@ const Home = ({ switchColorsMode }) => {
                 </Grid>
 
                 <Grid item xs={12}>
+                    <StyledPaper>
+                        <Dropdown />
+                    </StyledPaper>
+                </Grid>
+
+                <Grid item xs={12}>
                     <Space>
                         <Icon component={Ban} />
                         <Icon component={CheckCopy} size="8px" />
@@ -95,8 +102,25 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <Space>
-                        <Toggle value={value8} setValue={setValue8} />
-                        <Toggle value={value9} setValue={setValue9} />
+                        <Tooltip title="This will change your colors mode">
+                            <Button
+                                type="default"
+                                color="primary"
+                                onClick={() => {
+                                    switchColorsMode();
+                                }}
+                            >
+                                Primary Button
+                            </Button>
+                        </Tooltip>
+                        <Button
+                            color="secondary"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Secondary Button
+                        </Button>
                     </Space>
                 </Grid>
 
@@ -137,28 +161,10 @@ const Home = ({ switchColorsMode }) => {
                         />
                     </StyledPaper>
                 </Grid>
-
                 <Grid item xs={12}>
                     <Space>
-                        <Tooltip title="This will change your colors mode">
-                            <Button
-                                type="default"
-                                color="primary"
-                                onClick={() => {
-                                    switchColorsMode();
-                                }}
-                            >
-                                Primary Button
-                            </Button>
-                        </Tooltip>
-                        <Button
-                            color="secondary"
-                            onClick={() => {
-                                switchColorsMode();
-                            }}
-                        >
-                            Secondary Button
-                        </Button>
+                        <Toggle value={value8} setValue={setValue8} />
+                        <Toggle value={value9} setValue={setValue9} />
                     </Space>
                 </Grid>
 
