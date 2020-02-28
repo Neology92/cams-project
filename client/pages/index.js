@@ -59,9 +59,9 @@ const Home = ({ switchColorsMode }) => {
                 <Grid item xs={12}>
                     <Space>
                         <Icon component={Ban} />
-                        <Icon component={CheckCopy} />
-                        <Icon component={AngleDown} />
-                        <Icon component={Woman} />
+                        <Icon component={CheckCopy} size="8px" />
+                        <Icon component={AngleDown} size="100px" />
+                        <Icon component={Woman} size="50px" />
                         <Icon component={Clock} />
                         <Icon component={Check} />
                         <Icon component={Fire} />
