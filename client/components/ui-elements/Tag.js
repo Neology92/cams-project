@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
 import propTypes from 'prop-types';
+import Icon from '../Icon';
+import { Close } from '../../assets/icons';
 
 const Tag = ({ chipData, setChipData }) => {
     const handleDelete = chipToDelete => () => {
@@ -17,6 +19,7 @@ const Tag = ({ chipData, setChipData }) => {
                         key={data.key}
                         label={data.label}
                         onDelete={handleDelete(data)}
+                        deleteIcon={<Icon component={<Close />} />}
                     />
                 );
             })}
