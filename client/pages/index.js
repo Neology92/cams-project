@@ -10,6 +10,7 @@ import {
     Input,
     Toggle,
     SegmentedButtons,
+    Icon,
 } from '../components';
 import {
     Ban,
@@ -57,15 +58,15 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <Space>
-                        <Ban />
-                        <CheckCopy />
-                        <AngleDown />
-                        <Woman />
-                        <Clock />
-                        <Check />
-                        <Fire />
-                        <Lgbt />
-                        <DarkMode />
+                        <Icon component={Ban} />
+                        <Icon component={CheckCopy} />
+                        <Icon component={AngleDown} />
+                        <Icon component={Woman} />
+                        <Icon component={Clock} />
+                        <Icon component={Check} />
+                        <Icon component={Fire} />
+                        <Icon component={Lgbt} />
+                        <Icon component={DarkMode} />
                     </Space>
                 </Grid>
 
