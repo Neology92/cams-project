@@ -11,6 +11,7 @@ import {
     Toggle,
     SegmentedButtons,
     Icon,
+    Tooltip,
 } from '../components';
 import {
     Ban,
@@ -141,15 +142,17 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <Space>
-                        <Button
-                            type="default"
-                            color="primary"
-                            onClick={() => {
-                                switchColorsMode();
-                            }}
-                        >
-                            Primary Button
-                        </Button>
+                        <Tooltip title="This will change your colors mode">
+                            <Button
+                                type="default"
+                                color="primary"
+                                onClick={() => {
+                                    switchColorsMode();
+                                }}
+                            >
+                                Primary Button
+                            </Button>
+                        </Tooltip>
                         <Button
                             color="secondary"
                             onClick={() => {
@@ -205,12 +208,14 @@ const Home = ({ switchColorsMode }) => {
                 <Grid item xs={12}>
                     <StyledPaper>
                         <Space>
-                            <Input
-                                value={value6}
-                                setValue={setValue6}
-                                label="Label"
-                                placeholder="Placeholder"
-                            />
+                            <Tooltip title="You can write something here">
+                                <Input
+                                    value={value6}
+                                    setValue={setValue6}
+                                    label="Label"
+                                    placeholder="Placeholder"
+                                />
+                            </Tooltip>
                         </Space>
                         <Space>
                             <Input
