@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     MenuItem,
     ListItemIcon,
-    ListItemSecondaryAction,
+    ListItemSecondaryAction as SecondaryAction,
 } from '@material-ui/core';
 import Toggle from '../Toggle';
 import Icon from '../../Icon';
@@ -54,10 +54,8 @@ const Wrapper = styled(MenuItem)`
     }
 `;
 
-const SecondaryAction = styled(ListItemSecondaryAction)``;
-
 Item.propTypes = {
-    icon: PropTypes.node,
+    icon: PropTypes.func,
     label: PropTypes.string,
     width: PropTypes.string,
     toggleValue: PropTypes.bool,
@@ -71,7 +69,7 @@ Item.defaultProps = {
     width: '200px',
     toggleValue: false,
     disabled: false,
-    setToggleValue: '',
+    setToggleValue: null,
 };
 
 export default Item;
