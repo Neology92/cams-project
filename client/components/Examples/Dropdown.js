@@ -9,11 +9,15 @@ const Dropdown = () => {
     return (
         <Menu>
             <Subheader label="Label" />
-            <Item label="Woman" icon={Woman} />
             <Item
-                label="BUmp value"
+                label="Woman"
+                icon={Woman}
+                onClick={() => alert('You pushed a woman')} //eslint-disable-line
+            />
+            <Item
+                label="Fire"
                 icon={Fire}
-                onClick={() => alert('clicked')} //eslint-disable-line
+                onClick={() => alert('Australia say ouch')} //eslint-disable-line
             />
             <Divider />
             <Subheader label="Second label" />
