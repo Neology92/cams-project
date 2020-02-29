@@ -8,18 +8,32 @@ import {
 import Toggle from '../Toggle';
 import Icon from '../../Icon';
 
-const Item = ({ icon, label, toggleValue, setToggleValue }) => {
+const Item = ({
+    width,
+    icon,
+    label,
+    toggleValue,
+    setToggleValue,
+    disabled,
+    ...props
+}) => {
     return (
-        <Wrapper>
+        <Wrapper width={width} disabled={disabled} {...props}>
             {icon ? (
                 <ListItemIcon>
                     <Icon component={icon} />
                 </ListItemIcon>
             ) : null}
-            {label}
+
+            <span>{label}</span>
+
             {setToggleValue ? (
                 <SecondaryAction>
-                    <Toggle value={toggleValue} setValue={setToggleValue} />
+                    <Toggle
+                        disabled={disabled}
+                        value={toggleValue}
+                        setValue={() => setToggleValue(!toggleValue)}
+                    />
                 </SecondaryAction>
             ) : null}
         </Wrapper>
@@ -29,8 +43,11 @@ const Item = ({ icon, label, toggleValue, setToggleValue }) => {
 const Wrapper = styled(MenuItem)`
     && {
         font-size: 14px;
-        margin: 2px 0;
+        margin: 4px 0;
         padding: 4px 8px;
+        border-radius: 4px;
+        width: ${({ width }) => width};
+
         .MuiListItemIcon-root {
             min-width: 30px;
         }
@@ -42,14 +59,18 @@ const SecondaryAction = styled(ListItemSecondaryAction)``;
 Item.propTypes = {
     icon: PropTypes.node,
     label: PropTypes.string,
+    width: PropTypes.string,
     toggleValue: PropTypes.bool,
+    disabled: PropTypes.bool,
     setToggleValue: PropTypes.func,
 };
 
 Item.defaultProps = {
     icon: null,
     label: '',
+    width: '200px',
     toggleValue: false,
+    disabled: false,
     setToggleValue: '',
 };
 

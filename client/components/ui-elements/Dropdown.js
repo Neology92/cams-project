@@ -1,21 +1,28 @@
+import { useState } from 'react';
+
 import { Divider, Subheader, Item, Menu } from './dropdown-elems';
 import { Woman, Check, Fire } from '../../assets/icons';
 
 const Dropdown = () => {
+    const [toggle, setToggle] = useState(false);
+
     return (
         <Menu>
             <Subheader label="Label" />
             <Item label="Woman" icon={Woman} />
-            <Item label="BUmp value" icon={Fire} />
+            <Item
+                label="BUmp value"
+                icon={Fire}
+                onClick={() => alert('clicked')}
+            />
             <Divider />
             <Subheader label="Second label" />
             <Item
-                label="Rewiev done"
+                disabled
+                label="Review done"
                 icon={Check}
-                toggleValue={false}
-                setToggleValue={() => {
-                    alert('clicked'); //eslint-disable-line
-                }}
+                toggleValue={toggle}
+                setToggleValue={setToggle}
             />
         </Menu>
     );
