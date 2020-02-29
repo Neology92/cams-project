@@ -76,7 +76,7 @@ const StyledInput = styled(InputBase)`
 
 Input.propTypes = {
     value: PropTypes.string.isRequired,
-    setValue: PropTypes.string.isRequired,
+    setValue: PropTypes.func.isRequired,
     label: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
@@ -90,8 +90,8 @@ Input.defaultProps = {
     placeholder: '',
     type: 'default',
     width: '256px',
-    rows: '2',
-    rowsMax: '4',
+    rows: 2,
+    rowsMax: 4,
 };
 
 export default Input;
