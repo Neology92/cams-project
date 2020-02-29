@@ -47,7 +47,7 @@ CheckboxGroup.propTypes = {
     ),
     label: PropTypes.string,
     row: PropTypes.bool,
-    values: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
+    values: PropTypes.objectOf(PropTypes.bool),
     setValues: PropTypes.func.isRequired,
 };
 
