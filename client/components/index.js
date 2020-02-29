@@ -1,4 +1,4 @@
-import Navbar from './Navbar';
+import Navbar from './Examples/Navbar';
 
 import Button from './ui-elements/Button';
 import Select from './ui-elements/Select';
@@ -9,7 +9,7 @@ import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
 import Tooltip from './ui-elements/Tooltip';
 import Icon from './Icon';
-import Dropdown from './ui-elements/Dropdown';
+import Dropdown from './Examples/Dropdown';
 
 export {
     Navbar,
