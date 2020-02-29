@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Switch, FormControl } from '@material-ui/core';
+import { Switch } from '@material-ui/core';
 
-const Toggle = ({ value, setValue, color }) => {
+const Toggle = ({ value, setValue, color, ...props }) => {
     const handleChange = v => {
         setValue(!v);
     };
 
     return (
-        <FormControl>
-            <IOSSwitch
-                checked={value}
-                onChange={() => handleChange(value)}
-                value={value}
-                color={color}
-            />
-        </FormControl>
+        <IOSSwitch
+            checked={value}
+            onChange={() => handleChange(value)}
+            value={value}
+            color={color}
+            {...props}
+        />
     );
 };
 
@@ -35,7 +34,11 @@ const IOSSwitch = styled(Switch)`
                 border: ${({ theme }) => theme.palette.primary.main} !important;
                 width: 20px;
                 height: 20px;
-                background: ${({ theme }) => theme.palette.common.white};
+
+                background: ${({ disabled, theme }) =>
+                    disabled
+                        ? theme.palette.secondary.main
+                        : theme.palette.common.white};
             }
 
             &-track {
@@ -43,7 +46,8 @@ const IOSSwitch = styled(Switch)`
                     value
                         ? theme.palette.primary.main
                         : theme.palette.secondary.main};
-                opacity: 1 !important;
+                opacity: ${({ disabled }) =>
+                    disabled ? '0.2' : '1'} !important;
             }
         }
     }
