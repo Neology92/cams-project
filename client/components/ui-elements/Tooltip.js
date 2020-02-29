@@ -2,9 +2,9 @@ import MuiTooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 
-const Tooltip = ({ title, children, ...props }) => {
+const Tooltip = ({ label, children, ...props }) => {
     return (
-        <StyledToolTip title={title} arrow {...props}>
+        <StyledToolTip title={label} arrow {...props}>
             <div>{children}</div>
         </StyledToolTip>
     );
@@ -22,12 +22,12 @@ const StyledToolTip = withStyles(theme => ({
 }))(MuiTooltip);
 
 Tooltip.propTypes = {
-    title: propTypes.string,
+    label: propTypes.string,
     children: propTypes.node.isRequired,
 };
 
 Tooltip.defaultProps = {
-    title: '',
+    label: '',
 };
 
 export default Tooltip;
