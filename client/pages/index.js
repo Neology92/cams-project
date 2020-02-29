@@ -75,8 +75,6 @@ const Home = ({ switchColorsMode }) => {
                     <StyledPaper>
                         <Input
                             multiline
-                            rows={2}
-                            maxRows={4}
                             placeholder="Placeholder"
                             label="Text Area"
                             value={value11}
@@ -84,8 +82,8 @@ const Home = ({ switchColorsMode }) => {
                         />
                         <Input
                             multiline
-                            rows={2}
-                            maxRows={4}
+                            rows={1}
+                            rowsMax={2}
                             placeholder="Placeholder"
                             label="Wide Text Area"
                             width="40vw"
