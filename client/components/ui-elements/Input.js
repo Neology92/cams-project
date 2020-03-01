@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { InputBase, InputLabel, FormControl } from '@material-ui/core';
+import { InputBase, InputLabel, InputAdornment } from '@material-ui/core';
 import Icon from '../Icon';
-import { Check, CheckCopy } from '../../assets/icons';
+import { Check, CheckCopy, Search } from '../../assets/icons';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
@@ -53,19 +53,24 @@ class Input extends React.PureComponent {
                 <div>
                     <StyledLabel>{label}</StyledLabel>
                 </div>
-                <FormControl>
-                    <StyledInput
-                        value={value}
-                        placeholder={placeholder}
-                        type={type}
-                        onChange={e => this.handleChange(e)}
-                        // onBlur={e => setValue(e.target.value)}
-                        width={width}
-                        state={state}
-                        {...props}
-                    />
-                    {this.renderIcon()}
-                </FormControl>
+                <StyledInput
+                    value={value}
+                    placeholder={placeholder}
+                    type={type}
+                    onChange={e => this.handleChange(e)}
+                    // onBlur={e => setValue(e.target.value)}
+                    width={width}
+                    state={state}
+                    startAdornment={
+                        type === 'search' ? (
+                            <InputAdornment position="start">
+                                <Icon component={Search} />
+                            </InputAdornment>
+                        ) : null
+                    }
+                    {...props}
+                />
+                {this.renderIcon()}
             </div>
         );
     }
@@ -127,12 +132,12 @@ const StyledInput = styled(InputBase)`
         }
     }
 
-    .MuiInputBase-inputTypeSearch {
+    /* .MuiInputBase-inputTypeSearch {
         background: url('https://resources-live.sketch.cloud/files/22d56c79-8cd4-4f44-ade6-61b84950f754.png?Expires=1582938000&Signature=oFe0cOV3MTv8n5m-TkjTZydrcWTT0HGjvjqSrXv8nhPe0qv3OAyV0uJ~EanqvetygDPa9yAxenq3soqYzwdqjpafkoZMVfQ1TBlma-yKs7SdnUz45pg1D2CZjaePQvak5oRDT6~HAIcWgXbKEhP59GvxXi2dkapQSetWViA5EU4_&Key-Pair-Id=APKAJOITMW3RWOLNNPYA')
             no-repeat scroll 5px 5px;
         padding: 0 0 0 29px;
         background-color: ${({ theme }) => theme.palette.secondary.main};
-    }
+    } */
 `;
 
 Input.propTypes = {

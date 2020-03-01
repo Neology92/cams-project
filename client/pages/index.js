@@ -86,7 +86,6 @@ const Home = ({ switchColorsMode }) => {
                             label="Text Area"
                             value={value11}
                             setValue={setValue11}
-                            state="error"
                         />
                         <Input
                             multiline
@@ -95,7 +94,6 @@ const Home = ({ switchColorsMode }) => {
                             placeholder="Placeholder"
                             label="Wide Text Area"
                             width="40vw"
-                            state="approve"
                             value={value11}
                             setValue={setValue11}
                         />
@@ -220,9 +218,18 @@ const Home = ({ switchColorsMode }) => {
                                     setValue={setValue6}
                                     label="Label"
                                     placeholder="Placeholder"
+                                    state="approve"
                                 />
                             </Tooltip>
                         </Space>
+                        <Input
+                            value={value6}
+                            setValue={setValue6}
+                            label="Label"
+                            placeholder="Password"
+                            state="error"
+                            type="password"
+                        />
                         <Space>
                             <Input
                                 value={value7}
