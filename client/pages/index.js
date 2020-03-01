@@ -51,19 +51,6 @@ const Home = ({ switchColorsMode }) => {
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
     const [value11, setValue11] = useState('');
-    const [value12, setValue12] = useState([
-        { key: 0, label: 'first chip' },
-        { key: 1, label: '2nd chip' },
-        { key: 2, label: 'third long chip' },
-        { key: 3, label: 'fourth very very very long chip' },
-        { key: 4, label: 'some tag' },
-        { key: 5, label: 'placeholder' },
-        { key: 6, label: 'dududu' },
-        { key: 7, label: 'I need more tags' },
-        { key: 8, label: 'Cuz they are small' },
-        { key: 9, label: ' ' },
-        { key: 10, label: 'the one before me contains only one spac' },
-    ]);
 
     return (
         <Container maxWidth="lg">
@@ -75,7 +62,16 @@ const Home = ({ switchColorsMode }) => {
                             label="Tag Prototype"
                             onDelete={() => {}}
                         />
-                        <Tag key="no-delete" label="No Delete" />
+                        <Tag
+                            key="some-tag"
+                            label="Some Tag"
+                            onDelete={() => {}}
+                        />
+                        <Tag
+                            key="another-tag"
+                            label="Another Tag"
+                            onDelete={() => {}}
+                        />
                         <Tag key="no-label" onDelete={() => {}} />
                     </Space>
                 </Grid>
@@ -253,15 +249,6 @@ const Home = ({ switchColorsMode }) => {
                             />
                         </Space>
                     </StyledPaper>
-                    <Grid item xs={12}>
-                        <Space>
-                            <Tag chipData={value12} setChipData={setValue12} />
-                        </Space>
-                    </Grid>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space />
                 </Grid>
             </Grid>
         </Container>
