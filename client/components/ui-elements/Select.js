@@ -12,11 +12,18 @@ import {
 //  - children: Button Label
 //  - items: array of menu items {value: 'string', label:'string'}
 class Select extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        const { setValue } = this.props;
+        setValue(e.target.value);
+    }
+
     render() {
         const { value, setValue, label, items, ...props } = this.props;
-        const handleChange = e => {
-            setValue(e.target.value);
-        };
 
         return (
             <div>
@@ -29,7 +36,7 @@ class Select extends React.PureComponent {
                             <StyledInput
                                 {...props}
                                 value={value}
-                                onChange={e => handleChange(e)}
+                                onChange={e => this.handleChange(e)}
                             />
                         }
                     >

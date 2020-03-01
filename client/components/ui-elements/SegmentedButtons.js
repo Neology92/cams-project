@@ -4,19 +4,27 @@ import PropTypes from 'prop-types';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 class SegmentedButtons extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event, newValue) {
+        const { setValue } = this.props;
+
+        if (newValue) {
+            setValue(newValue);
+        }
+    }
+
     render() {
         const { value, setValue, label, items, ...props } = this.props;
-        const handleChange = (e, newValue) => {
-            if (newValue) {
-                setValue(newValue);
-            }
-        };
 
         return (
             <StyledGroup
                 value={value}
                 exclusive
-                onChange={handleChange}
+                onChange={this.handleChange}
                 {...props}
                 label={label}
             >

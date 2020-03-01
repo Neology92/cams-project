@@ -9,11 +9,18 @@ import {
 } from '@material-ui/core';
 
 class Radio extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        const { setValue } = this.props;
+        setValue(e.target.value);
+    }
+
     render() {
         const { value, setValue, label, items, ...props } = this.props;
-        const handleChange = e => {
-            setValue(e.target.value);
-        };
 
         return (
             <FormControl>
@@ -22,7 +29,7 @@ class Radio extends React.PureComponent {
                     aria-label={label}
                     name={label}
                     value={value}
-                    onChange={e => handleChange(e)}
+                    onChange={e => this.handleChange(e)}
                 >
                     {items.map(item => (
                         <RadioLabel
