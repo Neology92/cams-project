@@ -72,16 +72,9 @@ const IOSSwitch = styled(Switch)`
             width: 40px;
             height: 40px;
             margin: -8px 0 0 -8px;
-            /* width: 15px; */
-            /* height: 15px; */
 
             background: ${({ theme }) => theme.palette.primary.main};
         }
-        /* :focus-within {
-            .MuiSwitch-thumb {
-
-            }
-        }  */
     }
 `;
 
