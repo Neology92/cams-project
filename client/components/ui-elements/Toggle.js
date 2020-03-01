@@ -34,6 +34,7 @@ const IOSSwitch = styled(Switch)`
         height: 22px;
         padding: 0;
         border-radius: 12px;
+        overflow: visible;
 
         .MuiSwitch {
             &-switchBase {
@@ -41,7 +42,6 @@ const IOSSwitch = styled(Switch)`
             }
 
             &-thumb {
-                border: ${({ theme }) => theme.palette.primary.main} !important;
                 width: 20px;
                 height: 20px;
 
@@ -52,6 +52,7 @@ const IOSSwitch = styled(Switch)`
             }
 
             &-track {
+                border-radius: 12px;
                 background-color: ${({ value, theme }) =>
                     value
                         ? theme.palette.primary.main
@@ -60,6 +61,27 @@ const IOSSwitch = styled(Switch)`
                     disabled ? '0.2' : '1'} !important;
             }
         }
+    }
+
+    .MuiTouchRipple {
+        &-root {
+            overflow: visible;
+        }
+
+        &-child {
+            width: 40px;
+            height: 40px;
+            margin: -8px 0 0 -8px;
+            /* width: 15px; */
+            /* height: 15px; */
+
+            background: ${({ theme }) => theme.palette.primary.main};
+        }
+        /* :focus-within {
+            .MuiSwitch-thumb {
+
+            }
+        }  */
     }
 `;
 

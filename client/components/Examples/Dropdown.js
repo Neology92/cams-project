@@ -5,7 +5,7 @@ class Dropdown extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            toggle: false,
+            toggle: true,
         };
         this.setToggle = this.setToggle.bind(this);
     }
