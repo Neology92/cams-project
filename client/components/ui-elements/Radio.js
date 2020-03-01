@@ -8,34 +8,36 @@ import {
     FormControlLabel,
 } from '@material-ui/core';
 
-const Radio = ({ value, setValue, label, items, ...props }) => {
-    const handleChange = e => {
-        setValue(e.target.value);
-    };
+class Radio extends React.PureComponent {
+    render() {
+        const { value, setValue, label, items, ...props } = this.props;
+        const handleChange = e => {
+            setValue(e.target.value);
+        };
 
-    return (
-        <FormControl>
-            {label ? <StyledLabel>{label}</StyledLabel> : null}
-            <RadioGroup
-                aria-label={label}
-                name={label}
-                value={value}
-                onChange={e => handleChange(e)}
-            >
-                {items.map(item => (
-                    <RadioLabel
-                        key={item.value}
-                        value={item.value}
-                        label={item.label}
-                        control={<MuiRadio color="primary" />}
-                        {...props}
-                    />
-                ))}
-            </RadioGroup>
-        </FormControl>
-    );
-};
-
+        return (
+            <FormControl>
+                {label ? <StyledLabel>{label}</StyledLabel> : null}
+                <RadioGroup
+                    aria-label={label}
+                    name={label}
+                    value={value}
+                    onChange={e => handleChange(e)}
+                >
+                    {items.map(item => (
+                        <RadioLabel
+                            key={item.value}
+                            value={item.value}
+                            label={item.label}
+                            control={<MuiRadio color="primary" />}
+                            {...props}
+                        />
+                    ))}
+                </RadioGroup>
+            </FormControl>
+        );
+    }
+}
 const StyledLabel = styled(FormLabel)`
     && {
         margin: 8px 0;

@@ -4,45 +4,43 @@ import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
-const Input = ({
-    label,
-    value,
-    setValue,
-    placeholder,
-    type,
-    width,
-    ...props
-}) => {
-    const [v, setV] = React.useState(value);
-    const [i, setI] = React.useState(0);
 
-    const handleChange = newV => {
-        setV(newV);
-        if (i % 5 === 0) {
-            setValue(newV);
-        }
-        setI(i + 1);
-    };
+class Input extends React.PureComponent {
+    render() {
+        const {
+            label,
+            value,
+            setValue,
+            placeholder,
+            type,
+            width,
+            ...props
+        } = this.props;
 
-    return (
-        <div>
+        const handleChange = e => {
+            setValue(e.target.value);
+        };
+
+        return (
             <div>
-                <StyledLabel>{label}</StyledLabel>
+                <div>
+                    <StyledLabel>{label}</StyledLabel>
+                </div>
+                <FormControl>
+                    <StyledInput
+                        value={value}
+                        placeholder={placeholder}
+                        type={type}
+                        onChange={e => handleChange(e)}
+                        // onBlur={e => setValue(e.target.value)}
+                        width={width}
+                        {...props}
+                    />
+                </FormControl>
             </div>
-            <FormControl>
-                <StyledInput
-                    value={v}
-                    placeholder={placeholder}
-                    type={type}
-                    onChange={e => handleChange(e.target.value)}
-                    onBlur={e => setValue(e.target.value)}
-                    width={width}
-                    {...props}
-                />
-            </FormControl>
-        </div>
-    );
-};
+        );
+    }
+}
 
 const StyledLabel = styled(InputLabel)`
     && {

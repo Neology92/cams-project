@@ -3,33 +3,36 @@ import PropTypes from 'prop-types';
 
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
-const SegmentedButtons = ({ value, setValue, label, items, ...props }) => {
-    const handleChange = (e, newValue) => {
-        if (newValue) {
-            setValue(newValue);
-        }
-    };
+class SegmentedButtons extends React.PureComponent {
+    render() {
+        const { value, setValue, label, items, ...props } = this.props;
+        const handleChange = (e, newValue) => {
+            if (newValue) {
+                setValue(newValue);
+            }
+        };
 
-    return (
-        <StyledGroup
-            value={value}
-            exclusive
-            onChange={handleChange}
-            {...props}
-            label={label}
-        >
-            {items.map(item => (
-                <ToggleButton
-                    key={item.value}
-                    aria-label={item.label}
-                    value={item.value}
-                >
-                    {item.label}
-                </ToggleButton>
-            ))}
-        </StyledGroup>
-    );
-};
+        return (
+            <StyledGroup
+                value={value}
+                exclusive
+                onChange={handleChange}
+                {...props}
+                label={label}
+            >
+                {items.map(item => (
+                    <ToggleButton
+                        key={item.value}
+                        aria-label={item.label}
+                        value={item.value}
+                    >
+                        {item.label}
+                    </ToggleButton>
+                ))}
+            </StyledGroup>
+        );
+    }
+}
 
 const StyledGroup = styled(ToggleButtonGroup)`
     && {

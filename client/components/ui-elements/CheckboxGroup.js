@@ -2,33 +2,36 @@ import PropTypes from 'prop-types';
 import { FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 import styled from 'styled-components';
 
-const CheckboxGroup = ({ values, setValues, items, label, row, ...props }) => {
-    const handleChange = (event, name) => {
-        setValues({
-            ...values,
-            [name]: event.target.checked,
-        });
-    };
+class CheckboxGroup extends React.PureComponent {
+    render() {
+        const { values, setValues, items, label, row, ...props } = this.props;
+        const handleChange = (event, name) => {
+            setValues({
+                ...values,
+                [name]: event.target.checked,
+            });
+        };
 
-    return (
-        <FormGroup row={row}>
-            {items.map(item => (
-                <StyledLabel
-                    key={item.value}
-                    control={
-                        <Checkbox
-                            checked={values[item.value]}
-                            onChange={e => handleChange(e, item.value)}
-                            inputProps={{ 'aria-label': item.label }}
-                            {...props}
-                        />
-                    }
-                    label={item.label}
-                />
-            ))}
-        </FormGroup>
-    );
-};
+        return (
+            <FormGroup row={row}>
+                {items.map(item => (
+                    <StyledLabel
+                        key={item.value}
+                        control={
+                            <Checkbox
+                                checked={values[item.value]}
+                                onChange={e => handleChange(e, item.value)}
+                                inputProps={{ 'aria-label': item.label }}
+                                {...props}
+                            />
+                        }
+                        label={item.label}
+                    />
+                ))}
+            </FormGroup>
+        );
+    }
+}
 const StyledLabel = styled(FormControlLabel)`
     && {
         .MuiFormControlLabel-label {

@@ -2,13 +2,16 @@ import MuiTooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 
-const Tooltip = ({ label, children, ...props }) => {
-    return (
-        <StyledToolTip title={label} arrow {...props}>
-            <div>{children}</div>
-        </StyledToolTip>
-    );
-};
+class Tooltip extends React.PureComponent {
+    render() {
+        const { label, children, ...props } = this.props;
+        return (
+            <StyledToolTip title={label} arrow {...props}>
+                <div>{children}</div>
+            </StyledToolTip>
+        );
+    }
+}
 
 const StyledToolTip = withStyles(theme => ({
     tooltip: {
