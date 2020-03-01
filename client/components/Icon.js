@@ -10,6 +10,10 @@ const StyledIcon = styled(SvgIcon)`
     && {
         width: ${({ size }) => size};
         height: ${({ size }) => size};
+
+        g > path:nth-child(2) {
+            fill: ${({ theme }) => theme.palette.text.primary};
+        }
     }
 `;
 
