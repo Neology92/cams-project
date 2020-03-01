@@ -8,53 +8,56 @@ import {
 import Toggle from '../Toggle';
 import Icon from '../../Icon';
 
-const Item = ({
-    icon,
-    label,
-    toggle,
-    toggleValue,
-    setToggleValue,
-    disabled,
-    ...props
-}) => {
-    return (
-        <>
-            {toggle ? (
-                <Wrapper
-                    disabled={disabled}
-                    onClick={() => setToggleValue(!toggleValue)}
-                    {...props}
-                >
-                    {icon ? (
-                        <ListItemIcon>
-                            <Icon component={icon} />
-                        </ListItemIcon>
-                    ) : null}
+class Item extends React.PureComponent {
+    render() {
+        const {
+            icon,
+            label,
+            toggle,
+            toggleValue,
+            setToggleValue,
+            disabled,
+            ...props
+        } = this.props;
+        return (
+            <>
+                {toggle ? (
+                    <Wrapper
+                        disabled={disabled}
+                        onClick={() => setToggleValue(!toggleValue)}
+                        {...props}
+                    >
+                        {icon ? (
+                            <ListItemIcon>
+                                <Icon component={icon} />
+                            </ListItemIcon>
+                        ) : null}
 
-                    <span>{label}</span>
+                        <span>{label}</span>
 
-                    <SecondaryAction>
-                        <Toggle
-                            disabled={disabled}
-                            value={toggleValue}
-                            setValue={setToggleValue}
-                        />
-                    </SecondaryAction>
-                </Wrapper>
-            ) : (
-                <Wrapper disabled={disabled} {...props}>
-                    {icon ? (
-                        <ListItemIcon>
-                            <Icon component={icon} />
-                        </ListItemIcon>
-                    ) : null}
+                        <SecondaryAction>
+                            <Toggle
+                                disabled={disabled}
+                                value={toggleValue}
+                                setValue={setToggleValue}
+                            />
+                        </SecondaryAction>
+                    </Wrapper>
+                ) : (
+                    <Wrapper disabled={disabled} {...props}>
+                        {icon ? (
+                            <ListItemIcon>
+                                <Icon component={icon} />
+                            </ListItemIcon>
+                        ) : null}
 
-                    <span>{label}</span>
-                </Wrapper>
-            )}
-        </>
-    );
-};
+                        <span>{label}</span>
+                    </Wrapper>
+                )}
+            </>
+        );
+    }
+}
 
 const Wrapper = styled(MenuItem)`
     && {

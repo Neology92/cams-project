@@ -3,20 +3,23 @@ import MuiButton from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Button = ({ color, type, children, ...props }) => {
-    if (type === 'text') {
+class Button extends React.PureComponent {
+    render() {
+        const { color, type, children, ...props } = this.props;
+        if (type === 'text') {
+            return (
+                <StyledMuiButton color={color} {...props} format={type}>
+                    {children}
+                </StyledMuiButton>
+            );
+        }
         return (
-            <StyledMuiButton color={color} {...props} format={type}>
+            <StyledMuiButton variant="contained" color={color} {...props}>
                 {children}
             </StyledMuiButton>
         );
     }
-    return (
-        <StyledMuiButton variant="contained" color={color} {...props}>
-            {children}
-        </StyledMuiButton>
-    );
-};
+}
 
 const StyledMuiButton = styled(MuiButton)`
     padding: 8px;

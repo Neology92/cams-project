@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 
 import { ListSubheader } from '@material-ui/core';
 
-const Subheader = ({ label }) => {
-    return (
-        <Wrapper>
-            <span>{label}</span>
-        </Wrapper>
-    );
-};
+class Subheader extends React.PureComponent {
+    render() {
+        const { label } = this.props;
+        return (
+            <Wrapper>
+                <span>{label}</span>
+            </Wrapper>
+        );
+    }
+}
 
 const Wrapper = styled(ListSubheader)`
     && {

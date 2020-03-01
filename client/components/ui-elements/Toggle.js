@@ -2,21 +2,24 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 
-const Toggle = ({ value, setValue, color, ...props }) => {
-    const handleChange = v => {
-        setValue(!v);
-    };
+class Toggle extends React.PureComponent {
+    render() {
+        const { value, setValue, color, ...props } = this.props;
+        const handleChange = v => {
+            setValue(!v);
+        };
 
-    return (
-        <IOSSwitch
-            checked={value}
-            onChange={() => handleChange(value)}
-            value={value}
-            color={color}
-            {...props}
-        />
-    );
-};
+        return (
+            <IOSSwitch
+                checked={value}
+                onChange={() => handleChange(value)}
+                value={value}
+                color={color}
+                {...props}
+            />
+        );
+    }
+}
 
 const IOSSwitch = styled(Switch)`
     && {

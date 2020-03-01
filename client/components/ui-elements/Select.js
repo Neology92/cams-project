@@ -11,36 +11,39 @@ import {
 // Props:
 //  - children: Button Label
 //  - items: array of menu items {value: 'string', label:'string'}
-const Select = ({ value, setValue, label, items, ...props }) => {
-    const handleChange = e => {
-        setValue(e.target.value);
-    };
+class Select extends React.PureComponent {
+    render() {
+        const { value, setValue, label, items, ...props } = this.props;
+        const handleChange = e => {
+            setValue(e.target.value);
+        };
 
-    return (
-        <div>
-            <StyledLabel>
-                <em>{label}</em>
-            </StyledLabel>
-            <FormControl variant="filled">
-                <MuiSelect
-                    input={
-                        <StyledInput
-                            {...props}
-                            value={value}
-                            onChange={e => handleChange(e)}
-                        />
-                    }
-                >
-                    {items.map(item => (
-                        <MenuItem key={item.value} value={item.value}>
-                            {item.label}
-                        </MenuItem>
-                    ))}
-                </MuiSelect>
-            </FormControl>
-        </div>
-    );
-};
+        return (
+            <div>
+                <StyledLabel>
+                    <em>{label}</em>
+                </StyledLabel>
+                <FormControl variant="filled">
+                    <MuiSelect
+                        input={
+                            <StyledInput
+                                {...props}
+                                value={value}
+                                onChange={e => handleChange(e)}
+                            />
+                        }
+                    >
+                        {items.map(item => (
+                            <MenuItem key={item.value} value={item.value}>
+                                {item.label}
+                            </MenuItem>
+                        ))}
+                    </MuiSelect>
+                </FormControl>
+            </div>
+        );
+    }
+}
 
 const StyledLabel = styled(InputLabel)`
     margin: 8px 0;
