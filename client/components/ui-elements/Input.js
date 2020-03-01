@@ -6,6 +6,16 @@ import { InputBase, InputLabel, FormControl } from '@material-ui/core';
 // 'default' for normal input and 'search' for search input
 
 class Input extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        const { setValue } = this.props;
+        setValue(e.target.value);
+    }
+
     render() {
         const {
             label,
@@ -17,10 +27,6 @@ class Input extends React.PureComponent {
             ...props
         } = this.props;
 
-        const handleChange = e => {
-            setValue(e.target.value);
-        };
-
         return (
             <div>
                 <div>
@@ -31,7 +37,7 @@ class Input extends React.PureComponent {
                         value={value}
                         placeholder={placeholder}
                         type={type}
-                        onChange={e => handleChange(e)}
+                        onChange={e => this.handleChange(e)}
                         // onBlur={e => setValue(e.target.value)}
                         width={width}
                         {...props}

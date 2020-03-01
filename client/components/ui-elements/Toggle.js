@@ -3,16 +3,23 @@ import styled from 'styled-components';
 import { Switch } from '@material-ui/core';
 
 class Toggle extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(v) {
+        const { setValue } = this.props;
+        setValue(!v);
+    }
+
     render() {
         const { value, setValue, color, ...props } = this.props;
-        const handleChange = v => {
-            setValue(!v);
-        };
 
         return (
             <IOSSwitch
                 checked={value}
-                onChange={() => handleChange(value)}
+                onChange={() => this.handleChange(value)}
                 value={value}
                 color={color}
                 {...props}

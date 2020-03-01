@@ -51,8 +51,6 @@ const Home = ({ switchColorsMode }) => {
     const [value10, setValue10] = useState('2');
     const [value11, setValue11] = useState('');
 
-    console.log(value11);
-
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>

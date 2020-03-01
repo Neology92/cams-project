@@ -3,14 +3,22 @@ import { FormControlLabel, FormGroup, Checkbox } from '@material-ui/core';
 import styled from 'styled-components';
 
 class CheckboxGroup extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event, name) {
+        const { values, setValues } = this.props;
+
+        setValues({
+            ...values,
+            [name]: event.target.checked,
+        });
+    }
+
     render() {
         const { values, setValues, items, label, row, ...props } = this.props;
-        const handleChange = (event, name) => {
-            setValues({
-                ...values,
-                [name]: event.target.checked,
-            });
-        };
 
         return (
             <FormGroup row={row}>
@@ -20,7 +28,7 @@ class CheckboxGroup extends React.PureComponent {
                         control={
                             <Checkbox
                                 checked={values[item.value]}
-                                onChange={e => handleChange(e, item.value)}
+                                onChange={e => this.handleChange(e, item.value)}
                                 inputProps={{ 'aria-label': item.label }}
                                 {...props}
                             />
