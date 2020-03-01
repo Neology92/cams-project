@@ -24,16 +24,11 @@ const Dropdown = () => {
             <Item
                 label="Review done"
                 icon={Check}
+                toggle
                 toggleValue={toggle}
                 setToggleValue={setToggle}
             />
-            <Item
-                disabled
-                label="Disabled item"
-                icon={Ban}
-                toggleValue={toggle}
-                setToggleValue={setToggle}
-            />
+            <Item disabled label="Disabled item" icon={Ban} />
         </Menu>
     );
 };

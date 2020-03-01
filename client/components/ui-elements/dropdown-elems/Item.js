@@ -11,31 +11,48 @@ import Icon from '../../Icon';
 const Item = ({
     icon,
     label,
+    toggle,
     toggleValue,
     setToggleValue,
     disabled,
     ...props
 }) => {
     return (
-        <Wrapper disabled={disabled} {...props}>
-            {icon ? (
-                <ListItemIcon>
-                    <Icon component={icon} />
-                </ListItemIcon>
-            ) : null}
+        <>
+            {toggle ? (
+                <Wrapper
+                    disabled={disabled}
+                    onClick={() => setToggleValue(!toggleValue)}
+                    {...props}
+                >
+                    {icon ? (
+                        <ListItemIcon>
+                            <Icon component={icon} />
+                        </ListItemIcon>
+                    ) : null}
 
-            <span>{label}</span>
+                    <span>{label}</span>
 
-            {setToggleValue ? (
-                <SecondaryAction>
-                    <Toggle
-                        disabled={disabled}
-                        value={toggleValue}
-                        setValue={() => setToggleValue(!toggleValue)}
-                    />
-                </SecondaryAction>
-            ) : null}
-        </Wrapper>
+                    <SecondaryAction>
+                        <Toggle
+                            disabled={disabled}
+                            value={toggleValue}
+                            setValue={setToggleValue}
+                        />
+                    </SecondaryAction>
+                </Wrapper>
+            ) : (
+                <Wrapper disabled={disabled} {...props}>
+                    {icon ? (
+                        <ListItemIcon>
+                            <Icon component={icon} />
+                        </ListItemIcon>
+                    ) : null}
+
+                    <span>{label}</span>
+                </Wrapper>
+            )}
+        </>
     );
 };
 
@@ -55,17 +72,19 @@ const Wrapper = styled(MenuItem)`
 Item.propTypes = {
     icon: PropTypes.func,
     label: PropTypes.string,
-    toggleValue: PropTypes.bool,
     disabled: PropTypes.bool,
+    toggle: PropTypes.bool,
+    toggleValue: PropTypes.bool,
     setToggleValue: PropTypes.func,
 };
 
 Item.defaultProps = {
     icon: null,
     label: '',
-    toggleValue: false,
     disabled: false,
-    setToggleValue: null,
+    toggle: false,
+    toggleValue: false,
+    setToggleValue: () => {},
 };
 
 export default Item;
