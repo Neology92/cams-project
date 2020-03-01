@@ -86,6 +86,7 @@ const Home = ({ switchColorsMode }) => {
                             label="Text Area"
                             value={value11}
                             setValue={setValue11}
+                            state="error"
                         />
                         <Input
                             multiline
@@ -94,6 +95,7 @@ const Home = ({ switchColorsMode }) => {
                             placeholder="Placeholder"
                             label="Wide Text Area"
                             width="40vw"
+                            state="approve"
                             value={value11}
                             setValue={setValue11}
                         />

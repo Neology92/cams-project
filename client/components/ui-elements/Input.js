@@ -1,19 +1,39 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputBase, InputLabel, FormControl } from '@material-ui/core';
+import Icon from '../Icon';
+import { Check, CheckCopy } from '../../assets/icons';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
+
+// state: default/error/approve
 
 class Input extends React.PureComponent {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.renderIcon = this.renderIcon.bind(this);
     }
 
     handleChange(e) {
         const { setValue } = this.props;
         setValue(e.target.value);
+    }
+
+    renderIcon() {
+        const { state } = this.props;
+
+        switch (state) {
+            case 'error':
+                return <StyledIcon component={CheckCopy} state={state} />;
+
+            case 'approve':
+                return <StyledIcon component={Check} state={state} />;
+
+            default:
+                return null;
+        }
     }
 
     render() {
@@ -23,6 +43,7 @@ class Input extends React.PureComponent {
             setValue,
             placeholder,
             type,
+            state,
             width,
             ...props
         } = this.props;
@@ -40,13 +61,30 @@ class Input extends React.PureComponent {
                         onChange={e => this.handleChange(e)}
                         // onBlur={e => setValue(e.target.value)}
                         width={width}
+                        state={state}
                         {...props}
                     />
+                    {this.renderIcon()}
                 </FormControl>
             </div>
         );
     }
 }
+
+const StyledIcon = styled(Icon)`
+    && {
+        position: absolute;
+        top: -20px;
+        right: 0;
+
+        g > path:nth-child(2) {
+            fill: ${({ state, theme }) =>
+                state === 'error'
+                    ? theme.palette.error.main
+                    : theme.palette.green.main};
+        }
+    }
+`;
 
 const StyledLabel = styled(InputLabel)`
     && {
@@ -61,7 +99,19 @@ const StyledInput = styled(InputBase)`
     .MuiInputBase-input {
         box-sizing: border-box;
         position: relative;
-        border: 1px solid ${({ theme }) => theme.palette.secondary.main};
+        border: 1px solid
+            ${({ theme, state }) => {
+                switch (state) {
+                    case 'error':
+                        return theme.palette.error.main;
+
+                    case 'approve':
+                        return theme.palette.green.main;
+
+                    default:
+                        return theme.palette.secondary.main;
+                }
+            }};
         background-color: ${({ theme }) => theme.palette.secondary.main};
         border-radius: 4px;
         width: ${({ width }) => width};
@@ -73,8 +123,7 @@ const StyledInput = styled(InputBase)`
 
         &:focus {
             border-color: ${({ theme }) => theme.palette.primary.main};
-            background: ${({ theme }) =>
-                theme.palette.background.default} !important;
+            background: ${({ theme }) => theme.palette.background.default};
         }
     }
 
@@ -92,6 +141,7 @@ Input.propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
+    state: PropTypes.string,
     width: PropTypes.string,
     rows: PropTypes.number,
     rowsMax: PropTypes.number,
@@ -101,6 +151,7 @@ Input.defaultProps = {
     label: '',
     placeholder: '',
     type: 'default',
+    state: 'default',
     width: '256px',
     rows: 2,
     rowsMax: 4,
