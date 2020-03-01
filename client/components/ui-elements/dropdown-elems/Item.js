@@ -9,7 +9,6 @@ import Toggle from '../Toggle';
 import Icon from '../../Icon';
 
 const Item = ({
-    width,
     icon,
     label,
     toggleValue,
@@ -18,7 +17,7 @@ const Item = ({
     ...props
 }) => {
     return (
-        <Wrapper width={width} disabled={disabled} {...props}>
+        <Wrapper disabled={disabled} {...props}>
             {icon ? (
                 <ListItemIcon>
                     <Icon component={icon} />
@@ -46,7 +45,6 @@ const Wrapper = styled(MenuItem)`
         margin: 4px 0;
         padding: 4px 8px;
         border-radius: 4px;
-        width: ${({ width }) => width};
 
         .MuiListItemIcon-root {
             min-width: 30px;
@@ -57,7 +55,6 @@ const Wrapper = styled(MenuItem)`
 Item.propTypes = {
     icon: PropTypes.func,
     label: PropTypes.string,
-    width: PropTypes.string,
     toggleValue: PropTypes.bool,
     disabled: PropTypes.bool,
     setToggleValue: PropTypes.func,
@@ -66,7 +63,6 @@ Item.propTypes = {
 Item.defaultProps = {
     icon: null,
     label: '',
-    width: '200px',
     toggleValue: false,
     disabled: false,
     setToggleValue: null,
