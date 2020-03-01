@@ -13,8 +13,15 @@ const Input = ({
     width,
     ...props
 }) => {
-    const handleChange = e => {
-        setValue(e.target.value);
+    const [v, setV] = React.useState(value);
+    const [i, setI] = React.useState(0);
+
+    const handleChange = newV => {
+        setV(newV);
+        if (i % 5 === 0) {
+            setValue(newV);
+        }
+        setI(i + 1);
     };
 
     return (
@@ -24,10 +31,11 @@ const Input = ({
             </div>
             <FormControl>
                 <StyledInput
-                    value={value}
+                    value={v}
                     placeholder={placeholder}
                     type={type}
-                    onChange={e => handleChange(e)}
+                    onChange={e => handleChange(e.target.value)}
+                    onBlur={e => setValue(e.target.value)}
                     width={width}
                     {...props}
                 />
