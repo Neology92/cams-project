@@ -69,7 +69,15 @@ const Home = ({ switchColorsMode }) => {
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Space />
+                    <Space>
+                        <Tag
+                            key="tag-prototype"
+                            label="Tag Prototype"
+                            onDelete={() => {}}
+                        />
+                        <Tag key="no-delete" label="No Delete" />
+                        <Tag key="no-label" onDelete={() => {}} />
+                    </Space>
                 </Grid>
 
                 <Grid item xs={12}>

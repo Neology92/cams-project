@@ -1,70 +1,55 @@
+import React from 'react';
 import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
 import propTypes from 'prop-types';
 import Icon from '../Icon';
 import { Close } from '../../assets/icons';
 
-const Tag = ({ chipData, setChipData }) => {
-    const handleDelete = chipToDelete => () => {
-        setChipData(chips =>
-            chips.filter(chip => chip.key !== chipToDelete.key)
+class Tag extends React.PureComponent {
+    render() {
+        const { key, label, onDelete } = this.props;
+        return (
+            <StyledChip
+                key={key}
+                label={label}
+                onDelete={onDelete}
+                deleteIcon={<Icon component={Close} size="8px" />}
+            />
         );
-    };
-
-    return (
-        <div>
-            {chipData.map(data => {
-                return (
-                    <StyledChip
-                        key={data.key}
-                        label={data.label}
-                        onDelete={handleDelete(data)}
-                        deleteIcon={
-                            <Icon
-                                component={Close}
-                                size="8px"
-                                color="secondary"
-                            />
-                        }
-                    />
-                );
-            })}
-        </div>
-    );
-};
+    }
+}
 
 const StyledChip = styled(Chip)`
-    svg > g > path:nth-child(2) {
-        stroke: ${({ theme }) => theme.palette.text.secondary};
-        fill: ${({ theme }) => theme.palette.text.secondary};
-    }
-
     && {
         height: 20px;
         font-size: 12px;
-        margin: 3px 5px 3px 5px;
+        margin: 3px 5px;
         background-color: ${({ theme }) => theme.palette.secondary.main};
         color: ${({ theme }) => theme.palette.text.secondary};
-    }
 
-    .MuiChip-deleteIcon {
-        padding-left: 2px;
-        padding-right: 1px;
+        svg > g > path:nth-child(2) {
+            stroke: ${({ theme }) => theme.palette.text.secondary};
+            fill: ${({ theme }) => theme.palette.text.secondary};
+        }
+        .MuiChip-deleteIcon {
+            padding-left: 2px;
+            padding-right: 1px;
+        }
+        &:hover {
+            background-color: ${({ theme }) => theme.palette.secondary.dark};
+        }
     }
 `;
 
 Tag.propTypes = {
-    setChipData: propTypes.func.isRequired,
-    chipData: propTypes.arrayOf(
-        propTypes.shape({
-            key: propTypes.number.isRequired,
-            label: propTypes.string.isRequired,
-        })
-    ),
+    key: propTypes.string.isRequired,
+    label: propTypes.string,
+    onDelete: propTypes.func,
 };
 
 Tag.defaultProps = {
-    chipData: [],
+    label: '',
+    onDelete: () => {},
 };
 
 export default Tag;
