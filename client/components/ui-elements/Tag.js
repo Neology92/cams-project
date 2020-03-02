@@ -9,7 +9,7 @@ class Tag extends React.PureComponent {
         const { value, label, onDelete } = this.props;
         return (
             <StyledChip
-                key={value}
+                value={value}
                 label={label}
                 onDelete={onDelete}
                 deleteIcon={<Icon component={Close} size="8px" />}
@@ -20,6 +20,7 @@ class Tag extends React.PureComponent {
 
 const StyledChip = styled(Chip)`
     && {
+        position: relative;
         height: 20px;
         font-size: 12px;
         margin: 3px 5px;
@@ -27,18 +28,34 @@ const StyledChip = styled(Chip)`
         color: ${({ theme }) => theme.palette.text.secondary};
         pointer-events: none;
 
-        &:hover {
-            background-color: ${({ theme }) => theme.palette.secondary.dark};
-        }
-
         svg > g > path:nth-child(2) {
             stroke: ${({ theme }) => theme.palette.text.secondary};
             fill: ${({ theme }) => theme.palette.text.secondary};
         }
+
+        &::after {
+            content: '';
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index: 10;
+        }
+
+        :hover ::after {
+            transition: background 0.1s ease-in-out;
+            background-color: ${({ theme }) => theme.palette.secondary.dark};
+        }
+
         .MuiChip-deleteIcon {
-            padding-left: 2px;
-            padding-right: 1px;
+            position: relative;
+            z-index: 9999;
             pointer-events: auto;
+            padding: 4px 2px 4px 2px;
+            margin: 0 4px 0 -5px;
         }
     }
 `;
