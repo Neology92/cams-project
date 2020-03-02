@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputBase, InputLabel } from '@material-ui/core';
 import Icon from '../Icon';
-import { Check, CheckCopy } from '../../assets/icons';
+import { Check, CheckCopy, Search } from '../../assets/icons';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
@@ -12,8 +12,15 @@ import { Check, CheckCopy } from '../../assets/icons';
 class Input extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: false,
+        };
+
         this.handleChange = this.handleChange.bind(this);
-        this.renderIcon = this.renderIcon.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.renderStateIcon = this.renderStateIcon.bind(this);
+        this.renderTypeIcon = this.renderTypeIcon.bind(this);
     }
 
     handleChange(e) {
@@ -21,15 +28,41 @@ class Input extends React.PureComponent {
         setValue(e.target.value);
     }
 
-    renderIcon() {
+    handleFocus() {
+        const { focused } = this.state;
+        this.setState({
+            focused: !focused,
+        });
+    }
+
+    renderStateIcon() {
         const { state } = this.props;
 
         switch (state) {
             case 'error':
-                return <StyledIcon component={CheckCopy} state={state} />;
+                return <StateIcon component={CheckCopy} state={state} />;
 
             case 'approve':
-                return <StyledIcon component={Check} state={state} />;
+                return <StateIcon component={Check} state={state} />;
+
+            default:
+                return null;
+        }
+    }
+
+    renderTypeIcon() {
+        const { type } = this.props;
+        const { focused } = this.state;
+
+        switch (type) {
+            case 'search':
+                return (
+                    <TypeIcon
+                        component={Search}
+                        type={type}
+                        focused={focused}
+                    />
+                );
 
             default:
                 return null;
@@ -58,12 +91,14 @@ class Input extends React.PureComponent {
                     placeholder={placeholder}
                     type={type}
                     onChange={e => this.handleChange(e)}
-                    // onBlur={e => setValue(e.target.value)}
+                    onFocus={this.handleFocus}
+                    onBlur={this.handleFocus}
                     width={width}
                     state={state}
                     {...props}
                 />
-                {this.renderIcon()}
+                {this.renderStateIcon()}
+                {this.renderTypeIcon()}
             </Wrapper>
         );
     }
@@ -73,7 +108,7 @@ const Wrapper = styled.div`
     position: relative;
 `;
 
-const StyledIcon = styled(Icon)`
+const StateIcon = styled(Icon)`
     && {
         position: absolute;
         top: -3px;
@@ -88,6 +123,21 @@ const StyledIcon = styled(Icon)`
     }
 `;
 
+const TypeIcon = styled(Icon)`
+    && {
+        position: absolute;
+        bottom: 6px;
+        left: 8px;
+
+        g > path:nth-child(2) {
+            fill: ${({ focused, theme }) =>
+                focused
+                    ? theme.palette.text.default
+                    : theme.palette.text.secondary};
+        }
+    }
+`;
+
 const StyledLabel = styled(InputLabel)`
     && {
         position: relative;
@@ -98,38 +148,44 @@ const StyledLabel = styled(InputLabel)`
     }
 `;
 const StyledInput = styled(InputBase)`
-    .MuiInputBase-input {
-        box-sizing: border-box;
-        position: relative;
-            border: 1px solid ${({ theme, state }) =>
+    .MuiInputBase {
+        &-input {
+            position: relative;
+            box-sizing: border-box;
+            padding: 4px;
+            width: ${({ width }) => width};
+            min-height: 30px;
+            border: 1px solid
+                ${({ theme, state }) =>
+                    state === 'error'
+                        ? theme.palette.error.main
+                        : theme.palette.secondary.main};
+
+            border-radius: 4px;
+            background-color: ${({ theme }) => theme.palette.secondary.main};
+            font-size: 14px;
+            transition: ${({ theme }) =>
+                theme.transitions.create(['border-color'])};
+        }
+
+        &-input:focus {
+            border-color: ${({ theme, state }) =>
                 state === 'error'
                     ? theme.palette.error.main
-                    : theme.palette.secondary.main} ;
-
-        background-color: ${({ theme }) => theme.palette.secondary.main};
-        border-radius: 4px;
-        width: ${({ width }) => width};
-        min-height: 30px;
-        font-size: 14px;
-        padding: 4px;
-        transition: ${({ theme }) =>
-            theme.transitions.create(['border-color'])};
-
-        &:focus {
-            border-color:${({ theme, state }) =>
-                state === 'error'
-                    ? theme.palette.error.main
-                    : theme.palette.primary.main} ;
+                    : theme.palette.primary.main};
             background: ${({ theme }) => theme.palette.background.default};
         }
-    }
 
-    /* .MuiInputBase-inputTypeSearch {
-        background: url('https://resources-live.sketch.cloud/files/22d56c79-8cd4-4f44-ade6-61b84950f754.png?Expires=1582938000&Signature=oFe0cOV3MTv8n5m-TkjTZydrcWTT0HGjvjqSrXv8nhPe0qv3OAyV0uJ~EanqvetygDPa9yAxenq3soqYzwdqjpafkoZMVfQ1TBlma-yKs7SdnUz45pg1D2CZjaePQvak5oRDT6~HAIcWgXbKEhP59GvxXi2dkapQSetWViA5EU4_&Key-Pair-Id=APKAJOITMW3RWOLNNPYA')
-            no-repeat scroll 5px 5px;
-        padding: 0 0 0 29px;
-        background-color: ${({ theme }) => theme.palette.secondary.main};
-    } */
+        &-input::placeholder {
+            color: ${({ theme }) => theme.palette.text.secondary};
+            opacity: 1;
+        }
+
+        &-inputTypeSearch {
+            padding: 0 0 0 35px;
+            background-color: ${({ theme }) => theme.palette.secondary.main};
+        }
+    }
 `;
 
 Input.propTypes = {
