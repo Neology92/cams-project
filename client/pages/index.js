@@ -13,6 +13,7 @@ import {
     Icon,
     Tooltip,
     Dropdown,
+    Tag,
 } from '../components';
 import {
     Ban,
@@ -56,6 +57,27 @@ const Home = ({ switchColorsMode }) => {
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Space />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <Tag
+                            key="tag-prototype"
+                            label="Tag Prototype"
+                            onDelete={() => {}}
+                        />
+                        <Tag
+                            key="some-tag"
+                            label="Some Tag"
+                            onDelete={() => {}}
+                        />
+                        <Tag
+                            key="another-tag"
+                            label="Another Tag"
+                            onDelete={() => {}}
+                        />
+                        <Tag key="no-label" onDelete={() => {}} />
+                    </Space>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -218,18 +240,9 @@ const Home = ({ switchColorsMode }) => {
                                     setValue={setValue6}
                                     label="Label"
                                     placeholder="Placeholder"
-                                    state="approve"
                                 />
                             </Tooltip>
                         </Space>
-                        <Input
-                            value={value6}
-                            setValue={setValue6}
-                            label="Label"
-                            placeholder="Password"
-                            state="error"
-                            type="password"
-                        />
                         <Space>
                             <Input
                                 value={value7}
