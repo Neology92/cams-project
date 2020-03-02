@@ -5,11 +5,10 @@ const UserSchema = new Schema({
     role: {
         type: String,
         default: 'default',
-        required: true,
     },
 
     login: {
-        role: String,
+        type: String,
         required: true,
     },
     wallet: {
