@@ -51,6 +51,20 @@ const Home = ({ switchColorsMode }) => {
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
     const [value11, setValue11] = useState('');
+    const [values12, setValues12] = useState([
+        {
+            value: 'tag-prototype',
+            label: 'Tag Prototype',
+        },
+        {
+            value: 'some-tag',
+            label: 'Some Tag',
+        },
+        {
+            value: 'another-tag',
+            label: 'Another Tag',
+        },
+    ]);
 
     return (
         <Container maxWidth="lg">
@@ -61,22 +75,20 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <Space>
-                        <Tag
-                            key="tag-prototype"
-                            label="Tag Prototype"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="some-tag"
-                            label="Some Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="another-tag"
-                            label="Another Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag key="no-label" onDelete={() => {}} />
+                        {values12.map(item => (
+                            <Tag
+                                key={item.value}
+                                value={item.value}
+                                label={item.label}
+                                onDelete={() => {
+                                    setValues12(
+                                        values12.filter(
+                                            tag => tag.value !== item.value
+                                        )
+                                    );
+                                }}
+                            />
+                        ))}
                     </Space>
                 </Grid>
 
