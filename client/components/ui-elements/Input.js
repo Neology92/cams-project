@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { InputBase, InputLabel, InputAdornment } from '@material-ui/core';
+import { InputBase, InputLabel } from '@material-ui/core';
 import Icon from '../Icon';
-import { Check, CheckCopy, Search } from '../../assets/icons';
+import { Check, CheckCopy } from '../../assets/icons';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
@@ -49,7 +49,7 @@ class Input extends React.PureComponent {
         } = this.props;
 
         return (
-            <div>
+            <Wrapper>
                 <div>
                     <StyledLabel>{label}</StyledLabel>
                 </div>
@@ -61,26 +61,23 @@ class Input extends React.PureComponent {
                     // onBlur={e => setValue(e.target.value)}
                     width={width}
                     state={state}
-                    startAdornment={
-                        type === 'search' ? (
-                            <InputAdornment position="start">
-                                <Icon component={Search} />
-                            </InputAdornment>
-                        ) : null
-                    }
                     {...props}
                 />
                 {this.renderIcon()}
-            </div>
+            </Wrapper>
         );
     }
 }
 
+const Wrapper = styled.div`
+    position: relative;
+`;
+
 const StyledIcon = styled(Icon)`
     && {
         position: absolute;
-        top: -20px;
-        right: 0;
+        top: -3px;
+        right: -1px;
 
         g > path:nth-child(2) {
             fill: ${({ state, theme }) =>
@@ -104,19 +101,11 @@ const StyledInput = styled(InputBase)`
     .MuiInputBase-input {
         box-sizing: border-box;
         position: relative;
-        border: 1px solid
-            ${({ theme, state }) => {
-                switch (state) {
-                    case 'error':
-                        return theme.palette.error.main;
+            border: 1px solid ${({ theme, state }) =>
+                state === 'error'
+                    ? theme.palette.error.main
+                    : theme.palette.secondary.main} ;
 
-                    case 'approve':
-                        return theme.palette.green.main;
-
-                    default:
-                        return theme.palette.secondary.main;
-                }
-            }};
         background-color: ${({ theme }) => theme.palette.secondary.main};
         border-radius: 4px;
         width: ${({ width }) => width};
@@ -127,7 +116,10 @@ const StyledInput = styled(InputBase)`
             theme.transitions.create(['border-color'])};
 
         &:focus {
-            border-color: ${({ theme }) => theme.palette.primary.main};
+            border-color:${({ theme, state }) =>
+                state === 'error'
+                    ? theme.palette.error.main
+                    : theme.palette.primary.main} ;
             background: ${({ theme }) => theme.palette.background.default};
         }
     }
