@@ -1,5 +1,3 @@
-import Navbar from './Examples/Navbar';
-
 import Button from './ui-elements/Button';
 import Select from './ui-elements/Select';
 import Input from './ui-elements/Input';
@@ -9,7 +7,11 @@ import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
 import Tooltip from './ui-elements/Tooltip';
 import Tag from './ui-elements/Tag';
+
 import Icon from './Icon';
+import Modal from './Modal/Modal';
+
+import Navbar from './Examples/Navbar';
 import Dropdown from './Examples/Dropdown';
 
 export {
@@ -25,4 +27,5 @@ export {
     Tooltip,
     Dropdown,
     Tag,
+    Modal,
 };
