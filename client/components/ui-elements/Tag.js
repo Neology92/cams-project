@@ -42,7 +42,7 @@ const StyledChip = styled(Chip)`
             position: absolute;
             top: 0px;
             right: 0px;
-            z-index: 10;
+            z-index: 1;
         }
 
         :hover ::after {
@@ -52,7 +52,7 @@ const StyledChip = styled(Chip)`
 
         .MuiChip-deleteIcon {
             position: relative;
-            z-index: 9999;
+            z-index: 2;
             pointer-events: auto;
             padding: 4px 2px 4px 2px;
             margin: 0 4px 0 -5px;
