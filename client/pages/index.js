@@ -120,24 +120,27 @@ const Home = ({ switchColorsMode }) => {
                             isOpen={value13}
                             close={() => setValue13(false)}
                         >
-                            {/* <Input
+                            <Input
                                 value={value6}
                                 setValue={setValue6}
                                 label="Nazwa użytkownika"
                                 placeholder="Mateusz"
+                                width="100%"
                             />
                             <Input
                                 value={value6}
                                 setValue={setValue6}
                                 label="Adres email"
                                 placeholder="nazwa@domena.pl"
+                                width="100%"
                             />
                             <Input
                                 value={value6}
                                 setValue={setValue6}
                                 label="Hasło"
-                                placeholder="●●●●●●●●●●●"
-                            /> */}
+                                type="password"
+                                width="100%"
+                            />
                         </Modal>
 
                         <Button
