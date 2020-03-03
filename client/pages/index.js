@@ -14,6 +14,7 @@ import {
     Tooltip,
     Dropdown,
     Tag,
+    Modal,
 } from '../components';
 import {
     Ban,
@@ -25,6 +26,9 @@ import {
     Fire,
     Lgbt,
     DarkMode,
+    Sliders,
+    Coins,
+    Shield,
 } from '../assets/icons';
 
 const selectItems = [
@@ -32,6 +36,27 @@ const selectItems = [
     { value: '2', label: 'Second' },
     { value: '3', label: 'Very long thrid label' },
     { value: '4', label: 'Next one' },
+];
+
+const messageItems = [
+    {
+        icon: Sliders,
+        label: 'Super jakość',
+        desc:
+            'Najwyższa jakość strumienia. Nie ograniczamy możliwości, transmituj i oglądaj w HD, full-HD lub 4k. Wybór należy do Ciebie!    ',
+    },
+    {
+        icon: Coins,
+        label: 'Niskie Prowizje',
+        desc:
+            'Brak prowizji dla kupującego. Pieniądze które inwestujesz są w całości zamieniane na tokeny. Nic nie tracisz!',
+    },
+    {
+        icon: Shield,
+        label: 'Prywatność',
+        desc:
+            'Nasz autorski system antypiracki sprawia, że transmisje są najbezpieczniejsze na rynku, a z danymi obchodzimy się ostrożnie.',
+    },
 ];
 
 const Home = ({ switchColorsMode }) => {
@@ -65,12 +90,65 @@ const Home = ({ switchColorsMode }) => {
             label: 'Another Tag',
         },
     ]);
+    const [value13, setValue13] = useState(true);
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Space />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <Tooltip title="Załóż nowe konto">
+                            <Button
+                                type="default"
+                                color="primary"
+                                onClick={() => {
+                                    setValue13(true);
+                                }}
+                            >
+                                Darmowa rejestracja
+                            </Button>
+                        </Tooltip>
+
+                        <Modal
+                            label="Darmowa Rejestracja"
+                            desc="Dołącz do 320 000 użytkowników, którzy nam zaufali i twórz społeczność razem z nami!"
+                            messageItems={messageItems}
+                            isOpen={value13}
+                            close={() => setValue13(false)}
+                        >
+                            {/* <Input
+                                value={value6}
+                                setValue={setValue6}
+                                label="Nazwa użytkownika"
+                                placeholder="Mateusz"
+                            />
+                            <Input
+                                value={value6}
+                                setValue={setValue6}
+                                label="Adres email"
+                                placeholder="nazwa@domena.pl"
+                            />
+                            <Input
+                                value={value6}
+                                setValue={setValue6}
+                                label="Hasło"
+                                placeholder="●●●●●●●●●●●"
+                            /> */}
+                        </Modal>
+
+                        <Button
+                            color="secondary"
+                            onClick={() => {
+                                switchColorsMode();
+                            }}
+                        >
+                            Logowanie
+                        </Button>
+                    </Space>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -132,30 +210,6 @@ const Home = ({ switchColorsMode }) => {
                             setValue={setValue11}
                         />
                     </StyledPaper>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space>
-                        <Tooltip title="This will change your colors mode">
-                            <Button
-                                type="default"
-                                color="primary"
-                                onClick={() => {
-                                    switchColorsMode();
-                                }}
-                            >
-                                Primary Button
-                            </Button>
-                        </Tooltip>
-                        <Button
-                            color="secondary"
-                            onClick={() => {
-                                switchColorsMode();
-                            }}
-                        >
-                            Secondary Button
-                        </Button>
-                    </Space>
                 </Grid>
 
                 <Grid item xs={12}>
