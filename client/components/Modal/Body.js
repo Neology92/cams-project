@@ -1,4 +1,4 @@
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 class Body extends React.PureComponent {
@@ -6,14 +6,21 @@ class Body extends React.PureComponent {
         const { label, desc, children } = this.props;
 
         return (
-            <div>
+            <Wrapper>
                 <div>{label}</div>
                 <div>{desc}</div>
                 <div>{children}</div>
-            </div>
+            </Wrapper>
         );
     }
 }
+
+const Wrapper = styled.div`
+    width: 300px;
+    padding: 90px;
+
+    background: ${({ theme }) => theme.palette.background.default};
+`;
 
 Body.propTypes = {
     children: PropTypes.node,

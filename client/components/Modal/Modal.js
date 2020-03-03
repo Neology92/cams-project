@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import { Modal as MuiModal } from '@material-ui/core';
+import styled from 'styled-components';
+import { Modal as MuiModal, Grid, Container } from '@material-ui/core';
 import Body from './Body';
 import SideMessage from './SideMessage';
 
@@ -17,27 +17,45 @@ class Modal extends React.PureComponent {
 
         return (
             <MuiModal
-                disablePortal
+                // disablePortal
                 aria-labelledby={label}
                 aria-describedby={desc}
                 open={isOpen}
                 onClose={() => close()}
             >
-                <>
-                    <Body>{children}</Body>
-                    {messageItems.map(item => (
-                        <SideMessage
-                            key={item.label}
-                            label={item.label}
-                            desc={item.desc}
-                            icon={item.icon}
-                        />
-                    ))}
-                </>
+                <Container
+                    style={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Wrapper container>
+                        <Grid item direction="column" xs={6}>
+                            <Body label={label} desc={desc}>
+                                {children}
+                            </Body>
+                        </Grid>
+                        <Grid item direction="column" xs={4}>
+                            {messageItems.map(item => (
+                                <SideMessage
+                                    key={item.label}
+                                    label={item.label}
+                                    desc={item.desc}
+                                    icon={item.icon}
+                                />
+                            ))}
+                        </Grid>
+                    </Wrapper>
+                </Container>
             </MuiModal>
         );
     }
 }
+
+const Wrapper = styled(Grid)`
+    /* margin: 200px auto 0; */
+`;
 
 Modal.propTypes = {
     children: PropTypes.node,
