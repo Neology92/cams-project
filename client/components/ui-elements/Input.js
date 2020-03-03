@@ -98,6 +98,8 @@ class Input extends React.PureComponent {
 
 const Wrapper = styled.div`
     position: relative;
+    display: flex;
+    flex-direction: column;
 `;
 
 const StateIcon = styled(Icon)`
