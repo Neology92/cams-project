@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputBase, InputLabel } from '@material-ui/core';
 import Icon from '../Icon';
-import { Check, CheckCopy, Search } from '../../assets/icons';
+import { Check, CheckCopy } from '../../assets/icons';
 
 // Prop "type" takes string and defines type of input.
 // 'default' for normal input and 'search' for search input
@@ -20,7 +20,7 @@ class Input extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.renderStateIcon = this.renderStateIcon.bind(this);
-        this.renderTypeIcon = this.renderTypeIcon.bind(this);
+        this.renderTypeIcon = this.renderPrefixIcon.bind(this);
     }
 
     handleChange(e) {
@@ -50,23 +50,13 @@ class Input extends React.PureComponent {
         }
     }
 
-    renderTypeIcon() {
-        const { type } = this.props;
+    renderPrefixIcon() {
+        const { type, icon } = this.props;
         const { focused } = this.state;
 
-        switch (type) {
-            case 'search':
-                return (
-                    <TypeIcon
-                        component={Search}
-                        type={type}
-                        focused={focused}
-                    />
-                );
-
-            default:
-                return null;
-        }
+        return icon ? (
+            <PrefixIcon component={icon} type={type} focused={focused} />
+        ) : null;
     }
 
     render() {
@@ -76,6 +66,7 @@ class Input extends React.PureComponent {
             setValue,
             placeholder,
             type,
+            icon,
             state,
             width,
             ...props
@@ -95,10 +86,11 @@ class Input extends React.PureComponent {
                     onBlur={this.handleFocus}
                     width={width}
                     state={state}
+                    isIcon={icon}
                     {...props}
                 />
                 {this.renderStateIcon()}
-                {this.renderTypeIcon()}
+                {this.renderPrefixIcon()}
             </Wrapper>
         );
     }
@@ -123,7 +115,7 @@ const StateIcon = styled(Icon)`
     }
 `;
 
-const TypeIcon = styled(Icon)`
+const PrefixIcon = styled(Icon)`
     && {
         position: absolute;
         bottom: 6px;
@@ -166,6 +158,8 @@ const StyledInput = styled(InputBase)`
             font-size: 14px;
             transition: ${({ theme }) =>
                 theme.transitions.create(['border-color'])};
+
+            ${({ isIcon }) => (isIcon ? 'padding: 0 0 0 35px;' : null)}
         }
 
         &-input:focus {
@@ -182,13 +176,13 @@ const StyledInput = styled(InputBase)`
         }
 
         &-inputTypeSearch {
-            padding: 0 0 0 35px;
             background-color: ${({ theme }) => theme.palette.secondary.main};
         }
     }
 `;
 
 Input.propTypes = {
+    icon: PropTypes.func,
     value: PropTypes.string.isRequired,
     setValue: PropTypes.func.isRequired,
     label: PropTypes.string,
@@ -201,6 +195,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+    icon: null,
     label: '',
     placeholder: '',
     type: 'default',
