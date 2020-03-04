@@ -128,6 +128,28 @@ const Home = ({ switchColorsMode }) => {
                                 }}
                             />
                         ))}
+                        <TagsBoard labelArray={['first chip', '2nd chip', 'third long chip', 'fourth very very very long chip', 'some tag', 'placeholder', 'dududu', 'I need more tags', 'Cuz they are small', ' ', 'the one before me contains only one space']}/>
+                    </Space>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <Tag
+                            key="tag-prototype"
+                            label="Tag Prototype"
+                            onDelete={() => {}}
+                        />
+                        <Tag
+                            key="some-tag"
+                            label="Some Tag"
+                            onDelete={() => {}}
+                        />
+                        <Tag
+                            key="another-tag"
+                            label="Another Tag"
+                            onDelete={() => {}}
+                        />
+                        <Tag key="no-label" onDelete={() => {}} />
                     </Space>
                 </Grid>
 
