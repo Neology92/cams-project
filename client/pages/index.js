@@ -25,6 +25,7 @@ import {
     Fire,
     Lgbt,
     DarkMode,
+    Search,
 } from '../assets/icons';
 
 const selectItems = [
@@ -114,23 +115,38 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <Input
-                            multiline
-                            placeholder="Placeholder"
-                            label="Text Area"
-                            value={value11}
-                            setValue={setValue11}
-                        />
-                        <Input
-                            multiline
-                            rows={1}
-                            rowsMax={2}
-                            placeholder="Placeholder"
-                            label="Wide Text Area"
-                            width="40vw"
-                            value={value11}
-                            setValue={setValue11}
-                        />
+                        <Space>
+                            <Tooltip title="You can write something here">
+                                <Input
+                                    value={value6}
+                                    setValue={setValue6}
+                                    label="Label"
+                                    placeholder="Placeholder"
+                                    state="approve"
+                                    icon={Fire}
+                                />
+                            </Tooltip>
+                        </Space>
+                        <Space>
+                            <Input
+                                value={value7}
+                                setValue={setValue7}
+                                label="Search Label"
+                                placeholder="Search"
+                                state="error"
+                                type="password"
+                            />
+                        </Space>
+                        <Space>
+                            <Input
+                                value={value7}
+                                setValue={setValue7}
+                                label="Search Label"
+                                placeholder="Search"
+                                icon={Search}
+                                type="search"
+                            />
+                        </Space>
                     </StyledPaper>
                 </Grid>
 
@@ -245,25 +261,23 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <StyledPaper>
-                        <Space>
-                            <Tooltip title="You can write something here">
-                                <Input
-                                    value={value6}
-                                    setValue={setValue6}
-                                    label="Label"
-                                    placeholder="Placeholder"
-                                />
-                            </Tooltip>
-                        </Space>
-                        <Space>
-                            <Input
-                                value={value7}
-                                setValue={setValue7}
-                                label="Search Label"
-                                placeholder="Search"
-                                type="search"
-                            />
-                        </Space>
+                        <Input
+                            multiline
+                            placeholder="Placeholder"
+                            label="Text Area"
+                            value={value11}
+                            setValue={setValue11}
+                        />
+                        <Input
+                            multiline
+                            rows={1}
+                            rowsMax={2}
+                            placeholder="Placeholder"
+                            label="Wide Text Area"
+                            width="40vw"
+                            value={value11}
+                            setValue={setValue11}
+                        />
                     </StyledPaper>
                 </Grid>
 
