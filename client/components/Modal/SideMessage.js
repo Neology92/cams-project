@@ -39,7 +39,7 @@ const Wrapper = styled.div`
     height: 100px;
     padding: 24px;
     background: ${({ theme }) => theme.palette.secondary.main};
-    margin: 24px 12px;
+    /* margin: 24px 12px; */
 
     display: flex;
     flex-direction: column;
