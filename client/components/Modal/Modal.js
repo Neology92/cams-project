@@ -32,7 +32,7 @@ const Background = styled.div`
     z-index: -1;
     width: 100%;
     height: 100%;
-    opacity: 75%;
+    opacity: ${({ theme }) => theme.palette.background.opacity};
     background-color: ${({ theme }) => theme.palette.common.black};
 `;
 
@@ -49,7 +49,8 @@ class Modal extends React.PureComponent {
 
         return (
             <StyledMuiModal
-                // disablePortal // May resolve problems with SSR if appears
+                TrapFocus
+                disablePortal // May resolve problems with SSR if appears
                 aria-labelledby={label}
                 aria-describedby={desc}
                 open={isOpen}
@@ -57,8 +58,8 @@ class Modal extends React.PureComponent {
                 BackdropComponent={Background}
             >
                 <>
-                    <Body label={label} desc={desc}>
-                        {children}
+                    <Body label={label} desc={desc} close={close}>
+                        <>{children}</>
                     </Body>
                     {messageItems && (
                         <Grid>
