@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 
 class SideMessage extends React.PureComponent {
-    // renderPrefixIcon() {
-    //     const { type, icon } = this.props;
-    //     const { focused } = this.state;
-
-    //     return icon ? (
-    //         <PrefixIcon component={icon} type={type} focused={focused} />
-    //     ) : null;
-    // }
-
     render() {
         const { label, desc, icon } = this.props;
 
@@ -27,19 +18,12 @@ class SideMessage extends React.PureComponent {
     }
 }
 
-// const PrefixIcon = styled(Icon)`
-//     && {
-
-//     }
-// `
-
 const Wrapper = styled.div`
     position: relative;
     width: 300px;
     height: 100px;
     padding: 24px;
     background: ${({ theme }) => theme.palette.secondary.main};
-    /* margin: 24px 12px; */
 
     display: flex;
     flex-direction: column;
@@ -57,10 +41,12 @@ const Title = styled.h3`
     font-size: 24px;
     font-weight: 700;
     margin: 0 0 8px;
+    color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 const Desc = styled.div`
     font-size: 14px;
+    color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 SideMessage.propTypes = {

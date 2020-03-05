@@ -90,7 +90,7 @@ const Home = ({ switchColorsMode }) => {
             label: 'Another Tag',
         },
     ]);
-    const [value13, setValue13] = useState(true);
+    const [value13, setValue13] = useState(false);
 
     return (
         <Container maxWidth="lg">
