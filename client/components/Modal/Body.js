@@ -7,17 +7,29 @@ class Body extends React.PureComponent {
 
         return (
             <Wrapper>
-                <div>{label}</div>
-                <div>{desc}</div>
+                <Title>{label}</Title>
+                <Desc>{desc}</Desc>
                 <div>{children}</div>
             </Wrapper>
         );
     }
 }
 
+const Title = styled.div`
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 5px;
+`;
+
+const Desc = styled.div`
+    font-size: 14px;
+    margin: 0 0 31px;
+`;
+
 const Wrapper = styled.div`
-    width: 300px;
+    width: 305px;
     padding: 90px;
+    margin: 12px;
 
     background: ${({ theme }) => theme.palette.background.default};
 `;
