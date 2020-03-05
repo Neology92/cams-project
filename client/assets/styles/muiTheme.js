@@ -18,6 +18,7 @@ const lightMuiTheme = createMuiTheme({
         background: {
             default: '#ffffff',
             paper: '#F9F9F9',
+            opacity: '75%',
         },
         text: {
             primary: '#181818',
@@ -66,6 +67,7 @@ const darkMuiTheme = createMuiTheme({
         background: {
             default: '#1A1A1A',
             paper: '#171717',
+            opacity: '95%',
         },
         text: {
             primary: '#ffffff',
