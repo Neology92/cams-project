@@ -100,6 +100,7 @@ const Wrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 8px 0;
 `;
 
 const StateIcon = styled(Icon)`
