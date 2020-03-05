@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Modal as MuiModal, Grid, Container } from '@material-ui/core';
+import { Modal as MuiModal, Container } from '@material-ui/core';
 import Body from './Body';
 import SideMessage from './SideMessage';
 
@@ -30,13 +30,11 @@ class Modal extends React.PureComponent {
                         alignItems: 'center',
                     }}
                 >
-                    <Wrapper container>
-                        <Grid item direction="column" xs={6}>
-                            <Body label={label} desc={desc}>
-                                {children}
-                            </Body>
-                        </Grid>
-                        <Grid item direction="column" xs={4}>
+                    <Wrapper>
+                        <Body label={label} desc={desc}>
+                            {children}
+                        </Body>
+                        <div>
                             {messageItems.map(item => (
                                 <SideMessage
                                     key={item.label}
@@ -45,7 +43,7 @@ class Modal extends React.PureComponent {
                                     icon={item.icon}
                                 />
                             ))}
-                        </Grid>
+                        </div>
                     </Wrapper>
                 </Container>
             </MuiModal>
@@ -53,8 +51,11 @@ class Modal extends React.PureComponent {
     }
 }
 
-const Wrapper = styled(Grid)`
-    /* margin: 200px auto 0; */
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 `;
 
 Modal.propTypes = {

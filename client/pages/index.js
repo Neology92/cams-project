@@ -115,7 +115,7 @@ const Home = ({ switchColorsMode }) => {
                         </Tooltip>
 
                         <Modal
-                            label="Darmowa Rejestracja"
+                            label="Darmowa rejestracja"
                             desc="Dołącz do 320 000 użytkowników, którzy nam zaufali i twórz społeczność razem z nami!"
                             messageItems={messageItems}
                             isOpen={value13}
