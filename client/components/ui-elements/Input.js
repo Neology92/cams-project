@@ -106,7 +106,7 @@ const Wrapper = styled.div`
 const StateIcon = styled(Icon)`
     && {
         position: absolute;
-        top: -3px;
+        top: 5px;
         right: -1px;
 
         g > path:nth-child(2) {
@@ -121,7 +121,7 @@ const StateIcon = styled(Icon)`
 const PrefixIcon = styled(Icon)`
     && {
         position: absolute;
-        bottom: 6px;
+        bottom: 14px;
         left: 8px;
 
         g > path:nth-child(2) {
