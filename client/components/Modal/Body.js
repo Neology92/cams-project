@@ -87,6 +87,7 @@ const Wrapper = styled.div`
     position: relative;
 
     background: ${({ theme }) => theme.palette.background.default};
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
 `;
 
 Body.propTypes = {
