@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 class Button extends React.PureComponent {
     render() {
-        const { color, type, children, ...props } = this.props;
+        const { color, type, width, children, ...props } = this.props;
         if (type === 'text') {
             return (
                 <StyledMuiButton color={color} {...props} format={type}>
@@ -14,7 +14,12 @@ class Button extends React.PureComponent {
             );
         }
         return (
-            <StyledMuiButton variant="contained" color={color} {...props}>
+            <StyledMuiButton
+                variant="contained"
+                color={color}
+                width={width}
+                {...props}
+            >
                 {children}
             </StyledMuiButton>
         );
@@ -22,27 +27,36 @@ class Button extends React.PureComponent {
 }
 
 const StyledMuiButton = styled(MuiButton)`
-    padding: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: capitalize !important;
-    box-shadow: none !important;
+    && {
+        padding: 3px 8px;
+        width: ${({ width }) => width};
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: initial;
+        box-shadow: none;
 
-    ${({ color, format, theme }) =>
-        color === 'secondary' && format === 'text'
-            ? `color: ${theme.palette.text.secondary} !important;`
-            : ''}
+        :hover {
+            box-shadow: none;
+        }
+
+        ${({ color, format, theme }) =>
+            color === 'secondary' && format === 'text'
+                ? `color: ${theme.palette.text.secondary} !important;`
+                : ''}
+    }
 `;
 
 Button.propTypes = {
     color: PropTypes.string,
     type: PropTypes.string,
+    width: PropTypes.string,
     children: PropTypes.node.isRequired,
 };
 
 Button.defaultProps = {
     color: 'default',
     type: 'default',
+    width: 'inherit',
 };
 
 export default Button;
