@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '../ui-elements/Input';
 import Button from '../ui-elements/Button';
 import Modal from '../Modal/Modal';
+import Description from '../Text/Description';
 import { Sliders, Coins, Shield, Mail, Lock, User } from '../../assets/icons';
 
 const messageItems = [
@@ -73,27 +74,43 @@ class RegisterForm extends React.PureComponent {
                     icon={Lock}
                     width="100%"
                 />
-                <Policy>
-                    Klikając przycisk rejestracji, potwierdzasz przeczytanie i
-                    przyjmujesz do wiadomości wytyczne przedstawione w
-                    <a href="/regulamin">warunkach korzystania z usług</a>
-                    oraz w
+                <Description>
+                    <span>
+                        Klikając przycisk rejestracji, potwierdzasz przeczytanie
+                        i przyjmujesz do wiadomości wytyczne przedstawione w
+                    </span>
+                    <a href="/regulamin"> warunkach korzystania z usług</a>
+                    <span> oraz w </span>
                     <a href="/polityka-prywatnosci">
                         informacji o polityce prywatności.
                     </a>
-                </Policy>
-                <Button onClick={() => alert('clicked')} disabled width="100%">
-                    Zarejestruj się
-                </Button>
-                <Button onClick={() => alert('clicked')} width="100%">
-                    Zaloguj się na istniejące konto
-                </Button>
+                </Description>
+                <ButtonsWrapper>
+                    <Button
+                        onClick={() => alert('clicked')}
+                        disabled
+                        width="100%"
+                    >
+                        Zarejestruj się
+                    </Button>
+                    <Button onClick={() => alert('clicked')} width="100%">
+                        Zaloguj się na istniejące konto
+                    </Button>
+                </ButtonsWrapper>
             </Modal>
         );
     }
 }
 
-const Policy = styled.p``;
+const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    & > button:first-child {
+        margin-bottom: 8px;
+    }
+`;
 
 RegisterForm.propTypes = {
     isOpen: PropTypes.bool.isRequired,
