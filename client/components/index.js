@@ -7,6 +7,7 @@ import Toggle from './ui-elements/Toggle';
 import SegmentedButtons from './ui-elements/SegmentedButtons';
 import Tooltip from './ui-elements/Tooltip';
 import Tag from './ui-elements/Tag';
+import TagsBoard from './ui-elements/TagsBoard';
 
 import Icon from './Icon';
 import Modal from './Modal/Modal';
@@ -33,4 +34,5 @@ export {
     Modal,
     RegisterForm,
     LoginForm,
+    TagsBoard,
 };

@@ -11,14 +11,17 @@ class TagsBoard extends React.PureComponent {
             inputState: 'default',
             errorMessage: '',
         };
-
-        this.handleDelete = this.handleDelete.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleDelete(tagValue) {
         const { setTagArr, tagArray } = this.props;
-        const newArray = tagArray.filter(tag => tag.value !== tagValue);
+        console.log(`tag value: ${tagValue.value}`);
+        console.log(tagValue);
+        console.log(tagArray);
+        const newArray = tagArray.filter(tag => tag.value !== tagValue.value);
+        console.log(newArray);
         setTagArr(newArray);
     }
 
@@ -102,7 +105,7 @@ class TagsBoard extends React.PureComponent {
                                 key={tag.value}
                                 value={tag.value}
                                 label={tag.label}
-                                onDelete={this.handleDelete}
+                                onDelete={this.handleDelete(tag)}
                             />
                         );
                     })}
