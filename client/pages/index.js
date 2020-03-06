@@ -14,7 +14,7 @@ import {
     Tooltip,
     Dropdown,
     Tag,
-    Modal,
+    RegisterForm,
 } from '../components';
 import {
     Ban,
@@ -27,12 +27,6 @@ import {
     Lgbt,
     DarkMode,
     Search,
-    Sliders,
-    Coins,
-    Shield,
-    Mail,
-    Lock,
-    User,
 } from '../assets/icons';
 
 const selectItems = [
@@ -40,27 +34,6 @@ const selectItems = [
     { value: '2', label: 'Second' },
     { value: '3', label: 'Very long thrid label' },
     { value: '4', label: 'Next one' },
-];
-
-const messageItems = [
-    {
-        icon: Sliders,
-        label: 'Super jakość',
-        desc:
-            'Najwyższa jakość strumienia. Nie ograniczamy możliwości, transmituj i oglądaj w HD, full-HD lub 4k. Wybór należy do Ciebie!    ',
-    },
-    {
-        icon: Coins,
-        label: 'Niskie Prowizje',
-        desc:
-            'Brak prowizji dla kupującego. Pieniądze które inwestujesz są w całości zamieniane na tokeny. Nic nie tracisz!',
-    },
-    {
-        icon: Shield,
-        label: 'Prywatność',
-        desc:
-            'Nasz autorski system antypiracki sprawia, że transmisje są najbezpieczniejsze na rynku, a z danymi obchodzimy się ostrożnie.',
-    },
 ];
 
 const Home = ({ switchColorsMode }) => {
@@ -117,39 +90,10 @@ const Home = ({ switchColorsMode }) => {
                             </Button>
                         </Tooltip>
 
-                        <Modal
-                            label="Darmowa rejestracja"
-                            desc="Dołącz do 320 000 użytkowników, którzy nam zaufali i twórz społeczność razem z nami!"
-                            messageItems={messageItems}
+                        <RegisterForm
                             isOpen={value13}
                             close={() => setValue13(false)}
-                        >
-                            <Input
-                                value={value6}
-                                setValue={setValue6}
-                                label="Nazwa użytkownika"
-                                placeholder="Mateusz"
-                                icon={User}
-                                width="100%"
-                            />
-                            <Input
-                                value={value6}
-                                setValue={setValue6}
-                                label="Adres email"
-                                placeholder="nazwa@domena.pl"
-                                icon={Mail}
-                                width="100%"
-                            />
-                            <Input
-                                value={value6}
-                                setValue={setValue6}
-                                label="Hasło"
-                                type="password"
-                                placeholder="••••••••••"
-                                icon={Lock}
-                                width="100%"
-                            />
-                        </Modal>
+                        />
 
                         <Button
                             color="secondary"
