@@ -34,11 +34,27 @@ class RegisterForm extends React.PureComponent {
             username: '',
             email: '',
             password: '',
+            allowToRegister: false,
         };
+        this.checkIfInputsFilled = this.checkIfInputsFilled.bind(this);
+    }
+
+    componentDidUpdate() {
+        this.checkIfInputsFilled();
+    }
+
+    checkIfInputsFilled() {
+        const { username, email, password } = this.state;
+
+        if (username && email && password) {
+            this.setState({ allowToRegister: true });
+        } else {
+            this.setState({ allowToRegister: false });
+        }
     }
 
     render() {
-        const { username, email, password } = this.state;
+        const { username, email, password, allowToRegister } = this.state;
         const { isOpen, close } = this.props;
 
         return (
@@ -88,12 +104,17 @@ class RegisterForm extends React.PureComponent {
                 <ButtonsWrapper>
                     <Button
                         onClick={() => alert('clicked')}
-                        disabled
+                        disabled={!allowToRegister}
                         width="100%"
+                        color="primary"
                     >
                         Zarejestruj się
                     </Button>
-                    <Button onClick={() => alert('clicked')} width="100%">
+                    <Button
+                        onClick={() => alert('clicked')}
+                        width="100%"
+                        color="secondary"
+                    >
                         Zaloguj się na istniejące konto
                     </Button>
                 </ButtonsWrapper>
