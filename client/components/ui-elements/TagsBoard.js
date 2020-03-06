@@ -2,6 +2,7 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 import Tag from './Tag';
 import Input from './Input';
+import { Crosshair } from '../../assets/icons';
 
 class TagsBoard extends React.PureComponent {
     constructor(props) {
@@ -80,6 +81,7 @@ class TagsBoard extends React.PureComponent {
         return (
             <div>
                 <Input
+                    icon={Crosshair}
                     label="Tags"
                     value={inputValue}
                     onKeyDown={this.handleAdd}
