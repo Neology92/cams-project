@@ -136,7 +136,6 @@ const Home = ({ switchColorsMode }) => {
                                 }}
                             />
                         ))}
-                        <TagsBoard labelArray={['first chip', '2nd chip', 'third long chip', 'fourth very very very long chip', 'some tag', 'placeholder', 'dududu', 'I need more tags', 'Cuz they are small', ' ', 'the one before me contains only one space']}/>
                     </Space>
                 </Grid>
 
