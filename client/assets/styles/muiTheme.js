@@ -67,7 +67,7 @@ const darkMuiTheme = createMuiTheme({
         background: {
             default: '#1A1A1A',
             paper: '#171717',
-            opacity: '95%',
+            opacity: '85%',
         },
         text: {
             primary: '#ffffff',
