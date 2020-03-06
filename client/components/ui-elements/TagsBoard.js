@@ -15,13 +15,9 @@ class TagsBoard extends React.PureComponent {
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    handleDelete(tagValue) {
+    handleDelete(tag) {
         const { setTagArr, tagArray } = this.props;
-        console.log(`tag value: ${tagValue.value}`);
-        console.log(tagValue);
-        console.log(tagArray);
-        const newArray = tagArray.filter(tag => tag.value !== tagValue.value);
-        console.log(newArray);
+        const newArray = tagArray.filter(item => item.value !== tag.value);
         setTagArr(newArray);
     }
 
@@ -90,7 +86,7 @@ class TagsBoard extends React.PureComponent {
                     // Replace blocks using special characters
                     setValue={value =>
                         this.setState({
-                            inputValue: value.replace(/[\W\d]/gi, ''),
+                            inputValue: value.replace(/[^\w\s]/gi, ''),
                         })
                     }
                     state={inputState}
@@ -105,7 +101,7 @@ class TagsBoard extends React.PureComponent {
                                 key={tag.value}
                                 value={tag.value}
                                 label={tag.label}
-                                onDelete={this.handleDelete(tag)}
+                                onDelete={() => this.handleDelete(tag)}
                             />
                         );
                     })}
