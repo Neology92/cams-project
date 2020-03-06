@@ -30,6 +30,9 @@ import {
     Sliders,
     Coins,
     Shield,
+    Mail,
+    Lock,
+    User,
 } from '../assets/icons';
 
 const selectItems = [
@@ -126,6 +129,7 @@ const Home = ({ switchColorsMode }) => {
                                 setValue={setValue6}
                                 label="Nazwa użytkownika"
                                 placeholder="Mateusz"
+                                icon={User}
                                 width="100%"
                             />
                             <Input
@@ -133,6 +137,7 @@ const Home = ({ switchColorsMode }) => {
                                 setValue={setValue6}
                                 label="Adres email"
                                 placeholder="nazwa@domena.pl"
+                                icon={Mail}
                                 width="100%"
                             />
                             <Input
@@ -140,6 +145,8 @@ const Home = ({ switchColorsMode }) => {
                                 setValue={setValue6}
                                 label="Hasło"
                                 type="password"
+                                placeholder="••••••••••"
+                                icon={Lock}
                                 width="100%"
                             />
                         </Modal>
