@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Input from '../ui-elements/Input';
+import Button from '../ui-elements/Button';
 import Modal from '../Modal/Modal';
 import { Sliders, Coins, Shield, Mail, Lock, User } from '../../assets/icons';
 
@@ -71,10 +73,27 @@ class RegisterForm extends React.PureComponent {
                     icon={Lock}
                     width="100%"
                 />
+                <Policy>
+                    Klikając przycisk rejestracji, potwierdzasz przeczytanie i
+                    przyjmujesz do wiadomości wytyczne przedstawione w
+                    <a href="/regulamin">warunkach korzystania z usług</a>
+                    oraz w
+                    <a href="/polityka-prywatnosci">
+                        informacji o polityce prywatności.
+                    </a>
+                </Policy>
+                <Button onClick={() => alert('clicked')} disabled width="100%">
+                    Zarejestruj się
+                </Button>
+                <Button onClick={() => alert('clicked')} width="100%">
+                    Zaloguj się na istniejące konto
+                </Button>
             </Modal>
         );
     }
 }
+
+const Policy = styled.p``;
 
 RegisterForm.propTypes = {
     isOpen: PropTypes.bool.isRequired,
