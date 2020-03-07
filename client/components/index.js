@@ -10,7 +10,9 @@ import Tag from './ui-elements/Tag';
 
 import Icon from './Icon';
 import Modal from './Modal/Modal';
+
 import RegisterForm from './PopUps/RegisterForm';
+import LoginForm from './PopUps/LoginForm';
 
 import Navbar from './Examples/Navbar';
 import Dropdown from './Examples/Dropdown';
@@ -30,4 +32,5 @@ export {
     Tag,
     Modal,
     RegisterForm,
+    LoginForm,
 };

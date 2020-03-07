@@ -15,7 +15,9 @@ import {
     Dropdown,
     Tag,
     RegisterForm,
+    LoginForm,
 } from '../components';
+
 import {
     Ban,
     CheckCopy,
@@ -68,6 +70,7 @@ const Home = ({ switchColorsMode }) => {
         },
     ]);
     const [value13, setValue13] = useState(false);
+    const [value14, setValue14] = useState(false);
 
     return (
         <Container maxWidth="lg">
@@ -98,11 +101,15 @@ const Home = ({ switchColorsMode }) => {
                         <Button
                             color="secondary"
                             onClick={() => {
-                                switchColorsMode();
+                                setValue14(true);
                             }}
                         >
                             Logowanie
                         </Button>
+                        <LoginForm
+                            isOpen={value14}
+                            close={() => setValue14(false)}
+                        />
                     </Space>
                 </Grid>
 
