@@ -55,7 +55,12 @@ class Input extends React.PureComponent {
         const { focused } = this.state;
 
         return icon ? (
-            <PrefixIcon component={icon} type={type} focused={focused} />
+            <PrefixIcon
+                component={icon}
+                type={type}
+                // Conditional is required since passing prop through styled-components
+                focused={focused || null}
+            />
         ) : null;
     }
 
@@ -86,7 +91,8 @@ class Input extends React.PureComponent {
                     onBlur={this.handleFocus}
                     width={width}
                     state={state}
-                    icon={icon}
+                    // Conditional is required since passing prop through styled-components
+                    hasicon={icon ? 'true' : null}
                     {...props}
                 />
                 {this.renderStateIcon()}
@@ -162,7 +168,7 @@ const StyledInput = styled(InputBase)`
             transition: ${({ theme }) =>
                 theme.transitions.create(['border-color'])};
 
-            ${({ icon }) => (icon ? 'padding: 0 0 0 35px;' : null)}
+            ${({ hasicon }) => (hasicon ? 'padding: 0 0 0 35px;' : null)}
         }
 
         &-input:focus {
