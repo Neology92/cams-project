@@ -86,7 +86,7 @@ class Input extends React.PureComponent {
                     onBlur={this.handleFocus}
                     width={width}
                     state={state}
-                    isIcon={icon}
+                    icon={icon}
                     {...props}
                 />
                 {this.renderStateIcon()}
@@ -162,7 +162,7 @@ const StyledInput = styled(InputBase)`
             transition: ${({ theme }) =>
                 theme.transitions.create(['border-color'])};
 
-            ${({ isIcon }) => (isIcon ? 'padding: 0 0 0 35px;' : null)}
+            ${({ icon }) => (icon ? 'padding: 0 0 0 35px;' : null)}
         }
 
         &-input:focus {
