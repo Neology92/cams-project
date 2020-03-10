@@ -169,6 +169,10 @@ const StyledInput = styled(InputBase)`
                 theme.transitions.create(['border-color'])};
 
             ${({ hasicon }) => (hasicon ? 'padding: 0 0 0 35px;' : null)}
+
+            &::-webkit-search-cancel-button {
+                display: none;
+            }
         }
 
         &-input:focus {
