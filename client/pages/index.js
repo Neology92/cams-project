@@ -16,6 +16,7 @@ import {
     Tag,
     RegisterForm,
     LoginForm,
+    TagsBoard,
 } from '../components';
 
 import {
@@ -71,12 +72,19 @@ const Home = ({ switchColorsMode }) => {
     ]);
     const [value13, setValue13] = useState(false);
     const [value14, setValue14] = useState(false);
+    const [value15, setValue15] = useState([]);
 
     return (
         <Container maxWidth="lg">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Space />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Space>
+                        <TagsBoard tagArray={value15} setTagArr={setValue15} />
+                    </Space>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -128,7 +136,6 @@ const Home = ({ switchColorsMode }) => {
                                 }}
                             />
                         ))}
-                        <TagsBoard labelArray={['first chip', '2nd chip', 'third long chip', 'fourth very very very long chip', 'some tag', 'placeholder', 'dududu', 'I need more tags', 'Cuz they are small', ' ', 'the one before me contains only one space']}/>
                     </Space>
                 </Grid>
 
