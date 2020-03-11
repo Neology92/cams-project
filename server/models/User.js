@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -14,11 +15,12 @@ const UserSchema = new Schema({
     wallet: {
         type: Number,
         default: 0,
-        required: true,
     },
     safety: {
         email: { type: String, required: true },
         password: { type: String, required: true },
+        passwordTimestamp: { type: Date, default: Date.now() },
+        isDeleted: { type: Boolean, default: false },
     },
     account: {
         type: Map,
@@ -35,7 +37,7 @@ const UserSchema = new Schema({
             tags: [],
         },
     },
-    social_media: {
+    socialMedia: {
         type: Map,
         default: {
             instagram: '',
@@ -43,13 +45,21 @@ const UserSchema = new Schema({
             webpage: '',
         },
     },
-    stream_settings: {
+    streamSettings: {
         type: Map,
         default: {
-            show_tokens: true,
-            allow_gifts: true,
+            showTokens: true,
+            allowGifts: true,
         },
     },
 });
+
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = mongoose.model('user', UserSchema);
