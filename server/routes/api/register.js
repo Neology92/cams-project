@@ -15,19 +15,22 @@ router.post('/', (req, res) => {
     if (!login) {
         return res.send({
             success: false,
-            message: 'Error: Login cannot be blank',
+            errorMessage: 'Error: Login cannot be blank',
+            field: 'login',
         });
     }
     if (!email) {
         return res.send({
             success: false,
-            message: 'Error: Email cannot be blank',
+            errorMessage: 'Error: Email cannot be blank',
+            field: 'email',
         });
     }
     if (!password) {
         return res.send({
             success: false,
-            message: 'Error: Password cannot be blank',
+            errorMessage: 'Error: Password cannot be blank',
+            field: 'password',
         });
     }
 
@@ -42,12 +45,13 @@ router.post('/', (req, res) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: 'Error: Server Error',
+                    errorMessage: 'Error: Server Error',
                 });
             } else if (previousUsers.length > 0) {
                 return res.send({
                     success: false,
-                    message: 'Error: Email is already registered',
+                    errorMessage: 'Error: Email is already registered',
+                    field: 'email',
                 });
             }
         }
@@ -62,13 +66,14 @@ router.post('/', (req, res) => {
             if (err) {
                 return res.send({
                     success: false,
-                    message: 'Error: Server Error',
+                    errorMessage: 'Error: Server Error',
                 });
             } else if (previousUsers.length > 0) {
                 return res.send({
                     success: false,
-                    message:
+                    errorMessage:
                         'Error: User with that login is already registered',
+                    field: 'login',
                 });
             }
         }
@@ -89,12 +94,12 @@ router.post('/', (req, res) => {
         if (err) {
             res.send({
                 success: false,
-                message: err,
+                errorMessage: err,
             });
         } else {
             res.send({
                 success: true,
-                message: 'Signed up',
+                errorMessage: 'Signed up',
             });
         }
     });

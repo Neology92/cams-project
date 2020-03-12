@@ -46,9 +46,11 @@ class RegisterForm extends React.PureComponent {
                 state: 'default',
                 errorMessage: '',
             },
+            generalErrorMessage: '',
             allowToRegister: false,
         };
         this.checkIfInputsFilled = this.checkIfInputsFilled.bind(this);
+        this.signUp = this.signUp.bind(this);
     }
 
     componentDidUpdate() {
@@ -65,8 +67,14 @@ class RegisterForm extends React.PureComponent {
         }
     }
 
-    signUp() {
+    signUp(e) {
+        e.preventDefault();
         const { login, password, email } = this.state;
+
+        // Clear general error message
+        this.setState({
+            generalErrorMessage: '',
+        });
 
         fetch('/api/register', {
             method: 'POST',
@@ -81,12 +89,74 @@ class RegisterForm extends React.PureComponent {
         })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                if (json.success) {
+                    // Clear inputs
+                    this.setState({
+                        login: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                        email: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                        password: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                    });
+
+                    // Continue to welcome screen
+                    alert('Added user to database');
+                } else {
+                    // Display error
+                    switch (json.field) {
+                        case 'login':
+                            this.setState({
+                                login: {
+                                    state: 'error',
+                                    errorMessage: json.errorMessage,
+                                },
+                            });
+                            break;
+                        case 'password':
+                            this.setState({
+                                password: {
+                                    state: 'error',
+                                    errorMessage: json.errorMessage,
+                                },
+                            });
+                            break;
+                        case 'email':
+                            this.setState({
+                                email: {
+                                    state: 'error',
+                                    errorMessage: json.errorMessage,
+                                },
+                            });
+                            break;
+
+                        default:
+                            this.setState({
+                                generalErrorMessage: json.errorMessage,
+                            });
+                            break;
+                    }
+                }
             });
     }
 
     render() {
-        const { login, email, password, allowToRegister } = this.state;
+        const {
+            login,
+            email,
+            password,
+            generalErrorMessage,
+            allowToRegister,
+        } = this.state;
         const { isOpen, close } = this.props;
 
         return (
@@ -97,59 +167,76 @@ class RegisterForm extends React.PureComponent {
                 isOpen={isOpen}
                 close={close}
             >
-                <Input
-                    value={login.value}
-                    setValue={value => this.setState({ login: { value } })}
-                    label="Nazwa użytkownika"
-                    placeholder="Mateusz"
-                    icon={User}
-                    width="100%"
-                />
-                <Input
-                    value={email.value}
-                    setValue={value => this.setState({ email: { value } })}
-                    label="Adres email"
-                    placeholder="nazwa@domena.pl"
-                    icon={Mail}
-                    width="100%"
-                />
-                <Input
-                    value={password.value}
-                    setValue={value => this.setState({ password: { value } })}
-                    label="Hasło"
-                    type="password"
-                    placeholder="••••••••••"
-                    icon={Lock}
-                    width="100%"
-                />
-                <Description>
-                    <span>
-                        Klikając przycisk rejestracji, potwierdzasz przeczytanie
-                        i przyjmujesz do wiadomości wytyczne przedstawione w
-                    </span>
-                    <a href="/regulamin"> warunkach korzystania z usług</a>
-                    <span> oraz w </span>
-                    <a href="/polityka-prywatnosci">
-                        informacji o polityce prywatności.
-                    </a>
-                </Description>
-                <ButtonsWrapper>
-                    <Button
-                        onClick={() => this.signUp()}
-                        disabled={!allowToRegister}
+                <form onSubmit={this.signUp}>
+                    <Input
+                        value={login.value}
+                        setValue={value => this.setState({ login: { value } })}
+                        label="Nazwa użytkownika"
+                        placeholder="Mateusz"
+                        icon={User}
                         width="100%"
-                        color="primary"
-                    >
-                        Zarejestruj się
-                    </Button>
-                    <Button
-                        onClick={() => alert('clicked')}
+                    />
+                    {login.state === 'error' && (
+                        <ErrorMessage>{login.errorMessage}</ErrorMessage>
+                    )}
+                    <Input
+                        value={email.value}
+                        setValue={value => this.setState({ email: { value } })}
+                        label="Adres email"
+                        placeholder="nazwa@domena.pl"
+                        icon={Mail}
                         width="100%"
-                        color="secondary"
-                    >
-                        Zaloguj się na istniejące konto
-                    </Button>
-                </ButtonsWrapper>
+                    />
+                    {email.state === 'error' && (
+                        <ErrorMessage>{email.errorMessage}</ErrorMessage>
+                    )}
+                    <Input
+                        value={password.value}
+                        setValue={value =>
+                            this.setState({ password: { value } })
+                        }
+                        label="Hasło"
+                        type="password"
+                        placeholder="••••••••••"
+                        icon={Lock}
+                        width="100%"
+                    />
+                    {password.state === 'error' && (
+                        <ErrorMessage>{password.errorMessage}</ErrorMessage>
+                    )}
+                    <Description>
+                        <span>
+                            Klikając przycisk rejestracji, potwierdzasz
+                            przeczytanie i przyjmujesz do wiadomości wytyczne
+                            przedstawione w
+                        </span>
+                        <a href="/regulamin"> warunkach korzystania z usług</a>
+                        <span> oraz w </span>
+                        <a href="/polityka-prywatnosci">
+                            informacji o polityce prywatności.
+                        </a>
+                    </Description>
+                    <ButtonsWrapper>
+                        {generalErrorMessage && (
+                            <ErrorMessage>{generalErrorMessage}</ErrorMessage>
+                        )}
+                        <Button
+                            disabled={!allowToRegister}
+                            width="100%"
+                            color="primary"
+                            type="submit"
+                        >
+                            Zarejestruj się
+                        </Button>
+                        <Button
+                            onClick={() => alert('clicked')}
+                            width="100%"
+                            color="secondary"
+                        >
+                            Zaloguj się na istniejące konto
+                        </Button>
+                    </ButtonsWrapper>
+                </form>
             </Modal>
         );
     }
@@ -163,6 +250,12 @@ const ButtonsWrapper = styled.div`
     & > button:first-child {
         margin-bottom: 8px;
     }
+`;
+
+const ErrorMessage = styled.div`
+    color: ${({ theme }) => theme.palette.error.main};
+    font-size: 12px;
+    margin: -5px 0 5px;
 `;
 
 RegisterForm.propTypes = {
