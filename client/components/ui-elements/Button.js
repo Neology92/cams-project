@@ -5,10 +5,10 @@ import styled from 'styled-components';
 
 class Button extends React.PureComponent {
     render() {
-        const { color, type, width, children, ...props } = this.props;
-        if (type === 'text') {
+        const { color, kind, width, children, ...props } = this.props;
+        if (kind === 'text') {
             return (
-                <StyledMuiButton color={color} {...props} format={type}>
+                <StyledMuiButton color={color} {...props} format={kind}>
                     {children}
                 </StyledMuiButton>
             );
@@ -48,14 +48,14 @@ const StyledMuiButton = styled(MuiButton)`
 
 Button.propTypes = {
     color: PropTypes.string,
-    type: PropTypes.string,
+    kind: PropTypes.string,
     width: PropTypes.string,
     children: PropTypes.node.isRequired,
 };
 
 Button.defaultProps = {
     color: 'default',
-    type: 'default',
+    kind: 'default',
     width: 'inherit',
 };
 
