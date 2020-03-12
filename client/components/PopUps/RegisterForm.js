@@ -27,6 +27,39 @@ const messageItems = [
     },
 ];
 
+const loginRules = [
+    {
+        expression: str => str.length > 10,
+        response: 'cannot be longer than 10 characters.',
+    },
+    {
+        expression: str => str.length < 1,
+        response: 'cannot be empty.',
+    },
+];
+
+const emailRules = [
+    {
+        expression: str => str.length > 25,
+        response: 'cannot be longer than 25 characters.',
+    },
+    {
+        expression: str => str.length < 1,
+        response: 'cannot be empty.',
+    },
+];
+
+const passwordRules = [
+    {
+        expression: str => str.length > 9,
+        response: 'cannot be longer than 9 characters.',
+    },
+    {
+        expression: str => str.length < 1,
+        response: 'cannot be empty.',
+    },
+];
+
 class RegisterForm extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -49,9 +82,7 @@ class RegisterForm extends React.PureComponent {
             generalErrorMessage: '',
             allowToRegister: false,
         };
-        this.checkLogin = this.checkLogin.bind(this);
-        this.checkEmail = this.checkEmail.bind(this);
-        this.checkPassword = this.checkPassword.bind(this);
+        this.check = this.check.bind(this);
         this.manageRegisterPermission = this.manageRegisterPermission.bind(
             this
         );
@@ -62,76 +93,44 @@ class RegisterForm extends React.PureComponent {
         this.manageRegisterPermission();
     }
 
-    checkLogin() {
-        const { login } = this.state;
+    check(fieldName, rules) {
+        const field = this.state[fieldName]; //eslint-disable-line
 
-        this.setState({
-            login: { ...login, state: 'default', errorMessage: '' },
-        });
+        // Check rules
+        for (let i = 0; i < rules.length; i += 1) {
+            const { expression, response } = rules[i];
+            const errorMessage = `${fieldName} ${response}`;
 
-        if (login.value.length > 3 && login.value.length <= 10) {
-            this.setState({
-                login: { ...login, state: 'approve', errorMessage: '' },
-            });
-        } else if (login.value.length > 10) {
-            this.setState({
-                login: {
-                    ...login,
-                    state: 'error',
-                    errorMessage: '',
-                },
-            });
+            if (expression(field.value)) {
+                this.setState({
+                    [fieldName]: {
+                        ...field,
+                        state: 'error',
+                        errorMessage,
+                    },
+                });
+                return;
+            }
         }
-    }
 
-    checkEmail() {
-        const { email } = this.state;
-
+        // If everything is ok
         this.setState({
-            email: { ...email, state: 'default', errorMessage: '' },
+            [fieldName]: {
+                ...field,
+                state: 'approve',
+                errorMessage: '',
+            },
         });
-
-        if (email.value.length > 3 && email.value.length <= 10) {
-            this.setState({
-                email: { ...email, state: 'approve', errorMessage: '' },
-            });
-        } else if (email.value.length > 10) {
-            this.setState({
-                email: {
-                    ...email,
-                    state: 'error',
-                    errorMessage: '',
-                },
-            });
-        }
-    }
-
-    checkPassword() {
-        const { password } = this.state;
-
-        this.setState({
-            password: { ...password, state: 'default', errorMessage: '' },
-        });
-
-        if (password.value.length > 3 && password.value.length <= 10) {
-            this.setState({
-                password: { ...password, state: 'approve', errorMessage: '' },
-            });
-        } else if (password.value.length > 10) {
-            this.setState({
-                password: {
-                    ...password,
-                    state: 'error',
-                    errorMessage: '',
-                },
-            });
-        }
     }
 
     manageRegisterPermission() {
         const { login, email, password } = this.state;
 
-        if (login.value && email.value && password.value) {
+        if (
+            login.state === 'approve' &&
+            email.state === 'approve' &&
+            password.state === 'approve'
+        ) {
             this.setState({ allowToRegister: true });
         } else {
             this.setState({ allowToRegister: false });
@@ -181,7 +180,7 @@ class RegisterForm extends React.PureComponent {
                     });
 
                     // Continue to welcome screen
-                    alert('Added user to database');
+                    alert('Added user to database'); // eslint-diable-line
                 } else {
                     // Display error
                     switch (json.field) {
@@ -243,7 +242,7 @@ class RegisterForm extends React.PureComponent {
                         value={login.value}
                         setValue={value =>
                             this.setState({ login: { ...login, value } }, () =>
-                                this.checkLogin()
+                                this.check('login', loginRules)
                             )
                         }
                         state={login.state}
@@ -259,7 +258,7 @@ class RegisterForm extends React.PureComponent {
                         value={email.value}
                         setValue={value =>
                             this.setState({ email: { ...email, value } }, () =>
-                                this.checkEmail()
+                                this.check('email', emailRules)
                             )
                         }
                         state={email.state}
@@ -276,7 +275,7 @@ class RegisterForm extends React.PureComponent {
                         setValue={value =>
                             this.setState(
                                 { password: { ...password, value } },
-                                () => this.checkPassword()
+                                () => this.check('password', passwordRules)
                             )
                         }
                         state={password.state}
@@ -341,6 +340,10 @@ const ErrorMessage = styled.div`
     color: ${({ theme }) => theme.palette.error.main};
     font-size: 12px;
     margin: -5px 0 5px;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
 `;
 
 RegisterForm.propTypes = {
