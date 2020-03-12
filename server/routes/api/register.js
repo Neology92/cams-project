@@ -36,73 +36,68 @@ router.post('/', (req, res) => {
 
     email = email.toLowerCase();
 
-    // Check if email doesn't exist in database
-    User.find(
-        {
-            'safety.email': email,
-        },
-        (err, previousUsers) => {
-            if (err) {
-                return res.send({
-                    success: false,
-                    errorMessage: 'Error: Server Error',
-                });
-            } else if (previousUsers.length > 0) {
+    // Check if email or login doesn't exist in database
+    User.findOne({
+        $or: [
+            {
+                'safety.email': email,
+            },
+            {
+                login: login,
+            },
+        ],
+    })
+        .then(result => {
+            if (result) {
+                console.log(result);
+                if (result.login === login) {
+                    return res.send({
+                        success: false,
+                        errorMessage:
+                            'Error: User with that login is already registered',
+                        field: 'login',
+                    });
+                }
                 return res.send({
                     success: false,
                     errorMessage: 'Error: Email is already registered',
                     field: 'email',
                 });
-            }
-        }
-    );
-
-    // Check if login doesn't exist in database
-    User.find(
-        {
-            login: login,
-        },
-        (err, previousUsers) => {
-            if (err) {
-                return res.send({
-                    success: false,
-                    errorMessage: 'Error: Server Error',
+            } else {
+                // If everything is fine - create user
+                const newUser = new User({
+                    login: login,
+                    safety: {
+                        email: email,
+                    },
+                    account: {
+                        username: login,
+                    },
                 });
-            } else if (previousUsers.length > 0) {
-                return res.send({
-                    success: false,
-                    errorMessage:
-                        'Error: User with that login is already registered',
-                    field: 'login',
+                newUser.safety.password = newUser.generateHash(password);
+
+                // Push user to database
+                newUser.save(err => {
+                    if (err) {
+                        res.send({
+                            success: false,
+                            errorMessage: err,
+                        });
+                    } else {
+                        res.send({
+                            success: true,
+                            errorMessage: 'Signed up',
+                        });
+                    }
                 });
             }
-        }
-    );
-
-    const newUser = new User({
-        login: login,
-        safety: {
-            email: email,
-        },
-        account: {
-            username: login,
-        },
-    });
-    newUser.safety.password = newUser.generateHash(password);
-
-    newUser.save(err => {
-        if (err) {
-            res.send({
+        })
+        .catch(() => {
+            return res.send({
                 success: false,
-                errorMessage: err,
+                errorMessage: 'Error: Server Error',
             });
-        } else {
-            res.send({
-                success: true,
-                errorMessage: 'Signed up',
-            });
-        }
-    });
+        });
 });
 
 module.exports = router;
