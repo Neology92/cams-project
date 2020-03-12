@@ -31,9 +31,21 @@ class RegisterForm extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            email: '',
-            password: '',
+            login: {
+                value: '',
+                state: 'default',
+                errorMessage: '',
+            },
+            email: {
+                value: '',
+                state: 'default',
+                errorMessage: '',
+            },
+            password: {
+                value: '',
+                state: 'default',
+                errorMessage: '',
+            },
             allowToRegister: false,
         };
         this.checkIfInputsFilled = this.checkIfInputsFilled.bind(this);
@@ -44,17 +56,37 @@ class RegisterForm extends React.PureComponent {
     }
 
     checkIfInputsFilled() {
-        const { username, email, password } = this.state;
+        const { login, email, password } = this.state;
 
-        if (username && email && password) {
+        if (login.value && email.value && password.value) {
             this.setState({ allowToRegister: true });
         } else {
             this.setState({ allowToRegister: false });
         }
     }
 
+    signUp() {
+        const { login, password, email } = this.state;
+
+        fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email.value,
+                login: login.value,
+                password: password.value,
+            }),
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+            });
+    }
+
     render() {
-        const { username, email, password, allowToRegister } = this.state;
+        const { login, email, password, allowToRegister } = this.state;
         const { isOpen, close } = this.props;
 
         return (
@@ -66,24 +98,24 @@ class RegisterForm extends React.PureComponent {
                 close={close}
             >
                 <Input
-                    value={username}
-                    setValue={value => this.setState({ username: value })}
+                    value={login.value}
+                    setValue={value => this.setState({ login: { value } })}
                     label="Nazwa użytkownika"
                     placeholder="Mateusz"
                     icon={User}
                     width="100%"
                 />
                 <Input
-                    value={email}
-                    setValue={value => this.setState({ email: value })}
+                    value={email.value}
+                    setValue={value => this.setState({ email: { value } })}
                     label="Adres email"
                     placeholder="nazwa@domena.pl"
                     icon={Mail}
                     width="100%"
                 />
                 <Input
-                    value={password}
-                    setValue={value => this.setState({ password: value })}
+                    value={password.value}
+                    setValue={value => this.setState({ password: { value } })}
                     label="Hasło"
                     type="password"
                     placeholder="••••••••••"
@@ -103,7 +135,7 @@ class RegisterForm extends React.PureComponent {
                 </Description>
                 <ButtonsWrapper>
                     <Button
-                        onClick={() => alert('clicked')}
+                        onClick={() => this.signUp()}
                         disabled={!allowToRegister}
                         width="100%"
                         color="primary"
