@@ -49,15 +49,86 @@ class RegisterForm extends React.PureComponent {
             generalErrorMessage: '',
             allowToRegister: false,
         };
-        this.checkIfInputsFilled = this.checkIfInputsFilled.bind(this);
+        this.checkLogin = this.checkLogin.bind(this);
+        this.checkEmail = this.checkEmail.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.manageRegisterPermission = this.manageRegisterPermission.bind(
+            this
+        );
         this.signUp = this.signUp.bind(this);
     }
 
     componentDidUpdate() {
-        this.checkIfInputsFilled();
+        this.manageRegisterPermission();
     }
 
-    checkIfInputsFilled() {
+    checkLogin() {
+        const { login } = this.state;
+
+        this.setState({
+            login: { ...login, state: 'default', errorMessage: '' },
+        });
+
+        if (login.value.length > 3 && login.value.length <= 10) {
+            this.setState({
+                login: { ...login, state: 'approve', errorMessage: '' },
+            });
+        } else if (login.value.length > 10) {
+            this.setState({
+                login: {
+                    ...login,
+                    state: 'error',
+                    errorMessage: '',
+                },
+            });
+        }
+    }
+
+    checkEmail() {
+        const { email } = this.state;
+
+        this.setState({
+            email: { ...email, state: 'default', errorMessage: '' },
+        });
+
+        if (email.value.length > 3 && email.value.length <= 10) {
+            this.setState({
+                email: { ...email, state: 'approve', errorMessage: '' },
+            });
+        } else if (email.value.length > 10) {
+            this.setState({
+                email: {
+                    ...email,
+                    state: 'error',
+                    errorMessage: '',
+                },
+            });
+        }
+    }
+
+    checkPassword() {
+        const { password } = this.state;
+
+        this.setState({
+            password: { ...password, state: 'default', errorMessage: '' },
+        });
+
+        if (password.value.length > 3 && password.value.length <= 10) {
+            this.setState({
+                password: { ...password, state: 'approve', errorMessage: '' },
+            });
+        } else if (password.value.length > 10) {
+            this.setState({
+                password: {
+                    ...password,
+                    state: 'error',
+                    errorMessage: '',
+                },
+            });
+        }
+    }
+
+    manageRegisterPermission() {
         const { login, email, password } = this.state;
 
         if (login.value && email.value && password.value) {
@@ -170,7 +241,12 @@ class RegisterForm extends React.PureComponent {
                 <form onSubmit={this.signUp}>
                     <Input
                         value={login.value}
-                        setValue={value => this.setState({ login: { value } })}
+                        setValue={value =>
+                            this.setState({ login: { ...login, value } }, () =>
+                                this.checkLogin()
+                            )
+                        }
+                        state={login.state}
                         label="Nazwa użytkownika"
                         placeholder="Mateusz"
                         icon={User}
@@ -181,7 +257,12 @@ class RegisterForm extends React.PureComponent {
                     )}
                     <Input
                         value={email.value}
-                        setValue={value => this.setState({ email: { value } })}
+                        setValue={value =>
+                            this.setState({ email: { ...email, value } }, () =>
+                                this.checkEmail()
+                            )
+                        }
+                        state={email.state}
                         label="Adres email"
                         placeholder="nazwa@domena.pl"
                         icon={Mail}
@@ -193,8 +274,12 @@ class RegisterForm extends React.PureComponent {
                     <Input
                         value={password.value}
                         setValue={value =>
-                            this.setState({ password: { value } })
+                            this.setState(
+                                { password: { ...password, value } },
+                                () => this.checkPassword()
+                            )
                         }
+                        state={password.state}
                         label="Hasło"
                         type="password"
                         placeholder="••••••••••"
