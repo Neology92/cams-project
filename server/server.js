@@ -28,12 +28,17 @@ app.use('/api/users', users);
 app.use('/api/register', register);
 
 // Error handler
-app.use((error, req, res) => {
+//eslint-disable-next-line
+app.use((error, req, res, next) => {
     // Set HTTP Status code
     res.status(error.status);
 
     // Send response
-    res.json({ errorMessage: error.message, field: error.field });
+    res.json({
+        errorMessage: error.message,
+        field: error.field,
+        success: error.success,
+    });
 });
 
 // Listen on port

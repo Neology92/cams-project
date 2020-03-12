@@ -5,7 +5,7 @@ const createError = require('http-errors');
 
 const User = require('../../models/User');
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     const {
         body: { password, login },
     } = req;
@@ -17,16 +17,19 @@ router.post('/', (req, res) => {
     if (!login) {
         throw createError(400, 'Error: Login cannot be blank', {
             field: 'login',
+            success: false,
         });
     }
     if (!email) {
         throw createError(400, 'Error: Email cannot be blank', {
             field: 'email',
+            success: false,
         });
     }
     if (!password) {
         throw createError(400, 'Error: Password cannot be blank', {
             field: 'password',
+            success: false,
         });
     }
 
@@ -46,17 +49,24 @@ router.post('/', (req, res) => {
         .then(result => {
             if (result) {
                 if (result.login === login) {
-                    throw createError(
-                        409,
-                        'Error: User with that login is already registered',
-                        {
-                            field: 'login',
-                        }
+                    // We have to return error inside async functions
+                    return next(
+                        new createError(
+                            409,
+                            'Error: User with that login is already registered',
+                            {
+                                field: 'login',
+                                success: false,
+                            }
+                        )
                     );
                 }
-                throw createError(409, 'Error: Email is already registered', {
-                    field: 'email',
-                });
+                return next(
+                    new createError(409, 'Error: Email is already registered', {
+                        field: 'email',
+                        success: false,
+                    })
+                );
             } else {
                 // If everything is fine - create user
                 const newUser = new User({
@@ -73,9 +83,8 @@ router.post('/', (req, res) => {
                 // Push user to database
                 newUser.save(err => {
                     if (err) {
-                        res.send({
+                        throw createError(500, 'Error: Couldn;t add new user', {
                             success: false,
-                            errorMessage: err,
                         });
                     } else {
                         res.send({
@@ -87,7 +96,9 @@ router.post('/', (req, res) => {
             }
         })
         .catch(err => {
-            throw createError(500, `Error: Server error: ${err}`);
+            throw createError(500, `Error: Server error: ${err}`, {
+                success: false,
+            });
         });
 });
 
