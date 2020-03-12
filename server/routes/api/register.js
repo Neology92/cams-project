@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const createError = require('http-errors');
+
 const User = require('../../models/User');
 
 router.post('/', (req, res) => {
@@ -13,23 +15,17 @@ router.post('/', (req, res) => {
 
     // Check if fields are valid
     if (!login) {
-        return res.send({
-            success: false,
-            errorMessage: 'Error: Login cannot be blank',
+        throw createError(400, 'Error: Login cannot be blank', {
             field: 'login',
         });
     }
     if (!email) {
-        return res.send({
-            success: false,
-            errorMessage: 'Error: Email cannot be blank',
+        throw createError(400, 'Error: Email cannot be blank', {
             field: 'email',
         });
     }
     if (!password) {
-        return res.send({
-            success: false,
-            errorMessage: 'Error: Password cannot be blank',
+        throw createError(400, 'Error: Password cannot be blank', {
             field: 'password',
         });
     }
@@ -49,18 +45,16 @@ router.post('/', (req, res) => {
     })
         .then(result => {
             if (result) {
-                console.log(result);
                 if (result.login === login) {
-                    return res.send({
-                        success: false,
-                        errorMessage:
-                            'Error: User with that login is already registered',
-                        field: 'login',
-                    });
+                    throw createError(
+                        409,
+                        'Error: User with that login is already registered',
+                        {
+                            field: 'login',
+                        }
+                    );
                 }
-                return res.send({
-                    success: false,
-                    errorMessage: 'Error: Email is already registered',
+                throw createError(409, 'Error: Email is already registered', {
                     field: 'email',
                 });
             } else {
@@ -92,11 +86,8 @@ router.post('/', (req, res) => {
                 });
             }
         })
-        .catch(() => {
-            return res.send({
-                success: false,
-                errorMessage: 'Error: Server Error',
-            });
+        .catch(err => {
+            throw createError(500, `Error: Server error: ${err}`);
         });
 });
 

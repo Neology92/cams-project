@@ -27,6 +27,15 @@ app.use('/api/items', items);
 app.use('/api/users', users);
 app.use('/api/register', register);
 
+// Error handler
+app.use((error, req, res) => {
+    // Set HTTP Status code
+    res.status(error.status);
+
+    // Send response
+    res.json({ errorMessage: error.message, field: error.field });
+});
+
 // Listen on port
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
