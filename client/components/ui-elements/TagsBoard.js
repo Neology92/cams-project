@@ -64,23 +64,24 @@ class TagsBoard extends React.PureComponent {
     }
 
     render() {
-        const { tagsArray, width, icon } = this.props;
+        const { tagsArray, width, icon, ...props } = this.props;
         const { inputValue, inputState, errorMessage } = this.state;
         return (
             <Wrapper width={width}>
                 <Input
                     icon={icon}
                     label="Tags"
+                    width="100%"
+                    {...props}
                     value={inputValue}
                     onKeyDown={this.handleAdd}
-                    // Blocks using special characters
                     setValue={value =>
                         this.setState({
+                            // Block using special characters
                             inputValue: value.replace(/[^\w\s]/gi, ''),
                         })
                     }
                     state={inputState}
-                    width="100%"
                 />
                 {inputState === 'error' && (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
