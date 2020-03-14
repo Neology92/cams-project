@@ -82,6 +82,7 @@ class TagsBoard extends React.PureComponent {
                         })
                     }
                     state={inputState}
+                    onBlur={() => this.setState({ inputState: 'default' })}
                 />
                 {inputState === 'error' && (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
