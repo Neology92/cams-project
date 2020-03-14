@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Grid, Container, Paper } from '@material-ui/core';
 import { Button, RegisterForm, LoginForm, Tooltip } from '../components';
 
+import { UserContext } from '../utils/contexts';
+import logout from '../utils/logout';
+
 class Home extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -11,6 +14,8 @@ class Home extends React.PureComponent {
             openLoginModal: false,
         };
     }
+
+    componentDidMount() {}
 
     render() {
         const { openLoginModal, openRegisterModal } = this.state;
@@ -24,40 +29,63 @@ class Home extends React.PureComponent {
                     </Grid>
                     <Grid item xs={12}>
                         <Space>
-                            <Tooltip title="Załóż nowe konto">
-                                <Button
-                                    color="primary"
-                                    onClick={() =>
-                                        this.setState({
-                                            openRegisterModal: true,
-                                        })
-                                    }
-                                >
-                                    Darmowa rejestracja
-                                </Button>
-                            </Tooltip>
+                            <UserContext.Consumer>
+                                {value =>
+                                    value.sessionToken ? (
+                                        <>
+                                            <Button
+                                                color="secondary"
+                                                onClick={() => logout()}
+                                            >
+                                                Wyloguj się
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Tooltip title="Załóż nowe konto">
+                                                <Button
+                                                    color="primary"
+                                                    onClick={() =>
+                                                        this.setState({
+                                                            openRegisterModal: true,
+                                                        })
+                                                    }
+                                                >
+                                                    Darmowa rejestracja
+                                                </Button>
+                                            </Tooltip>
 
-                            <RegisterForm
-                                isOpen={openRegisterModal}
-                                close={() =>
-                                    this.setState({ openRegisterModal: false })
-                                }
-                            />
+                                            <RegisterForm
+                                                isOpen={openRegisterModal}
+                                                close={() =>
+                                                    this.setState({
+                                                        openRegisterModal: false,
+                                                    })
+                                                }
+                                            />
 
-                            <Button
-                                color="secondary"
-                                onClick={() =>
-                                    this.setState({ openLoginModal: true })
+                                            <Button
+                                                color="secondary"
+                                                onClick={() =>
+                                                    this.setState({
+                                                        openLoginModal: true,
+                                                    })
+                                                }
+                                            >
+                                                Logowanie
+                                            </Button>
+                                            <LoginForm
+                                                isOpen={openLoginModal}
+                                                close={() =>
+                                                    this.setState({
+                                                        openLoginModal: false,
+                                                    })
+                                                }
+                                            />
+                                        </>
+                                    )
                                 }
-                            >
-                                Logowanie
-                            </Button>
-                            <LoginForm
-                                isOpen={openLoginModal}
-                                close={() =>
-                                    this.setState({ openLoginModal: false })
-                                }
-                            />
+                            </UserContext.Consumer>
                         </Space>
                     </Grid>
                     <Grid item xs={12}>
