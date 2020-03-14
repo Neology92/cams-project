@@ -18,19 +18,19 @@ class TagsBoard extends React.PureComponent {
     }
 
     handleDelete(tag) {
-        const { setTagArr, tagArray } = this.props;
-        const newArray = tagArray.filter(item => item.value !== tag.value);
-        setTagArr(newArray);
+        const { setTagsArray, tagsArray } = this.props;
+        const newArray = tagsArray.filter(item => item.value !== tag.value);
+        setTagsArray(newArray);
     }
 
     // 13 keyCode is Enter
     handleAdd(e) {
         if (e.keyCode === 13) {
-            const { setTagArr, tagArray } = this.props;
+            const { setTagsArray, tagsArray } = this.props;
             const { inputValue } = this.state;
             const value = inputValue.replace(/\s+/g, '-').toLowerCase();
 
-            if (tagArray.length >= 3) {
+            if (tagsArray.length >= 3) {
                 this.setState({
                     inputValue: '',
                     inputState: 'error',
@@ -48,16 +48,16 @@ class TagsBoard extends React.PureComponent {
                     inputState: 'error',
                     errorMessage: 'Tag może mieć maksymalnie 15 znaków.',
                 });
-            } else if (tagArray.some(tag => tag.value === value)) {
+            } else if (tagsArray.some(tag => tag.value === value)) {
                 this.setState({
                     inputValue: '',
                     inputState: 'error',
                     errorMessage: 'Tagi muszą być unikalne.',
                 });
             } else {
-                const newArray = tagArray;
+                const newArray = tagsArray;
                 newArray.push({ value, label: inputValue });
-                setTagArr(newArray);
+                setTagsArray(newArray);
                 this.setState({
                     inputValue: '',
                     inputState: 'default',
@@ -67,7 +67,7 @@ class TagsBoard extends React.PureComponent {
     }
 
     render() {
-        const { tagArray } = this.props;
+        const { tagsArray } = this.props;
         const { inputValue, inputState, errorMessage } = this.state;
         return (
             <div>
@@ -88,7 +88,7 @@ class TagsBoard extends React.PureComponent {
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
                 <TagContainer>
-                    {tagArray.map(tag => {
+                    {tagsArray.map(tag => {
                         return (
                             <Tag
                                 key={tag.value}
@@ -113,13 +113,13 @@ const TagContainer = styled.div`
 `;
 
 TagsBoard.propTypes = {
-    tagArray: PropTypes.arrayOf(
+    tagsArray: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.string,
             label: PropTypes.string,
         })
     ).isRequired,
-    setTagArr: PropTypes.func.isRequired,
+    setTagsArray: PropTypes.func.isRequired,
 };
 
 export default TagsBoard;

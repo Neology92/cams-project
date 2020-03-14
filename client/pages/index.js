@@ -83,7 +83,10 @@ const Home = ({ switchColorsMode }) => {
 
                 <Grid item xs={12}>
                     <Space>
-                        <TagsBoard tagArray={value15} setTagArr={setValue15} />
+                        <TagsBoard
+                            tagsArray={value15}
+                            setTagsArray={setValue15}
+                        />
                     </Space>
                 </Grid>
 
