@@ -1,3 +1,9 @@
+import { setInStorage } from './storage';
+
 export default function() {
-    console.log('Log out');
+    setInStorage('session_token', '');
+
+    // Send remove session token from database query
+
+    window.location.reload();
 }

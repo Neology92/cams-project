@@ -7,6 +7,8 @@ import ErrorMessage from '../Text/ErrorMessage';
 import Description from '../Text/Description';
 import { Lock, User } from '../../assets/icons';
 
+import { setInStorage } from '../../utils/storage';
+
 const messageItems = [];
 
 const loginRules = [
@@ -45,6 +47,7 @@ class LoginForm extends React.PureComponent {
                 state: 'default',
                 errorMessage: '',
             },
+            generalErrorMessage: '',
             allowToLogin: false,
         };
         this.check = this.check.bind(this);
@@ -59,9 +62,78 @@ class LoginForm extends React.PureComponent {
     signIn(e) {
         e.preventDefault();
 
-        console.log(this);
+        const { login, password } = this.state;
 
-        alert('Submited');
+        // Clear general error message
+        this.setState({
+            generalErrorMessage: '',
+        });
+
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                login: login.value,
+                password: password.value,
+            }),
+        })
+            .then(res => res.json())
+            .then(json => {
+                if (json.success) {
+                    // Clear inputs
+                    this.setState({
+                        login: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                        email: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                        password: {
+                            value: '',
+                            state: 'default',
+                            errorMessage: '',
+                        },
+                    });
+
+                    // Set sessionToken
+                    setInStorage('session_token', json.token);
+                    window.location.reload();
+
+                    // Close modal
+                } else {
+                    // Display error
+                    switch (json.field) {
+                        case 'login':
+                            this.setState({
+                                login: {
+                                    state: 'error',
+                                    errorMessage: json.errorMessage,
+                                },
+                            });
+                            break;
+                        case 'password':
+                            this.setState({
+                                password: {
+                                    state: 'error',
+                                    errorMessage: json.errorMessage,
+                                },
+                            });
+                            break;
+
+                        default:
+                            this.setState({
+                                generalErrorMessage: json.errorMessage,
+                            });
+                            break;
+                    }
+                }
+            });
     }
 
     check(fieldName, rules) {
@@ -105,7 +177,12 @@ class LoginForm extends React.PureComponent {
     }
 
     render() {
-        const { login, password, allowToLogin } = this.state;
+        const {
+            login,
+            password,
+            allowToLogin,
+            generalErrorMessage,
+        } = this.state;
         const { isOpen, close } = this.props;
 
         return (
@@ -156,6 +233,9 @@ class LoginForm extends React.PureComponent {
                         <a href="/odzyskiwanie-hasla"> Nie pamiętasz hasła?</a>
                     </Description>
                     <ButtonsWrapper>
+                        {generalErrorMessage && (
+                            <ErrorMessage>{generalErrorMessage}</ErrorMessage>
+                        )}
                         <Button
                             disabled={!allowToLogin}
                             width="100%"
