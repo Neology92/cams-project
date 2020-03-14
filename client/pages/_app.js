@@ -1,23 +1,22 @@
 import App from 'next/app';
-import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { lightMuiTheme, darkMuiTheme } from '../assets/styles/muiTheme';
-import { Navbar } from '../components';
 import { getFromStorage } from '../utils/storage';
+import { UserContext } from '../utils/contexts';
 
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import '../assets/styles/fontNunitoSans.css';
 
-const AccountContext = React.createContext({ sessionToken: null, user: null });
+import { Navbar } from '../components';
 
 export default class MyApp extends App {
     constructor(props) {
         super(props);
         this.state = {
             muiTheme: lightMuiTheme,
-            sessionToken: null,
-            user: null,
+            sessionToken: '',
+            user: {},
         };
         this.switchColorsMode = this.switchColorsMode.bind(this);
     }
@@ -46,14 +45,14 @@ export default class MyApp extends App {
             <>
                 <ThemeProvider theme={this.state.muiTheme}>
                     <MuiThemeProvider theme={this.state.muiTheme}>
-                        <AccountContext.Provider value={{ sessionToken, user }}>
+                        <UserContext.Provider value={{ sessionToken, user }}>
                             <GlobalStyle />
                             <Navbar />
                             <Component
                                 {...pageProps}
                                 switchColorsMode={this.switchColorsMode}
                             />
-                        </AccountContext.Provider>
+                        </UserContext.Provider>
                     </MuiThemeProvider>
                 </ThemeProvider>
             </>
