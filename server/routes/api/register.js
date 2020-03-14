@@ -7,10 +7,10 @@ const User = require('../../models/User');
 
 router.post('/', (req, res, next) => {
     const {
-        body: { password, login },
+        body: { password },
     } = req;
     let {
-        body: { email },
+        body: { email, login },
     } = req;
 
     // Check if fields are valid
@@ -33,7 +33,10 @@ router.post('/', (req, res, next) => {
         });
     }
 
+    const username = login;
+
     email = email.toLowerCase();
+    login = login.toLowerCase();
 
     // Check if email or login doesn't exist in database
     User.findOne({
@@ -79,7 +82,7 @@ router.post('/', (req, res, next) => {
                         email: email,
                     },
                     account: {
-                        username: login,
+                        username: username,
                     },
                 });
                 newUser.safety.password = newUser.generateHash(password);
