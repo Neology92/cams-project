@@ -30,6 +30,7 @@ import {
     Lgbt,
     DarkMode,
     Search,
+    Crosshair,
 } from '../assets/icons';
 
 const selectItems = [
@@ -86,6 +87,9 @@ const Home = ({ switchColorsMode }) => {
                         <TagsBoard
                             tagsArray={value15}
                             setTagsArray={setValue15}
+                            maxTags={3}
+                            width="512px"
+                            icon={Crosshair}
                         />
                     </Space>
                 </Grid>

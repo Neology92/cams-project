@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tag from './Tag';
 import Input from './Input';
-import { Crosshair } from '../../assets/icons';
 import ErrorMessage from '../Text/ErrorMessage';
 
 class TagsBoard extends React.PureComponent {
@@ -26,63 +25,62 @@ class TagsBoard extends React.PureComponent {
     // 13 keyCode is Enter
     handleAdd(e) {
         if (e.keyCode === 13) {
-            const { setTagsArray, tagsArray } = this.props;
+            const { setTagsArray, tagsArray, maxTags } = this.props;
             const { inputValue } = this.state;
             const value = inputValue.replace(/\s+/g, '-').toLowerCase();
 
-            if (tagsArray.length >= 3) {
+            if (tagsArray.length >= maxTags) {
                 this.setState({
-                    inputValue: '',
                     inputState: 'error',
-                    errorMessage: 'Zbyt wiele tagów.',
+                    errorMessage: `Limit tagów: ${maxTags}`,
                 });
             } else if (inputValue === '') {
                 this.setState({
-                    inputValue: '',
                     inputState: 'error',
                     errorMessage: 'Nie można dodać pustego tagu.',
                 });
             } else if (inputValue.length >= 15) {
                 this.setState({
-                    inputValue: '',
                     inputState: 'error',
                     errorMessage: 'Tag może mieć maksymalnie 15 znaków.',
                 });
             } else if (tagsArray.some(tag => tag.value === value)) {
                 this.setState({
-                    inputValue: '',
                     inputState: 'error',
-                    errorMessage: 'Tagi muszą być unikalne.',
+                    errorMessage: 'Tagi tag już istnieje ',
                 });
             } else {
                 const newArray = tagsArray;
                 newArray.push({ value, label: inputValue });
                 setTagsArray(newArray);
                 this.setState({
-                    inputValue: '',
                     inputState: 'default',
                 });
             }
+            this.setState({
+                inputValue: '',
+            });
         }
     }
 
     render() {
-        const { tagsArray } = this.props;
+        const { tagsArray, width, icon } = this.props;
         const { inputValue, inputState, errorMessage } = this.state;
         return (
-            <div>
+            <Wrapper width={width}>
                 <Input
-                    icon={Crosshair}
+                    icon={icon}
                     label="Tags"
                     value={inputValue}
                     onKeyDown={this.handleAdd}
-                    // Replace blocks using special characters
+                    // Blocks using special characters
                     setValue={value =>
                         this.setState({
                             inputValue: value.replace(/[^\w\s]/gi, ''),
                         })
                     }
                     state={inputState}
+                    width="100%"
                 />
                 {inputState === 'error' && (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
@@ -99,16 +97,20 @@ class TagsBoard extends React.PureComponent {
                         );
                     })}
                 </TagContainer>
-            </div>
+            </Wrapper>
         );
     }
 }
+
+const Wrapper = styled.div`
+    width: ${({ width }) => width};
+`;
 
 const TagContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    width: 256px;
+    width: 100%;
     padding-top: 7px;
 `;
 
@@ -120,6 +122,15 @@ TagsBoard.propTypes = {
         })
     ).isRequired,
     setTagsArray: PropTypes.func.isRequired,
+    maxTags: PropTypes.number,
+    width: PropTypes.string,
+    icon: PropTypes.func,
+};
+
+TagsBoard.defaultProps = {
+    maxTags: 3,
+    width: '256px',
+    icon: null,
 };
 
 export default TagsBoard;
