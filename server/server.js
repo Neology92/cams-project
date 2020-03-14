@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 
 const items = require('./routes/api/items');
 const users = require('./routes/api/users');
+
 const register = require('./routes/api/register');
+const login = require('./routes/api/login');
 
 const app = express();
 
@@ -26,6 +28,7 @@ mongoose
 app.use('/api/items', items);
 app.use('/api/users', users);
 app.use('/api/register', register);
+app.use('/api/login', login);
 
 // Error handler
 //eslint-disable-next-line
