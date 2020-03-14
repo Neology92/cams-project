@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Tag from './Tag';
 import Input from './Input';
 import { Crosshair } from '../../assets/icons';
+import ErrorMessage from '../Text/ErrorMessage';
 
 class TagsBoard extends React.PureComponent {
     constructor(props) {
@@ -109,11 +110,6 @@ const TagContainer = styled.div`
     text-align: center;
     width: 256px;
     padding-top: 7px;
-`;
-
-const ErrorMessage = styled.span`
-    color: ${({ theme }) => theme.palette.error.main};
-    font-size: 12px;
 `;
 
 TagsBoard.propTypes = {
