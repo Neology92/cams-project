@@ -13,7 +13,6 @@ import {
     Icon,
     Tooltip,
     Dropdown,
-    Tag,
     RegisterForm,
     LoginForm,
     TagsBoard,
@@ -57,20 +56,6 @@ const Home = ({ switchColorsMode }) => {
     const [value9, setValue9] = useState(true);
     const [value10, setValue10] = useState('2');
     const [value11, setValue11] = useState('');
-    const [values12, setValues12] = useState([
-        {
-            value: 'tag-prototype',
-            label: 'Tag Prototype',
-        },
-        {
-            value: 'some-tag',
-            label: 'Some Tag',
-        },
-        {
-            value: 'another-tag',
-            label: 'Another Tag',
-        },
-    ]);
     const [value13, setValue13] = useState(false);
     const [value14, setValue14] = useState(false);
     const [value15, setValue15] = useState([]);
@@ -83,7 +68,7 @@ const Home = ({ switchColorsMode }) => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Space>
+                    <StyledPaper>
                         <TagsBoard
                             tagsArray={value15}
                             setTagsArray={setValue15}
@@ -91,7 +76,7 @@ const Home = ({ switchColorsMode }) => {
                             width="512px"
                             icon={Crosshair}
                         />
-                    </Space>
+                    </StyledPaper>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -124,67 +109,6 @@ const Home = ({ switchColorsMode }) => {
                             isOpen={value14}
                             close={() => setValue14(false)}
                         />
-                    </Space>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space>
-                        {values12.map(item => (
-                            <Tag
-                                key={item.value}
-                                value={item.value}
-                                label={item.label}
-                                onDelete={() => {
-                                    setValues12(
-                                        values12.filter(
-                                            tag => tag.value !== item.value
-                                        )
-                                    );
-                                }}
-                            />
-                        ))}
-                    </Space>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space>
-                        <Tag
-                            key="tag-prototype"
-                            label="Tag Prototype"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="some-tag"
-                            label="Some Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="another-tag"
-                            label="Another Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag key="no-label" onDelete={() => {}} />
-                    </Space>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Space>
-                        <Tag
-                            key="tag-prototype"
-                            label="Tag Prototype"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="some-tag"
-                            label="Some Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag
-                            key="another-tag"
-                            label="Another Tag"
-                            onDelete={() => {}}
-                        />
-                        <Tag key="no-label" onDelete={() => {}} />
                     </Space>
                 </Grid>
 
