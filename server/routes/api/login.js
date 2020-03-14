@@ -42,14 +42,29 @@ router.post('/', (req, res, next) => {
         .then(user => {
             if (user) {
                 // Check if password matches
-                if (user.validPassword(password)) {
+                if (!user.validPassword(password)) {
+                    return next(
+                        new createError(409, 'Error: Hasło niepoprawne.', {
+                            field: 'password',
+                            success: false,
+                        })
+                    );
+                } else {
                     const userSession = new UserSession({
                         userId: user._id,
                     });
 
                     // Push userSession
-                    userSession.save((err, doc) => {
-                        if (err) {
+                    userSession
+                        .save()
+                        .then(doc => {
+                            res.send({
+                                success: true,
+                                errorMessage: 'Zalogowano.',
+                                token: doc._id,
+                            });
+                        })
+                        .catch(() => {
                             throw createError(
                                 500,
                                 'Error: Nie udało się zalogować.',
@@ -57,21 +72,8 @@ router.post('/', (req, res, next) => {
                                     success: false,
                                 }
                             );
-                        } else {
-                            res.send({
-                                success: true,
-                                errorMessage: 'Zalogowano.',
-                                token: doc._id,
-                            });
-                        }
-                    });
+                        });
                 }
-                return next(
-                    new createError(409, 'Error: Hasło niepoprawne.', {
-                        field: 'password',
-                        success: false,
-                    })
-                );
             } else {
                 // If user doesn't exist
                 return next(
