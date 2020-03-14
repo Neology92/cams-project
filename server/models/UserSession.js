@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const UserSessionSchema = new Schema({
     userId: {
-        type: Number,
-        default: -1,
+        type: String,
+        required: true,
     },
     timestamp: {
         type: Date,
