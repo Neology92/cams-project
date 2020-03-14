@@ -83,7 +83,6 @@ const Home = ({ switchColorsMode }) => {
                     <Space>
                         <Tooltip title="Załóż nowe konto">
                             <Button
-                                type="default"
                                 color="primary"
                                 onClick={() => {
                                     setValue13(true);
@@ -237,7 +236,7 @@ const Home = ({ switchColorsMode }) => {
                     <StyledPaper>
                         <Button
                             color="primary"
-                            type="text"
+                            kind="text"
                             onClick={() => {
                                 switchColorsMode();
                             }}
@@ -247,7 +246,7 @@ const Home = ({ switchColorsMode }) => {
 
                         <Button
                             color="secondary"
-                            type="text"
+                            kind="text"
                             onClick={() => {
                                 switchColorsMode();
                             }}
