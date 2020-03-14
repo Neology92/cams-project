@@ -39,7 +39,7 @@ class TagsBoard extends React.PureComponent {
                     inputState: 'error',
                     errorMessage: 'Nie można dodać pustego tagu.',
                 });
-            } else if (inputValue.length >= 15) {
+            } else if (inputValue.length > 15) {
                 this.setState({
                     inputState: 'error',
                     errorMessage: 'Tag może mieć maksymalnie 15 znaków.',
@@ -47,7 +47,7 @@ class TagsBoard extends React.PureComponent {
             } else if (tagsArray.some(tag => tag.value === value)) {
                 this.setState({
                     inputState: 'error',
-                    errorMessage: 'Tagi tag już istnieje ',
+                    errorMessage: 'Taki tag już istnieje ',
                 });
             } else {
                 const newArray = tagsArray;
