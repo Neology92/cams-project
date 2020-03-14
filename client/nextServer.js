@@ -25,8 +25,8 @@ app.prepare().then(() => {
     server.use(proxyRegister);
     server.use(proxyLogin);
 
-    server.get('/home', (req, res) => {
-        return app.render(req, res, '/', req.query);
+    server.get('/', (req, res) => {
+        return app.render(req, res, '/home', req.query);
     });
 
     server.all('*', (req, res) => {
