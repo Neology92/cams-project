@@ -85,7 +85,7 @@ class TagsBoard extends React.PureComponent {
                 {inputState === 'error' && (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
-                <TagContainer>
+                <TagsContainer>
                     {tagsArray.map(tag => {
                         return (
                             <Tag
@@ -96,7 +96,7 @@ class TagsBoard extends React.PureComponent {
                             />
                         );
                     })}
-                </TagContainer>
+                </TagsContainer>
             </Wrapper>
         );
     }
@@ -106,7 +106,7 @@ const Wrapper = styled.div`
     width: ${({ width }) => width};
 `;
 
-const TagContainer = styled.div`
+const TagsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     text-align: center;
