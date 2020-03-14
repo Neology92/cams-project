@@ -1,4 +1,4 @@
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tag from './Tag';
 import Input from './Input';
@@ -113,8 +113,13 @@ const TagContainer = styled.div`
 `;
 
 TagsBoard.propTypes = {
-    tagArray: propTypes.arrayOf(propTypes.object).isRequired,
-    setTagArr: propTypes.func.isRequired,
+    tagArray: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string,
+            label: PropTypes.string,
+        })
+    ).isRequired,
+    setTagArr: PropTypes.func.isRequired,
 };
 
 export default TagsBoard;
