@@ -15,19 +15,19 @@ router.post('/', (req, res, next) => {
 
     // Check if fields are valid
     if (!login) {
-        throw createError(400, 'Error: Login cannot be blank', {
+        throw createError(400, 'Error: Login nie może być pusty.', {
             field: 'login',
             success: false,
         });
     }
     if (!email) {
-        throw createError(400, 'Error: Email cannot be blank', {
+        throw createError(400, 'Error: Email nie może być pusty.', {
             field: 'email',
             success: false,
         });
     }
     if (!password) {
-        throw createError(400, 'Error: Password cannot be blank', {
+        throw createError(400, 'Error: Password nie może być pusty.', {
             field: 'password',
             success: false,
         });
@@ -53,7 +53,7 @@ router.post('/', (req, res, next) => {
                     return next(
                         new createError(
                             409,
-                            'Error: User with that login is already registered',
+                            'Error: Użytkownik z podanym loginem jest już zarejestrowany.',
                             {
                                 field: 'login',
                                 success: false,
@@ -62,10 +62,14 @@ router.post('/', (req, res, next) => {
                     );
                 }
                 return next(
-                    new createError(409, 'Error: Email is already registered', {
-                        field: 'email',
-                        success: false,
-                    })
+                    new createError(
+                        409,
+                        'Error: Email jest już zainstalowany.',
+                        {
+                            field: 'email',
+                            success: false,
+                        }
+                    )
                 );
             } else {
                 // If everything is fine - create user
@@ -83,13 +87,17 @@ router.post('/', (req, res, next) => {
                 // Push user to database
                 newUser.save(err => {
                     if (err) {
-                        throw createError(500, 'Error: Couldn;t add new user', {
-                            success: false,
-                        });
+                        throw createError(
+                            500,
+                            'Error: Nie można dodać nowego użytkownika.',
+                            {
+                                success: false,
+                            }
+                        );
                     } else {
                         res.send({
                             success: true,
-                            errorMessage: 'Signed up',
+                            errorMessage: 'Zarejestrowano.',
                         });
                     }
                 });
