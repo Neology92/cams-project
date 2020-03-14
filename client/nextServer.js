@@ -10,13 +10,20 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
     const server = express();
 
-    const proxy = createProxyMiddleware('/api/register', {
+    const proxyRegister = createProxyMiddleware('/api/register', {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
     });
 
-    server.use(proxy);
+    const proxyLogin = createProxyMiddleware('/api/login', {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+    });
+
+    server.use(proxyRegister);
+    server.use(proxyLogin);
 
     server.get('/home', (req, res) => {
         return app.render(req, res, '/', req.query);
