@@ -14,7 +14,6 @@ app.prepare().then(() => {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
-        // pathRewrite: { [`^api/`]: '' },
     });
 
     server.use(proxy);
