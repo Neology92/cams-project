@@ -3,30 +3,101 @@ import styled from 'styled-components';
 import Input from '../ui-elements/Input';
 import Button from '../ui-elements/Button';
 import Modal from '../Modal/Modal';
+import ErrorMessage from '../Text/ErrorMessage';
 import Description from '../Text/Description';
 import { Lock, User } from '../../assets/icons';
 
 const messageItems = [];
 
+const loginRules = [
+    {
+        expression: str => str.length > 10,
+        response: 'cannot be longer than 10 characters.',
+    },
+    {
+        expression: str => str.length < 1,
+        response: 'cannot be empty.',
+    },
+];
+
+const passwordRules = [
+    {
+        expression: str => str.length > 9,
+        response: 'cannot be longer than 9 characters.',
+    },
+    {
+        expression: str => str.length < 1,
+        response: 'cannot be empty.',
+    },
+];
+
 class LoginForm extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            login: {
+                value: '',
+                state: 'default',
+                errorMessage: '',
+            },
+            password: {
+                value: '',
+                state: 'default',
+                errorMessage: '',
+            },
             allowToLogin: false,
         };
-        this.checkIfInputsFilled = this.checkIfInputsFilled.bind(this);
+        this.check = this.check.bind(this);
+        this.signIn = this.signIn.bind(this);
+        this.manageLoginPermission = this.manageLoginPermission.bind(this);
     }
 
     componentDidUpdate() {
-        this.checkIfInputsFilled();
+        this.manageLoginPermission();
     }
 
-    checkIfInputsFilled() {
-        const { username, password } = this.state;
+    signIn(e) {
+        e.preventDefault();
 
-        if (username && password) {
+        console.log(this);
+
+        alert('Submited');
+    }
+
+    check(fieldName, rules) {
+        const field = this.state[fieldName]; //eslint-disable-line
+
+        // Check rules
+        for (let i = 0; i < rules.length; i += 1) {
+            const { expression, response } = rules[i];
+            const errorMessage = `${fieldName} ${response}`;
+
+            if (expression(field.value)) {
+                this.setState({
+                    [fieldName]: {
+                        ...field,
+                        state: 'error',
+                        errorMessage,
+                    },
+                });
+                return;
+            }
+        }
+
+        // If everything is ok
+        this.setState({
+            [fieldName]: {
+                ...field,
+                state: 'approve',
+                errorMessage: '',
+            },
+        });
+    }
+
+    manageLoginPermission() {
+        const { password, login } = this.state;
+
+        if (password.state === 'approve' && login.state === 'approve') {
             this.setState({ allowToLogin: true });
         } else {
             this.setState({ allowToLogin: false });
@@ -34,7 +105,7 @@ class LoginForm extends React.PureComponent {
     }
 
     render() {
-        const { username, password, allowToLogin } = this.state;
+        const { login, password, allowToLogin } = this.state;
         const { isOpen, close } = this.props;
 
         return (
@@ -46,43 +117,62 @@ class LoginForm extends React.PureComponent {
                 isOpen={isOpen}
                 close={close}
             >
-                <Input
-                    value={username}
-                    setValue={value => this.setState({ username: value })}
-                    label="Login"
-                    placeholder="Nick lub email"
-                    icon={User}
-                    width="100%"
-                />
-                <Input
-                    value={password}
-                    setValue={value => this.setState({ password: value })}
-                    label="Hasło"
-                    type="password"
-                    placeholder="••••••••••"
-                    icon={Lock}
-                    width="100%"
-                />
-                <Description>
-                    <a href="/odzyskiwanie-hasla"> Nie pamiętasz hasła?</a>
-                </Description>
-                <ButtonsWrapper>
-                    <Button
-                        onClick={() => alert('clicked')}
-                        disabled={!allowToLogin}
+                <form onSubmit={this.signIn}>
+                    <Input
+                        value={login.value}
+                        setValue={value => {
+                            this.setState({ login: { ...login, value } }, () =>
+                                this.check('login', loginRules)
+                            );
+                        }}
+                        state={login.state}
+                        icon={User}
+                        label="Login"
+                        placeholder="Nick lub email"
                         width="100%"
-                        color="primary"
-                    >
-                        Zaloguj się
-                    </Button>
-                    <Button
-                        onClick={() => alert('clicked')}
+                    />
+                    {login.state === 'error' && (
+                        <ErrorMessage>{login.errorMessage}</ErrorMessage>
+                    )}
+                    <Input
+                        value={password.value}
+                        setValue={value =>
+                            this.setState(
+                                { password: { ...password, value } },
+                                () => this.check('password', passwordRules)
+                            )
+                        }
+                        state={password.state}
+                        icon={Lock}
+                        label="Hasło"
+                        type="password"
+                        placeholder="••••••••••"
                         width="100%"
-                        color="secondary"
-                    >
-                        Stwórz darmowe konto
-                    </Button>
-                </ButtonsWrapper>
+                    />
+                    {password.state === 'error' && (
+                        <ErrorMessage>{password.errorMessage}</ErrorMessage>
+                    )}
+                    <Description>
+                        <a href="/odzyskiwanie-hasla"> Nie pamiętasz hasła?</a>
+                    </Description>
+                    <ButtonsWrapper>
+                        <Button
+                            disabled={!allowToLogin}
+                            width="100%"
+                            color="primary"
+                            type="submit"
+                        >
+                            Zaloguj się
+                        </Button>
+                        <Button
+                            onClick={() => alert('clicked')}
+                            width="100%"
+                            color="secondary"
+                        >
+                            Stwórz darmowe konto
+                        </Button>
+                    </ButtonsWrapper>
+                </form>
             </Modal>
         );
     }
