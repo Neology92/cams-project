@@ -10,34 +10,12 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
     const server = express();
 
-    const proxyRegister = createProxyMiddleware('/api/register', {
+    const proxy = createProxyMiddleware('/api', {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
     });
-
-    const proxyLogin = createProxyMiddleware('/api/login', {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-    });
-
-    const proxyVerifyToken = createProxyMiddleware('/api/verifyToken', {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-    });
-
-    const proxyLogout = createProxyMiddleware('/api/logout', {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-    });
-
-    server.use(proxyRegister);
-    server.use(proxyLogin);
-    server.use(proxyVerifyToken);
-    server.use(proxyLogout);
+    server.use(proxy);
 
     server.get('/', (req, res) => {
         return app.render(req, res, '/home', req.query);
