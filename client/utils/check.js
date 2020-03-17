@@ -1,21 +1,26 @@
-const check = (rules, field) => {
+const check = (fieldName, field, rules) => {
     // Check rules
     for (let i = 0; i < rules.length; i += 1) {
         const { expression, response } = rules[i];
 
         if (expression(field.value)) {
             return {
-                ...field,
-                state: 'error',
-                errorMessage: response,
+                [fieldName]: {
+                    ...field,
+                    state: 'error',
+                    errorMessage: response,
+                },
             };
         }
     }
+
     // If everything is ok
     return {
-        ...field,
-        state: 'approve',
-        errorMessage: '',
+        [fieldName]: {
+            ...field,
+            state: 'approve',
+            errorMessage: '',
+        },
     };
 };
 
