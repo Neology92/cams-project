@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
             } else {
                 return next(
                     new createError(404, 'Error: Session not found', {
-                        success: false,
+                        success: true,
                     })
                 );
             }
