@@ -7,6 +7,7 @@ const users = require('./routes/api/users');
 
 const register = require('./routes/api/register');
 const login = require('./routes/api/login');
+const verifyToken = require('./routes/api/verifyToken');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/items', items);
 app.use('/api/users', users);
 app.use('/api/register', register);
 app.use('/api/login', login);
+app.use('/api/verifyToken', verifyToken);
 
 // Error handler
 //eslint-disable-next-line
