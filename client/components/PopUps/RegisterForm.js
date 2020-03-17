@@ -5,6 +5,7 @@ import Button from '../ui-elements/Button';
 import Modal from '../Modal/Modal';
 import Description from '../Text/Description';
 import { Sliders, Coins, Shield, Mail, Lock, User } from '../../assets/icons';
+import check from '../../utils/check';
 
 const messageItems = [
     {
@@ -82,45 +83,15 @@ class RegisterForm extends React.PureComponent {
             generalErrorMessage: '',
             allowToRegister: false,
         };
-        this.check = this.check.bind(this);
         this.manageRegisterPermission = this.manageRegisterPermission.bind(
             this
         );
         this.signUp = this.signUp.bind(this);
+        this.check = check.bind(this);
     }
 
     componentDidUpdate() {
         this.manageRegisterPermission();
-    }
-
-    check(fieldName, rules) {
-        const field = this.state[fieldName]; //eslint-disable-line
-
-        // Check rules
-        for (let i = 0; i < rules.length; i += 1) {
-            const { expression, response } = rules[i];
-            const errorMessage = `${fieldName} ${response}`;
-
-            if (expression(field.value)) {
-                this.setState({
-                    [fieldName]: {
-                        ...field,
-                        state: 'error',
-                        errorMessage,
-                    },
-                });
-                return;
-            }
-        }
-
-        // If everything is ok
-        this.setState({
-            [fieldName]: {
-                ...field,
-                state: 'approve',
-                errorMessage: '',
-            },
-        });
     }
 
     manageRegisterPermission() {
@@ -228,7 +199,6 @@ class RegisterForm extends React.PureComponent {
             allowToRegister,
         } = this.state;
         const { isOpen, close } = this.props;
-
         return (
             <Modal
                 label="Darmowa rejestracja"
@@ -242,7 +212,13 @@ class RegisterForm extends React.PureComponent {
                         value={login.value}
                         setValue={value =>
                             this.setState({ login: { ...login, value } }, () =>
-                                this.check('login', loginRules)
+                                this.setState(prevState =>
+                                    this.check(
+                                        'login',
+                                        prevState.login,
+                                        loginRules
+                                    )
+                                )
                             )
                         }
                         state={login.state}
@@ -258,7 +234,13 @@ class RegisterForm extends React.PureComponent {
                         value={email.value}
                         setValue={value =>
                             this.setState({ email: { ...email, value } }, () =>
-                                this.check('email', emailRules)
+                                this.setState(prevState =>
+                                    this.check(
+                                        'email',
+                                        prevState.email,
+                                        emailRules
+                                    )
+                                )
                             )
                         }
                         state={email.state}
@@ -275,7 +257,14 @@ class RegisterForm extends React.PureComponent {
                         setValue={value =>
                             this.setState(
                                 { password: { ...password, value } },
-                                () => this.check('password', passwordRules)
+                                () =>
+                                    this.setState(prevState =>
+                                        this.check(
+                                            'password',
+                                            prevState.password,
+                                            passwordRules
+                                        )
+                                    )
                             )
                         }
                         state={password.state}
@@ -330,7 +319,6 @@ const ButtonsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
-
     & > button:first-child {
         margin-bottom: 8px;
     }
@@ -340,7 +328,6 @@ const ErrorMessage = styled.div`
     color: ${({ theme }) => theme.palette.error.main};
     font-size: 12px;
     margin: -5px 0 5px;
-
     &::first-letter {
         text-transform: uppercase;
     }
