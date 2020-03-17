@@ -18,14 +18,14 @@ router.post('/', (req, res, next) => {
     }
 
     // Check if session exists
-    UserSession.findOne({
+    UserSession.deleteOne({
         _id: sessionToken,
     })
         .then(session => {
             if (session) {
                 res.send({
                     success: true,
-                    message: 'Session exists',
+                    message: 'Wylogowano',
                 });
             } else {
                 return next(
