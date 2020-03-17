@@ -2,7 +2,7 @@ import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { lightMuiTheme, darkMuiTheme } from '../assets/styles/muiTheme';
-import { getFromStorage } from '../utils/storage';
+import { getFromStorage, setInStorage } from '../utils/storage';
 import { UserContext } from '../utils/contexts';
 
 import GlobalStyle from '../assets/styles/GlobalStyle';
@@ -25,8 +25,25 @@ export default class MyApp extends App {
         const sessionToken = getFromStorage('session_token');
         if (sessionToken) {
             // Verify session token and fetch user data
-            const user = {};
-            this.setState({ sessionToken, user });
+            fetch('/api/verifyToken', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sessionToken,
+                }),
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.success) {
+                        this.setState({ sessionToken, user: res.user });
+                    } else {
+                        this.setState({ sessionToken: '', user: {} });
+                        setInStorage('session_token', '');
+                    }
+                })
+                .catch(null);
         }
     }
 
