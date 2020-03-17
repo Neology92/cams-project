@@ -30,9 +30,13 @@ class Home extends React.PureComponent {
                     <Grid item xs={12}>
                         <Space>
                             <UserContext.Consumer>
-                                {value =>
-                                    value.sessionToken ? (
+                                {context =>
+                                    context.sessionToken ? (
                                         <>
+                                            <h2>
+                                                Hello{' '}
+                                                {context.user.account.username}!
+                                            </h2>
                                             <Button
                                                 color="secondary"
                                                 onClick={() => logout()}
