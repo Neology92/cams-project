@@ -22,8 +22,22 @@ app.prepare().then(() => {
         secure: false,
     });
 
+    const proxyVerifyToken = createProxyMiddleware('/api/verifyToken', {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+    });
+
+    const proxyLogout = createProxyMiddleware('/api/logout', {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+    });
+
     server.use(proxyRegister);
     server.use(proxyLogin);
+    server.use(proxyVerifyToken);
+    server.use(proxyLogout);
 
     server.get('/', (req, res) => {
         return app.render(req, res, '/home', req.query);

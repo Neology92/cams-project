@@ -6,6 +6,7 @@ const users = require('./routes/api/users');
 
 const register = require('./routes/api/register');
 const login = require('./routes/api/login');
+const logout = require('./routes/api/logout');
 const verifyToken = require('./routes/api/verifyToken');
 
 const app = express();
@@ -28,6 +29,7 @@ mongoose
 app.use('/api/users', users);
 app.use('/api/register', register);
 app.use('/api/login', login);
+app.use('/api/logout', logout);
 app.use('/api/verifyToken', verifyToken);
 
 // Error handler
