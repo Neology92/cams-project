@@ -1,0 +1,19 @@
+{
+  "name": "cams-project",
+  "version": "2.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neology92/cams-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Neology92/cams-project/issues"
+  },
+  "homepage": "https://github.com/Neology92/cams-project#readme"
+}
