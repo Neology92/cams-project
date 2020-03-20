@@ -3,13 +3,6 @@
 # dependencies
 /node_modules
 
-# testing
-/server/coverage
-
-# production
-/server/build
-/server/dist
-/client/.next
 
 # misc
 .DS_Store
@@ -17,15 +10,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-/server/.DS_Store
-/server/.env
-/server/npm-debug.log*
-/server/yarn-debug.log*
-/server/yarn-error.log*
-
-/client/.env
-/client/.env.build
-/client/npm-debug.log*
-/client/yarn-debug.log*
-/client/yarn-error.log*
