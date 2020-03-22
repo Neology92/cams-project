@@ -4,7 +4,7 @@
 /node_modules
 
 # build
-/client/dist
+/dist
 
 # misc
 .DS_Store
