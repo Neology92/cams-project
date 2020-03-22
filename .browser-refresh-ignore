@@ -1,0 +1,12 @@
+node_modules/
+client/
+server/
+dist/
+.babelrc
+.gitignore
+.prettierrc.json
+package.json
+package-lock.json
+webpack.common.json
+webpack.dev.json
+webpack.prod.json

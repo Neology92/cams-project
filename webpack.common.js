@@ -1,21 +1,19 @@
 const webpack = require('webpack');
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 clientBase = {
     entry: './client/index.js',
+
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'client/template.html',
         }),
-        new webpack.BannerPlugin({
-            banner: 'require("source-map-support").install();',
-            raw: true,
-            entryOnly: false,
-        }),
+        new CleanWebpackPlugin(),
     ],
-    devtool: 'source-map',
 
     module: {
         rules: [
@@ -24,10 +22,10 @@ clientBase = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-            {
-                test: /\.html$/,
-                use: ['html-loader'],
-            },
+            // {
+            //     test: /\.html$/,
+            //     use: ['html-loader'],
+            // },
             {
                 test: /\.(svg|png|jpg|gif)$/,
                 use: {
@@ -44,20 +42,12 @@ clientBase = {
 
 serverBase = {
     entry: './server/server.js',
+
     target: 'node',
     node: {
         __dirname: false,
         __filename: false,
     },
-    plugins: [
-        new webpack.BannerPlugin({
-            banner: 'require("source-map-support").install();',
-            raw: true,
-            entryOnly: false,
-        }),
-    ],
-    devtool: 'source-map',
-
     module: {
         rules: [
             {

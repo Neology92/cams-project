@@ -16,10 +16,19 @@ function handleRender(req, res) {
         }
 
         // inject the rendered app into our html
-        const page = htmlData.replace(
-            '<div id=app></div>',
-            `<div id=app>${reactHtml}</div>`
-        );
+        let page = '';
+        if (process.env.NODE_ENV === 'production') {
+            page = htmlData.replace(
+                '<div id="app"></div>',
+                `<div id="app">${reactHtml}</div>`
+            );
+        } else {
+            page = htmlData.replace(
+                '<div id="app"></div>',
+                `<div id="app">${reactHtml}</div>
+                <script src="${process.env.BROWSER_REFRESH_URL}"></script>`
+            );
+        }
 
         //send page
         return res.send(page);
