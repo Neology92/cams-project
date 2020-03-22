@@ -2,11 +2,13 @@ node_modules/
 client/
 server/
 dist/
+.vscode/
+.git/
 .babelrc
 .gitignore
 .prettierrc.json
 package.json
 package-lock.json
-webpack.common.json
-webpack.dev.json
-webpack.prod.json
+webpack.common.js
+webpack.dev.js
+webpack.prod.js

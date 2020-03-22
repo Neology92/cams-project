@@ -22,10 +22,10 @@ clientBase = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-            // {
-            //     test: /\.html$/,
-            //     use: ['html-loader'],
-            // },
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
+            },
             {
                 test: /\.(svg|png|jpg|gif)$/,
                 use: {
