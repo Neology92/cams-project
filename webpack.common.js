@@ -1,13 +1,22 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = {
-    entry: './client/src/index.js',
+clientBase = {
+    entry: './client/index.js',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'client/src/template.html',
+            filename: 'index.html',
+            template: 'client/template.html',
+        }),
+        new webpack.BannerPlugin({
+            banner: 'require("source-map-support").install();',
+            raw: true,
+            entryOnly: false,
         }),
     ],
+    devtool: 'source-map',
+
     module: {
         rules: [
             {
@@ -32,3 +41,38 @@ module.exports = {
         ],
     },
 };
+
+serverBase = {
+    entry: './server/server.js',
+    target: 'node',
+    node: {
+        __dirname: false,
+        __filename: false,
+    },
+    plugins: [
+        new webpack.BannerPlugin({
+            banner: 'require("source-map-support").install();',
+            raw: true,
+            entryOnly: false,
+        }),
+    ],
+    devtool: 'source-map',
+
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
+            },
+        ],
+    },
+
+    externals: [nodeExternals()],
+};
+
+module.exports = { clientBase, serverBase };

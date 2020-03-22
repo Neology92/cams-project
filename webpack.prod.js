@@ -1,16 +1,23 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const common = require('./webpack.common');
-const merge = require('webpack-merge');
 const path = require('path');
+const merge = require('webpack-merge');
+const { clientBase, serverBase } = require('./webpack.common');
 
-const config = merge(common, {
+const client = merge(clientBase, {
     mode: 'production',
-    entry: './client/src/index.js',
     output: {
-        path: path.resolve(__dirname, 'client', 'dist'),
+        path: path.resolve(__dirname, 'dist', 'public'),
         filename: 'app.[contentHash].js',
     },
     plugins: [new CleanWebpackPlugin()],
 });
 
-module.exports = config;
+const server = merge(serverBase, {
+    mode: 'production',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'server.js',
+    },
+});
+
+module.exports = [client, server];

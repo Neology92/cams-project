@@ -8,21 +8,21 @@ import App from '../client/app.js';
 function handleRender(req, res) {
     const reactHtml = ReactDOMServer.renderToString(<App />);
 
-    const indexFile = path.resolve(__dirname, '..', 'client', 'index.html');
+    const indexFile = path.resolve(__dirname, 'public', 'index.html');
 
     fs.readFile(indexFile, 'utf8', (err, htmlData) => {
         if (err) {
-            console.error('Something went wrong:', err);
-            return res.status(500).send('Oops, better luck next time!');
+            return res.status(404).send('File not found');
         }
+
         // inject the rendered app into our html
-        htmlData.replace(
-            '<div id="app"></div>',
-            `<div id="app">${reactHtml}</div>`
+        const page = htmlData.replace(
+            '<div id=app></div>',
+            `<div id=app>${reactHtml}</div>`
         );
 
-        //send
-        return res.send(htmlData);
+        //send page
+        return res.send(page);
     });
 }
 

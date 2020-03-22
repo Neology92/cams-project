@@ -1,13 +1,9 @@
-const common = require('./webpack.common');
-const merge = require('webpack-merge');
 const path = require('path');
+const merge = require('webpack-merge');
+const { clientBase, serverBase } = require('./webpack.common');
 
-const config = merge(common, {
+const client = merge(clientBase, {
     mode: 'development',
-    output: {
-        path: path.resolve(__dirname, 'client', 'dist'),
-        filename: 'app.[hash].js',
-    },
 
     devServer: {
         hot: true,
@@ -16,4 +12,14 @@ const config = merge(common, {
     },
 });
 
-module.exports = config;
+const server = merge(serverBase, {
+    mode: 'development',
+
+    devServer: {
+        hot: true,
+        compress: true,
+        port: 3000,
+    },
+});
+
+module.exports = [client, server];
