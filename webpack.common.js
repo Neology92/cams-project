@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
@@ -13,7 +12,6 @@ clientBase = {
             filename: 'index.html',
             template: 'client/template.html',
         }),
-        // new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: 'styles/[name].[contentHash].css',
         }),
