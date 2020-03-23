@@ -3,10 +3,17 @@ import path from 'path';
 import fs from 'fs';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import App from '../client/app.js';
 
 function handleRender(req, res) {
-    const reactHtml = ReactDOMServer.renderToString(<App />);
+    let context = {};
+
+    const reactHtml = ReactDOMServer.renderToString(
+        <StaticRouter location={req.url} context={context}>
+            <App thing="passed by ssr" />
+        </StaticRouter>
+    );
 
     const indexFile = path.resolve(__dirname, 'public', 'index.html');
 
@@ -18,10 +25,15 @@ function handleRender(req, res) {
         // inject the rendered app into our html
         let page = '';
         if (process.env.NODE_ENV === 'production') {
-            page = htmlData.replace(
-                '<div id="app"></div>',
-                `<div id="app">${reactHtml}</div>`
-            );
+            page = htmlData
+                .replace(
+                    '<div id="app"></div>',
+                    `<div id="app">${reactHtml}</div>`
+                )
+                .replace(
+                    '<div id=app></div>',
+                    `<div id="app">${reactHtml}</div>`
+                );
         } else {
             page = htmlData.replace(
                 '<div id="app"></div>',

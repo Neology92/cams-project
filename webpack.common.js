@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 clientBase = {
+    devtool: 'eval-source-map',
+
     entry: './client/index.js',
 
     plugins: [
@@ -27,12 +29,28 @@ clientBase = {
                 use: ['html-loader'],
             },
             {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/',
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.(svg|png|jpg|gif)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[contentHash].[ext]',
-                        outputPath: 'img',
+                        outputPath: 'img/',
                     },
                 },
             },
@@ -41,6 +59,8 @@ clientBase = {
 };
 
 serverBase = {
+    devtool: 'eval-source-map',
+
     entry: './server/server.js',
 
     target: 'node',
@@ -54,6 +74,22 @@ serverBase = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'public/fonts/',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.html$/,

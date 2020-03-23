@@ -10,7 +10,7 @@ const client = merge(clientBase, {
         filename: 'app.[contentHash].js',
     },
 
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
 
     watchOptions: {
         aggregateTimeout: 1000,
@@ -25,7 +25,7 @@ const server = merge(serverBase, {
         filename: 'server.js',
     },
 
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
 
     watchOptions: {
         aggregateTimeout: 1000,
