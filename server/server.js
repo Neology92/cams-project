@@ -11,7 +11,7 @@ function handleRender(req, res) {
 
     const reactHtml = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={context}>
-            <App thing="passed by ssr" />
+            <App />
         </StaticRouter>
     );
 
@@ -49,8 +49,11 @@ function handleRender(req, res) {
 
 const app = express();
 
-app.use('/public', express.static('./public'));
+app.use('/styles', express.static(path.resolve(__dirname, 'public', 'styles')));
+app.use('/fonts', express.static(path.resolve(__dirname, 'public', 'fonts')));
+app.use('/js', express.static(path.resolve(__dirname, 'public', 'js')));
 
 app.get('*', handleRender);
+
 app.listen(3000);
 console.log('App is running on http://localhost:3000');

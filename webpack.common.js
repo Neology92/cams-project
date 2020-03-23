@@ -1,12 +1,11 @@
 const webpack = require('webpack');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 clientBase = {
-    devtool: 'eval-source-map',
-
     entry: './client/index.js',
 
     plugins: [
@@ -14,7 +13,10 @@ clientBase = {
             filename: 'index.html',
             template: 'client/template.html',
         }),
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles/[name].[contentHash].css',
+        }),
     ],
 
     module: {
@@ -30,7 +32,7 @@ clientBase = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -38,8 +40,7 @@ clientBase = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[ext]',
-                            outputPath: 'fonts/',
+                            name: 'fonts/[name].[ext]',
                         },
                     },
                 ],
@@ -56,11 +57,10 @@ clientBase = {
             },
         ],
     },
+    // externals: [nodeExternals()],
 };
 
 serverBase = {
-    devtool: 'eval-source-map',
-
     entry: './server/server.js',
 
     target: 'node',
@@ -77,7 +77,7 @@ serverBase = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: ['css-loader'],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,

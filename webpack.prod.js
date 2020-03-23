@@ -7,7 +7,7 @@ const client = merge(clientBase, {
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist', 'public'),
-        filename: 'app.[contentHash].js',
+        filename: 'js/app.[contentHash].js',
     },
 });
 

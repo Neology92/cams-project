@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import Router from './Router';
 
 // import GlobalStyle from './assets/styles/GlobalStyle';
-// import './assets/styles/fontNunitoSans.css';
+import './assets/styles/fontNunitoSans.css';
 
 export default class App extends Component {
     // constructor(props) {
@@ -62,7 +62,6 @@ export default class App extends Component {
 
     render() {
         // const { sessionToken, user, muiTheme } = this.state;
-        const { thing } = this.props;
 
         return (
             <>
@@ -71,7 +70,7 @@ export default class App extends Component {
                 {/* <UserContext.Provider value={{ sessionToken, user }}> */}
                 {/* <GlobalStyle /> */}
                 {/* <Navbar switchColorsMode={this.switchColorsMode} /> */}
-                <h1>Message: {thing}</h1>
+                <p>HEy mate!</p>
                 <Router />
                 {/* </UserContext.Provider> */}
                 {/* </MuiThemeProvider> */}
