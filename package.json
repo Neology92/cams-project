@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "jest",
-        "dev": "concurrently \"webpack --config webpack.dev.js --watch\" \"browser-refresh dev/server.js\"",
+        "dev": "concurrently \"webpack --config webpack.dev.js --watch\" \"sleep 3 && browser-refresh dev/server.js\"",
         "prod:build": "webpack --config webpack.prod.js",
         "prod:start": "cross-env NODE_ENV=production node ./dist/server.js",
         "start": "npm run prod:build && npm run prod:start"
