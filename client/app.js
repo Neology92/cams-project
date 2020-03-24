@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 // import { getFromStorage, setInStorage } from './utils/storage';
 // import { UserContext } from './utils/contexts';
 // import { Navbar } from './components';
-import Router from './Router';
+import Router from './router';
 
 // import GlobalStyle from './assets/styles/GlobalStyle';
 import './assets/styles/fontNunitoSans.css';
