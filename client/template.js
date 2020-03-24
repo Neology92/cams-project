@@ -1,4 +1,4 @@
-export default function(styledComponents, Mui, body, title) {
+export default function(body, title, styledComponents, Mui) {
     return `
     <!DOCTYPE html>
     <html lang="pl">
