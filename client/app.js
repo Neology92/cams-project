@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 // import { MuiThemeProvider } from '@material-ui/core/styles';
 // import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 // import { getFromStorage, setInStorage } from './utils/storage';
@@ -7,7 +8,7 @@ import React, { Component } from 'react';
 // import { Navbar } from './components';
 import Router from './router';
 
-// import GlobalStyle from './assets/styles/GlobalStyle';
+import GlobalStyle from './assets/styles/GlobalStyle';
 import './assets/styles/fontNunitoSans.css';
 
 export default class App extends Component {
@@ -70,7 +71,9 @@ export default class App extends Component {
                 {/* <UserContext.Provider value={{ sessionToken, user }}> */}
                 {/* <GlobalStyle /> */}
                 {/* <Navbar switchColorsMode={this.switchColorsMode} /> */}
-                <p>HEy mate!</p>
+                <StyledComponent>
+                    <p>HEy mate!</p>
+                </StyledComponent>
                 <Router />
                 {/* </UserContext.Provider> */}
                 {/* </MuiThemeProvider> */}
@@ -79,3 +82,10 @@ export default class App extends Component {
         );
     }
 }
+
+const StyledComponent = styled.div`
+    width: 100px;
+    height: 100px;
+    background: red;
+    padding: 20px;
+`;
