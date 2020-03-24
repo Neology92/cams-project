@@ -36,6 +36,8 @@
     },
     "dependencies": {
         "@material-ui/core": "^4.9.7",
+        "@material-ui/icons": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.46",
         "cross-env": "^7.0.2",
         "express": "^4.17.1",
         "react": "^16.13.1",

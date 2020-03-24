@@ -6,6 +6,7 @@ import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 // import { getFromStorage, setInStorage } from './utils/storage';
 // import { UserContext } from './utils/contexts';
 // import { Navbar } from './components';
+import Navbar from './components/Examples/Navbar';
 import Router from './router';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
@@ -19,7 +20,7 @@ export default class App extends Component {
             sessionToken: '',
             user: {},
         };
-        // this.switchColorsMode = this.switchColorsMode.bind(this);
+        this.switchColorsMode = this.switchColorsMode.bind(this);
     }
 
     // componentDidMount() {
@@ -48,18 +49,18 @@ export default class App extends Component {
     //     }
     // }
 
-    // switchColorsMode() {
-    //     const { muiTheme } = this.state;
-    //     if (muiTheme === lightMuiTheme) {
-    //         this.setState({
-    //             muiTheme: darkMuiTheme,
-    //         });
-    //     } else {
-    //         this.setState({
-    //             muiTheme: lightMuiTheme,
-    //         });
-    //     }
-    // }
+    switchColorsMode() {
+        const { muiTheme } = this.state;
+        if (muiTheme === lightMuiTheme) {
+            this.setState({
+                muiTheme: darkMuiTheme,
+            });
+        } else {
+            this.setState({
+                muiTheme: lightMuiTheme,
+            });
+        }
+    }
 
     render() {
         const { sessionToken, user, muiTheme } = this.state;
@@ -70,10 +71,7 @@ export default class App extends Component {
                     <MuiThemeProvider theme={muiTheme}>
                         {/* <UserContext.Provider value={{ sessionToken, user }}> */}
                         <GlobalStyle />
-                        {/* <Navbar switchColorsMode={this.switchColorsMode} /> */}
-                        <StyledComponent>
-                            <p>HEy mate!</p>
-                        </StyledComponent>
+                        <Navbar switchColorsMode={this.switchColorsMode} />
                         <Router />
                         {/* </UserContext.Provider> */}
                     </MuiThemeProvider>
