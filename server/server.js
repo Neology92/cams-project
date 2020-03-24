@@ -50,7 +50,10 @@ function handleRender(req, res) {
 const app = express();
 
 app.use('/styles', express.static(path.resolve(__dirname, 'public', 'styles')));
-app.use('/fonts', express.static(path.resolve(__dirname, 'public', 'fonts')));
+app.use(
+    '/styles/fonts',
+    express.static(path.resolve(__dirname, 'public', 'fonts'))
+);
 app.use('/js', express.static(path.resolve(__dirname, 'public', 'js')));
 
 app.get('*', handleRender);
