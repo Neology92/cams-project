@@ -7,6 +7,7 @@ import {
     MenuItem,
     Menu,
 } from '@material-ui/core';
+import Toggle from '../ui-elements/Toggle';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,9 +32,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Navbar() {
+export default function Navbar({ switchColorsMode }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [toggleState, setToggleState] = React.useState(false);
     const open = Boolean(anchorEl);
 
     const handleMenu = event => {
@@ -42,6 +44,11 @@ export default function Navbar() {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const switchToggle = val => {
+        setToggleState(val);
+        switchColorsMode();
     };
 
     return (
@@ -58,6 +65,9 @@ export default function Navbar() {
                     <Typography variant="h6" className={classes.title}>
                         nok
                     </Typography>
+                    <div>
+                        <Toggle setValue={switchToggle} value={toggleState} />
+                    </div>
 
                     <div>
                         <IconButton
