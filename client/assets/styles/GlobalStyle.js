@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: "Nunito Sans", sans-serif;
+        color: ${({ theme }) => theme.palette.text.primary};
     }
 
 
