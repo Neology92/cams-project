@@ -10,7 +10,7 @@ clientBase = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'client/template.html',
+            template: 'client/template.js',
         }),
         new MiniCssExtractPlugin({
             filename: 'styles/[name].[contentHash].css',
