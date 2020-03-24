@@ -113,7 +113,7 @@ class Home extends PureComponent {
     render() {
         return (
             <div>
-                <h1 style={{ fontFamily: 'Nunito Sans' }}>home</h1>
+                <h1>home</h1>
             </div>
         );
     }

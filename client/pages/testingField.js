@@ -285,7 +285,7 @@ const Test = ({ switchColorsMode }) => {
 
     return (
         <div>
-            <h1 style={{ fontFamily: 'Nunito Sans' }}>Testing field</h1>
+            <h1>Testing field</h1>
         </div>
     );
 };
