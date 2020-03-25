@@ -26,7 +26,14 @@ clientBase = {
             },
             {
                 test: /\.html$/,
-                use: ['html-loader'],
+                use: [
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            minimize: false,
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/i,

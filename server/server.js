@@ -22,28 +22,43 @@ function handleRender(req, res) {
             return res.status(404).send('File not found');
         }
 
-        // inject the rendered app into our html
-        let page = '';
-        if (process.env.NODE_ENV === 'production') {
-            page = htmlData
-                .replace(
-                    '<div id="app"></div>',
-                    `<div id="app">${reactHtml}</div>`
-                )
-                .replace(
-                    '<div id=app></div>',
-                    `<div id="app">${reactHtml}</div>`
-                );
-        } else {
-            page = htmlData.replace(
-                '<div id="app"></div>',
-                `<div id="app">${reactHtml}</div>
-                <script src="${process.env.BROWSER_REFRESH_URL}"></script>`
-            );
+        let title = 'Faply';
+        let styles = '';
+        let scripts = '';
+        let body = reactHtml;
+
+        if (process.env.NODE_ENV === 'development') {
+            scripts = `<script src="${process.env.BROWSER_REFRESH_URL}"></script>`;
         }
 
+        // inject rendered app into our html
+        htmlData = htmlData.replace(
+            '<div id="app"></div>',
+            `<div id="app">${body}</div>`
+        );
+
+        // inject title into our html
+        htmlData = htmlData.replace(
+            '<title></title>',
+            `<title>${title}</title>`
+        );
+
+        // inject scripts into our html
+        htmlData = htmlData.replace(
+            '</body>',
+            `${scripts}
+                </body>`
+        );
+
+        // inject styles into our html
+        htmlData = htmlData.replace(
+            '</head>',
+            `${styles}
+            </head>`
+        );
+
         //send page
-        return res.send(page);
+        return res.send(htmlData);
     });
 }
 
