@@ -5,19 +5,29 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../../client/app.js';
-import { ServerStyleSheet } from 'styled-components';
+import {
+    ServerStyleSheet as ScServerStyleSheet,
+    ThemeProvider,
+} from 'styled-components';
+import {
+    ServerStyleSheets as MuiServerStyleSheet,
+    MuiThemeProvider,
+} from '@material-ui/core/styles';
 
 const router = express.Router();
 
 const handleRender = router.get('/', (req, res) => {
     let context = {};
-    const sheet = new ServerStyleSheet();
+    const scSheet = new ScServerStyleSheet();
+    const muiSheet = new MuiServerStyleSheet();
 
     const reactHtml = ReactDOMServer.renderToString(
-        sheet.collectStyles(
-            <StaticRouter location={req.url} context={context}>
-                <App />
-            </StaticRouter>
+        muiSheet.collect(
+            scSheet.collectStyles(
+                <StaticRouter location={req.url} context={context}>
+                    <App />
+                </StaticRouter>
+            )
         )
     );
 
@@ -36,8 +46,13 @@ const handleRender = router.get('/', (req, res) => {
             scripts = `<script src="${process.env.BROWSER_REFRESH_URL}"></script>`;
         }
 
-        // Styled Components
-        styles = sheet.getStyleTags();
+        // Mui and styled-components
+        const muiStyleTag = ` <style id="jss-server-side">${muiSheet.toString()}<\style>`;
+        const scStyleTag = scSheet.getStyleTags();
+        styles = `
+        ${muiStyleTag}
+        ${scStyleTag}
+        `;
 
         // inject rendered app into our html
         htmlData = htmlData.replace(
