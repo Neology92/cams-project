@@ -5,20 +5,23 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../../client/app.js';
+import { ServerStyleSheet } from 'styled-components';
 
 const router = express.Router();
 
 const handleRender = router.get('/', (req, res) => {
     let context = {};
+    const sheet = new ServerStyleSheet();
 
     const reactHtml = ReactDOMServer.renderToString(
-        <StaticRouter location={req.url} context={context}>
-            <App />
-        </StaticRouter>
+        sheet.collectStyles(
+            <StaticRouter location={req.url} context={context}>
+                <App />
+            </StaticRouter>
+        )
     );
 
     const indexFile = path.resolve(__dirname, 'public', 'index.html');
-
     fs.readFile(indexFile, 'utf8', (err, htmlData) => {
         if (err) {
             return res.status(404).send('File not found');
@@ -32,6 +35,9 @@ const handleRender = router.get('/', (req, res) => {
         if (process.env.NODE_ENV === 'development') {
             scripts = `<script src="${process.env.BROWSER_REFRESH_URL}"></script>`;
         }
+
+        // Styled Components
+        styles = sheet.getStyleTags();
 
         // inject rendered app into our html
         htmlData = htmlData.replace(
