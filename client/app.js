@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 // import { getFromStorage, setInStorage } from './utils/storage';
 // import { UserContext } from './utils/contexts';
@@ -67,16 +67,18 @@ export default class App extends Component {
 
         return (
             <>
-                <ThemeProvider theme={muiTheme}>
-                    <MuiThemeProvider theme={muiTheme}>
-                        {/* <UserContext.Provider value={{ sessionToken, user }}> */}
-                        <GlobalStyle />
-                        <Navbar switchColorsMode={this.switchColorsMode} />
-                        <StyledComponent>Styled</StyledComponent>
-                        <Router />
-                        {/* </UserContext.Provider> */}
-                    </MuiThemeProvider>
-                </ThemeProvider>
+                <StylesProvider injectFirst>
+                    <ThemeProvider theme={muiTheme}>
+                        <MuiThemeProvider theme={muiTheme}>
+                            {/* <UserContext.Provider value={{ sessionToken, user }}> */}
+                            <GlobalStyle />
+                            <Navbar switchColorsMode={this.switchColorsMode} />
+                            <StyledComponent>Styled</StyledComponent>
+                            <Router />
+                            {/* </UserContext.Provider> */}
+                        </MuiThemeProvider>
+                    </ThemeProvider>
+                </StylesProvider>
             </>
         );
     }
