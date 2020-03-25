@@ -5,7 +5,6 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../client/app.js';
-import htmlTemplate from '../client/template';
 
 function handleRender(req, res) {
     let context = {};
@@ -16,18 +15,51 @@ function handleRender(req, res) {
         </StaticRouter>
     );
 
-    // inject the rendered app into our html
-    let body = '';
-    let title = 'Faply';
-    if (process.env.NODE_ENV === 'production') {
-        body = reactHtml;
-    } else {
-        body = `${reactHtml}
-                <script src="${process.env.BROWSER_REFRESH_URL}"></script>`;
-    }
+    const indexFile = path.resolve(__dirname, 'public', 'index.html');
 
-    //send page
-    return res.send(htmlTemplate(body, title));
+    fs.readFile(indexFile, 'utf8', (err, htmlData) => {
+        if (err) {
+            return res.status(404).send('File not found');
+        }
+
+        let title = 'Faply';
+        let styles = '';
+        let scripts = '';
+        let body = reactHtml;
+
+        if (process.env.NODE_ENV === 'development') {
+            scripts = `<script src="${process.env.BROWSER_REFRESH_URL}"></script>`;
+        }
+
+        // inject rendered app into our html
+        htmlData = htmlData.replace(
+            '<div id="app"></div>',
+            `<div id="app">${body}</div>`
+        );
+
+        // inject title into our html
+        htmlData = htmlData.replace(
+            '<title></title>',
+            `<title>${title}</title>`
+        );
+
+        // inject scripts into our html
+        htmlData = htmlData.replace(
+            '</body>',
+            `${scripts}
+                </body>`
+        );
+
+        // inject styles into our html
+        htmlData = htmlData.replace(
+            '</head>',
+            `${styles}
+            </head>`
+        );
+
+        //send page
+        return res.send(htmlData);
+    });
 }
 
 const app = express();
