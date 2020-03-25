@@ -5,14 +5,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../../client/app.js';
-import {
-    ServerStyleSheet as ScServerStyleSheet,
-    ThemeProvider,
-} from 'styled-components';
-import {
-    ServerStyleSheets as MuiServerStyleSheet,
-    MuiThemeProvider,
-} from '@material-ui/core/styles';
+import { ServerStyleSheet as ScServerStyleSheet } from 'styled-components';
+import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/core/styles';
 
 const router = express.Router();
 
@@ -47,8 +41,8 @@ const handleRender = router.get('/', (req, res) => {
         }
 
         // Mui and styled-components
-        const muiStyleTag = ` <style id="jss-server-side">${muiSheet.toString()}<\style>`;
-        const scStyleTag = scSheet.getStyleTags();
+        const muiStyleTag = `<style id="jss-server-side">${muiSheet.toString()}</style>`;
+        const scStyleTag = `${scSheet.getStyleTags()}`;
         styles = `
         ${muiStyleTag}
         ${scStyleTag}
