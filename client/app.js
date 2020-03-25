@@ -72,6 +72,7 @@ export default class App extends Component {
                         {/* <UserContext.Provider value={{ sessionToken, user }}> */}
                         <GlobalStyle />
                         <Navbar switchColorsMode={this.switchColorsMode} />
+                        <StyledComponent>Styled</StyledComponent>
                         <Router />
                         {/* </UserContext.Provider> */}
                     </MuiThemeProvider>
