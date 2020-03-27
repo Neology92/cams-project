@@ -1,3 +1,4 @@
+/* eslint prefer-const: 0 */
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -57,7 +58,7 @@ function handleRender(req, res) {
             </head>`
         );
 
-        //send page
+        // send page
         return res.send(htmlData);
     });
 }
