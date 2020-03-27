@@ -1,3 +1,4 @@
+/* eslint prefer-const: 0 */
 import express from 'express';
 import path from 'path';
 
