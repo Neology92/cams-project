@@ -4,7 +4,7 @@ import fs from 'fs';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import App from '../../client/app.js';
+import App from '../../client/App.js';
 import { ServerStyleSheet as ScServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/core/styles';
 
