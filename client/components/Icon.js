@@ -12,7 +12,7 @@ const StyledIcon = styled(SvgIcon)`
         width: ${({ size }) => size};
         height: ${({ size }) => size};
 
-        path {
+        path:nth-child(2) {
             fill: ${({ theme }) => theme.palette.text.primary};
         }
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
     AppBar,
     Toolbar,
@@ -7,10 +9,10 @@ import {
     MenuItem,
     Menu,
 } from '@material-ui/core';
-import Toggle from '../ui-elements/Toggle';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
+import Toggle from '../ui-elements/Toggle';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -97,3 +99,7 @@ export default function Navbar({ switchColorsMode }) {
         </div>
     );
 }
+
+Navbar.propTypes = {
+    switchColorsMode: PropTypes.func.isRequired,
+};
