@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ThemeProvider } from 'styled-components';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
 import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 // import { getFromStorage, setInStorage } from './utils/storage';
@@ -8,6 +8,8 @@ import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 // import { Navbar } from './components';
 import Navbar from './components/Examples/Navbar';
 import Router from './Router';
+
+import Ban from './assets/icons/ban.svg';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import './assets/styles/fontNunitoSans.css';
@@ -17,8 +19,8 @@ export default class App extends Component {
         super(props);
         this.state = {
             muiTheme: lightMuiTheme,
-            sessionToken: '',
-            user: {},
+            // sessionToken: '',
+            // user: {},
         };
         this.switchColorsMode = this.switchColorsMode.bind(this);
     }
@@ -63,7 +65,11 @@ export default class App extends Component {
     }
 
     render() {
-        const { sessionToken, user, muiTheme } = this.state;
+        const {
+            // sessionToken,
+            // user,
+            muiTheme,
+        } = this.state;
 
         return (
             <>
@@ -74,6 +80,7 @@ export default class App extends Component {
                             <GlobalStyle />
                             <Navbar switchColorsMode={this.switchColorsMode} />
                             <StyledComponent>Styled</StyledComponent>
+                            <Ban />
                             <Router />
                             {/* </UserContext.Provider> */}
                         </MuiThemeProvider>
