@@ -9,7 +9,7 @@ import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
 import Navbar from './components/Examples/Navbar';
 import Router from './Router';
 
-import Ban from './assets/icons/ban.svg';
+import { Ban } from './assets/icons';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import './assets/styles/fontNunitoSans.css';
