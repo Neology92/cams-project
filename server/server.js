@@ -12,6 +12,7 @@ app.use(
     express.static(path.resolve(__dirname, 'public', 'fonts'))
 );
 app.use('/js', express.static(path.resolve(__dirname, 'public', 'js')));
+app.use('/img', express.static(path.resolve(__dirname, 'public', 'img')));
 
 app.use('*', handleRender);
 
