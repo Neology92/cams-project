@@ -39,7 +39,6 @@ class Dropdown extends React.PureComponent {
                 <Item
                     label="Review done"
                     icon={Check}
-                    F
                     toggle
                     toggleValue={toggle}
                     setToggleValue={this.setToggle}
