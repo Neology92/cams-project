@@ -1,12 +1,13 @@
+/* eslint  prefer-const: 0 */
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import App from '../../client/App.js';
 import { ServerStyleSheet as ScServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/core/styles';
+import App from '../../client/App.js';
 
 const router = express.Router();
 
@@ -74,7 +75,7 @@ const handleRender = router.get('/', (req, res) => {
             </head>`
         );
 
-        //send page
+        // send page
         return res.send(htmlData);
     });
 });
