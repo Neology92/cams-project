@@ -116,7 +116,7 @@ const StateIcon = styled(Icon)`
         top: 5px;
         right: -1px;
 
-        path {
+        path:nth-child(2) {
             fill: ${({ state, theme }) =>
                 state === 'error'
                     ? theme.palette.error.main
@@ -131,7 +131,7 @@ const PrefixIcon = styled(Icon)`
         bottom: 14px;
         left: 8px;
 
-        path {
+        path:nth-child(2) {
             fill: ${({ focused, theme }) =>
                 focused
                     ? theme.palette.text.default
