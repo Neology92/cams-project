@@ -1,10 +1,8 @@
-const webpack = require('webpack');
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
-clientBase = {
+const clientBase = {
     entry: './client/index.js',
 
     plugins: [
@@ -51,7 +49,7 @@ clientBase = {
                 ],
             },
             {
-                test: /\.(svg|png|jpg|gif)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
@@ -60,12 +58,16 @@ clientBase = {
                     },
                 },
             },
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
         ],
     },
     // externals: [nodeExternals()],
 };
 
-serverBase = {
+const serverBase = {
     entry: './server/server.js',
 
     target: 'node',
@@ -79,6 +81,10 @@ serverBase = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
             },
             {
                 test: /\.css$/i,
@@ -97,8 +103,18 @@ serverBase = {
                 ],
             },
             {
-                test: /\.html$/,
-                use: ['html-loader'],
+                test: /\.(png|jpg|gif)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[contentHash].[ext]',
+                        outputPath: 'public/img/',
+                    },
+                },
+            },
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
             },
         ],
     },
