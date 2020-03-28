@@ -65,7 +65,14 @@ class TagsBoard extends React.PureComponent {
     }
 
     render() {
-        const { tagsArray, width, icon, ...props } = this.props;
+        const {
+            tagsArray,
+            width,
+            icon,
+            maxTags,
+            setTagsArray,
+            ...props
+        } = this.props;
         const { inputValue, inputState, errorMessage } = this.state;
         return (
             <Wrapper width={width}>

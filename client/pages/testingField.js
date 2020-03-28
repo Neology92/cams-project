@@ -70,7 +70,7 @@ const Test = () => {
                     <StyledPaper>
                         <TagsBoard
                             tagsArray={value15}
-                            setTagsArray={setValue15}
+                            setTagsArray={val => setValue15(val)}
                             maxTags={3}
                             width="512px"
                             icon={Crosshair}
