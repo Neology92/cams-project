@@ -6,9 +6,9 @@
     "scripts": {
         "test": "jest",
         "dev": "concurrently \"webpack --config webpack.dev.js --watch\" \"sleep 3 && browser-refresh dev/server.js\"",
-        "prod:build": "webpack --config webpack.prod.js",
-        "prod:start": "cross-env NODE_ENV=production node ./dist/server.js",
-        "start": "npm run prod:build && npm run prod:start"
+        "build": "webpack --config webpack.prod.js",
+        "start": "cross-env NODE_ENV=production node ./dist/server.js",
+        "prod": "npm run build && npm start"
     },
     "author": "",
     "license": "ISC",
