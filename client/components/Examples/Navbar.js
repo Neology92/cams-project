@@ -12,6 +12,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Toggle from '../ui-elements/Toggle';
 
 const useStyles = makeStyles(theme => ({
@@ -67,6 +68,15 @@ export default function Navbar({ switchColorsMode }) {
                     <Typography variant="h6" className={classes.title}>
                         nok
                     </Typography>
+                    <div className={classes.title}>
+                        <Link to="/home">Home</Link>
+                    </div>
+                    <div className={classes.title}>
+                        <Link to="/test">Testing Field</Link>
+                    </div>
+                    <div className={classes.title}>
+                        <Link to="/aasdasd">404</Link>
+                    </div>
                     <div>
                         <Toggle setValue={switchToggle} value={toggleState} />
                     </div>

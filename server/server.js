@@ -14,7 +14,7 @@ app.use(
 app.use('/js', express.static(path.resolve(__dirname, 'public', 'js')));
 app.use('/img', express.static(path.resolve(__dirname, 'public', 'img')));
 
-app.use('*', handleRender);
+app.use('/', handleRender);
 
 app.listen(3000);
 console.log('App is running on http://localhost:3000');
