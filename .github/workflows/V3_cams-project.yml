@@ -31,4 +31,4 @@ jobs:
         app-name: 'cams-project'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b6027bafd443401090fa26b342239b63 }}
-        package: .
+        package: ./dist
