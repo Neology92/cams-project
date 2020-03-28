@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // import { ThemeProvider } from 'styled-components';
 // import { MuiThemeProvider } from '@material-ui/core/styles';
 // import { lightMuiTheme, darkMuiTheme } from './assets/styles/muiTheme';
@@ -10,7 +10,7 @@ import Router from './router';
 // import GlobalStyle from './assets/styles/GlobalStyle';
 import './assets/styles/fontNunitoSans.css';
 
-export default class App extends Component {
+export default class App extends PureComponent {
     // constructor(props) {
     //     super(props);
     //     this.state = {
