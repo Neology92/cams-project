@@ -1,5 +1,4 @@
 /* eslint  prefer-const: 0 */
-import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import React from 'react';
@@ -9,9 +8,7 @@ import { ServerStyleSheet as ScServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/core/styles';
 import App from '../../client/App.js';
 
-const router = express.Router();
-
-const handleRender = router.get('/', (req, res) => {
+const handleRender = (req, res) => {
     let context = {};
     const scSheet = new ScServerStyleSheet();
     const muiSheet = new MuiServerStyleSheet();
@@ -20,7 +17,7 @@ const handleRender = router.get('/', (req, res) => {
         muiSheet.collect(
             scSheet.collectStyles(
                 <StaticRouter location={req.url} context={context}>
-                    <App />
+                    <App req={req} />
                 </StaticRouter>
             )
         )
@@ -78,6 +75,6 @@ const handleRender = router.get('/', (req, res) => {
         // send page
         return res.send(htmlData);
     });
-});
+};
 
 export default handleRender;

@@ -8,19 +8,21 @@ import NotFound from './pages/404';
 export default class Router extends PureComponent {
     render() {
         return (
-            <Switch>
-                <Route exact path="/test">
-                    <Test />
-                </Route>
+            <>
+                <Switch>
+                    <Route exact path="/test">
+                        <Test />
+                    </Route>
 
-                <Route exact path={['/', '/home']}>
-                    <Home />
-                </Route>
+                    <Route exact path={['/', '/home']}>
+                        <Home />
+                    </Route>
 
-                <Route>
-                    <NotFound />
-                </Route>
-            </Switch>
+                    <Route>
+                        <NotFound />
+                    </Route>
+                </Switch>
+            </>
         );
     }
 }
