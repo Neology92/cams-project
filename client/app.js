@@ -22,7 +22,6 @@ export default class App extends Component {
         };
         this.switchColorsMode = this.switchColorsMode.bind(this);
     }
-
     // componentDidMount() {
     //     const sessionToken = getFromStorage('session_token');
     //     if (sessionToken) {
