@@ -5,7 +5,7 @@ import User from '../../models/User';
 
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
+export default router.post('/', (req, res, next) => {
     const { userId } = req;
 
     // Check if userId isn't empty
@@ -38,5 +38,3 @@ router.post('/', (req, res, next) => {
             });
         });
 });
-
-module.exports = router;

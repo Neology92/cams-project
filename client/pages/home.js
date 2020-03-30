@@ -30,61 +30,73 @@ class Home extends PureComponent {
                         <Space>
                             <UserContext.Consumer>
                                 {context =>
-                                    context.sessionToken ? (
-                                        <>
-                                            <h2>
-                                                Hello{' '}
-                                                {context.user.account.username}!
-                                            </h2>
-                                            <Button
-                                                color="secondary"
-                                                onClick={() => logout()}
-                                            >
-                                                Wyloguj się
-                                            </Button>
-                                        </>
+                                    context.checkingToken ? (
+                                        <Loading />
                                     ) : (
                                         <>
-                                            <Tooltip title="Załóż nowe konto">
-                                                <Button
-                                                    color="primary"
-                                                    onClick={() =>
-                                                        this.setState({
-                                                            openRegisterModal: true,
-                                                        })
-                                                    }
-                                                >
-                                                    Darmowa rejestracja
-                                                </Button>
-                                            </Tooltip>
+                                            {context.sessionToken ? (
+                                                <>
+                                                    <h2>
+                                                        Hello{' '}
+                                                        {
+                                                            context.user.account
+                                                                .username
+                                                        }
+                                                        !
+                                                    </h2>
+                                                    <Button
+                                                        color="secondary"
+                                                        onClick={() => logout()}
+                                                    >
+                                                        Wyloguj się
+                                                    </Button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Tooltip title="Załóż nowe konto">
+                                                        <Button
+                                                            color="primary"
+                                                            onClick={() =>
+                                                                this.setState({
+                                                                    openRegisterModal: true,
+                                                                })
+                                                            }
+                                                        >
+                                                            Darmowa rejestracja
+                                                        </Button>
+                                                    </Tooltip>
 
-                                            <RegisterForm
-                                                isOpen={openRegisterModal}
-                                                close={() =>
-                                                    this.setState({
-                                                        openRegisterModal: false,
-                                                    })
-                                                }
-                                            />
+                                                    <RegisterForm
+                                                        isOpen={
+                                                            openRegisterModal
+                                                        }
+                                                        close={() =>
+                                                            this.setState({
+                                                                openRegisterModal: false,
+                                                            })
+                                                        }
+                                                    />
 
-                                            <Button
-                                                color="secondary"
-                                                onClick={() =>
-                                                    this.setState({
-                                                        openLoginModal: true,
-                                                    })
-                                                }
-                                            >
-                                                Logowanie
-                                            </Button>
-                                            <LoginForm
-                                                isOpen={openLoginModal}
-                                                close={() =>
-                                                    this.setState({
-                                                        openLoginModal: false,
-                                                    })
-                                                }
-                                            />
+                                                    <Button
+                                                        color="secondary"
+                                                        onClick={() =>
+                                                            this.setState({
+                                                                openLoginModal: true,
+                                                            })
+                                                        }
+                                                    >
+                                                        Logowanie
+                                                    </Button>
+                                                    <LoginForm
+                                                        isOpen={openLoginModal}
+                                                        close={() =>
+                                                            this.setState({
+                                                                openLoginModal: false,
+                                                            })
+                                                        }
+                                                    />
+                                                </>
+                                            )}
                                         </>
                                     )
                                 }
@@ -96,6 +108,8 @@ class Home extends PureComponent {
         );
     }
 }
+
+const Loading = () => <p>Loading...</p>;
 
 const Space = styled.div`
     min-height: 50px;
