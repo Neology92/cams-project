@@ -11,6 +11,7 @@ import register from './controllers/api/register';
 import login from './controllers/api/login';
 import logout from './controllers/api/logout';
 import verifyToken from './controllers/api/verifyToken';
+import getUser from './controllers/api/getUser';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/api/register', register);
 app.use('/api/login', login);
 app.use('/api/logout', logout);
 app.use('/api/verifyToken', verifyToken);
+app.use('/api/verifyToken', getUser);
 
 // Getting static assets
 app.use('/styles', express.static(path.resolve(__dirname, 'public', 'styles')));
