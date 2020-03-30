@@ -16,6 +16,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             muiTheme: lightMuiTheme,
+            checkingToken: false,
             sessionToken: '',
             user: {},
         };
@@ -25,6 +26,8 @@ export default class App extends Component {
     componentDidMount() {
         const sessionToken = getFromStorage('session_token');
         if (sessionToken) {
+            this.setState({ checkingToken: true });
+
             // Verify session token and fetch user data
             fetch('/api/verifyToken', {
                 method: 'POST',
@@ -43,6 +46,7 @@ export default class App extends Component {
                         this.setState({ sessionToken: '', user: {} });
                         setInStorage('session_token', '');
                     }
+                    this.setState({ checkingToken: false });
                 })
                 .catch(null);
         }
@@ -62,7 +66,7 @@ export default class App extends Component {
     }
 
     render() {
-        const { sessionToken, user, muiTheme } = this.state;
+        const { checkingToken, sessionToken, user, muiTheme } = this.state;
 
         return (
             <>
@@ -70,7 +74,7 @@ export default class App extends Component {
                     <ThemeProvider theme={muiTheme}>
                         <MuiThemeProvider theme={muiTheme}>
                             <UserContext.Provider
-                                value={{ sessionToken, user }}
+                                value={{ checkingToken, sessionToken, user }}
                             >
                                 <GlobalStyle />
                                 <Navbar
