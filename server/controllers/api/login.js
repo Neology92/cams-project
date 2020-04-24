@@ -53,6 +53,7 @@ export default router.post('/', (req, res, next) => {
                         })
                     );
                 }
+
                 const userSession = new UserSession({
                     userId: user._id,
                 });

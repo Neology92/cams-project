@@ -55,11 +55,11 @@ const UserSchema = new Schema({
     },
 });
 
-UserSchema.methods.generateHash = password => {
+UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-UserSchema.methods.validPassword = password => {
+UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.safety.password);
 };
 
